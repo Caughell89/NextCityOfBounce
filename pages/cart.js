@@ -3,7 +3,7 @@ import { useRef, useState } from 'react'
 import { Button, DatePicker } from 'antd';
 import Image from 'next/image'
 import Link from 'next/link'
-import  globals from "../styles/globals.css"
+import  globals from "../styles/globals.less"
 import styles from '../styles/Home.module.css'
 import AutoComplete from '../components/Autocomplete'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

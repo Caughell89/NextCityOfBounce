@@ -1,5 +1,5 @@
 import "../styles/antd.less";
-import "../styles/globals.css";
+import "../styles/globals.less";
 import { motion } from "framer-motion";
 import UserProvider from "../context/UserContext";
 import Layout from "../components/Layout";

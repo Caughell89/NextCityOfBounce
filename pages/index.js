@@ -4,7 +4,7 @@ import { Drawer, DatePicker } from "antd";
 import Image from "next/image";
 import Link from "next/link";
 import styles from "../styles/Home.module.css";
-import globals from "../styles/globals.css";
+import globals from "../styles/globals.less";
 import { UserContext } from "./../context/UserContext";
 import AutoComplete from "../components/Autocomplete";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

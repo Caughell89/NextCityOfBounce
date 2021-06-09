@@ -1,8 +1,8 @@
 import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
-import {Input} from 'antd'
+import { Input } from "antd";
 import Backdrop from "./Backdrop";
-import styles from '../styles/Autocomplete.module.css'
+import styles from "../styles/Autocomplete.module.css";
 import { getLocationsByCity } from "../util/API";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -220,7 +220,7 @@ class Autocomplete extends Component {
             <div className={styles.loadingLine}></div>
           </div>
           <div className={styles.loadingSuggestionLine}>
-            <FontAwesomeIcon icon={faMapMarkerAlt}/>
+            <FontAwesomeIcon icon={faMapMarkerAlt} />
             <div className={styles.loadingLine}></div>
           </div>
           <div className={styles.loadingSuggestionLine}>
@@ -228,7 +228,7 @@ class Autocomplete extends Component {
             <div className={styles.loadingLine}></div>
           </div>
           <div className={styles.loadingSuggestionLine}>
-            <FontAwesomeIcon icon={faMapMarkerAlt}/>
+            <FontAwesomeIcon icon={faMapMarkerAlt} />
             <div className={styles.loadingLine}></div>
           </div>
         </div>
@@ -267,35 +267,41 @@ class Autocomplete extends Component {
         );
       } else {
         suggestionsListComponent = (
-            <ul className={styles.noSuggestions}>    
+          <ul className={styles.noSuggestions}>
             <li>
               <FontAwesomeIcon icon={faExclamationTriangle} className="mr-3" />{" "}
-              {this.props.noneFound}     
-              </li>  
-            </ul>
+              {this.props.noneFound}
+            </li>
+          </ul>
         );
       }
     }
     let backdrop;
     if (this.state.showSuggestions) {
       backdrop = (
-        <Backdrop click={this.backdropClickHandler} style={styles.clearBackdrop} />
+        <Backdrop
+          click={this.backdropClickHandler}
+          style={styles.clearBackdrop}
+        />
       );
     }
     return (
       <Fragment>
         <div>
-        <Input size={style==="nav"?"":"large"} bordered={style==="nav"?false:true} placeholder={this.props.placeholder}
-        name={this.props.name}
-        id={this.props.id}
-        disabled={this.props.disabled}
-        placeholder={this.props.placeholder}
-        className={style}
-        type="text"
-        onChange={onChange}
-        onKeyDown={onKeyDown}
-        value={userInput}
-        />
+          <Input
+            size={style === "nav" ? "" : "large"}
+            bordered={style === "nav" ? false : true}
+            placeholder={this.props.placeholder}
+            name={this.props.name}
+            id={this.props.id}
+            disabled={this.props.disabled}
+            placeholder={this.props.placeholder}
+            className={style}
+            type="text"
+            onChange={onChange}
+            onKeyDown={onKeyDown}
+            value={userInput}
+          />
 
           {/* <input
             name={this.props.name}

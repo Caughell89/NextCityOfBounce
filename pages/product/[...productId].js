@@ -11,7 +11,7 @@ import {
 import styles from "../../styles/Product.module.css";
 import Link from "next/link";
 import LoadingIndicator from "../../components/LoadingIndicator";
-import globals from "../../styles/globals.css";
+import globals from "../../styles/globals.less";
 import {
   getItem,
   getCompanyById,
@@ -129,7 +129,7 @@ export default function Product() {
 
               <div>
                 <div className={styles.checkoutCol}>
-                  <div>{product.productName}</div>
+                  <div className="bold a">{product.productName}</div>
                   <div>Reviews</div>
                   <div>Price</div>
                   <div>Location</div>

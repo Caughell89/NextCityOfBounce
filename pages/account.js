@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { UserContext } from "./../context/UserContext";
 import LoadingIndicator from "../components/LoadingIndicator"
-import  globals from "../styles/globals.css"
+import  globals from "../styles/globals.less"
 import { preventBlanks, emailIsValid, phoneIsValid } from "../util/FormTools";
 import { updateUser, updateUserPhoto } from "../util/API";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

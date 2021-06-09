@@ -6,7 +6,7 @@ import { Menu, Dropdown, InputNumber, Slider, Checkbox } from "antd";
 import { DownOutlined } from "@ant-design/icons";
 import ProductTile from "../../components/ProductTile";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import globals from "../../styles/globals.css";
+import globals from "../../styles/globals.less";
 import styles from "../../styles/Search.module.css";
 import { urlLocToString } from "../../util/FormTools";
 import { productSearch, productSearchFiltered } from "../../util/API";
