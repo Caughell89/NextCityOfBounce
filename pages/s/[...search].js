@@ -2,15 +2,12 @@ import Head from "next/head";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import NumberFormat from "react-number-format";
-
 import { Menu, Dropdown, InputNumber, Slider, Checkbox } from "antd";
 import { DownOutlined } from "@ant-design/icons";
-
 import ProductTile from "../../components/ProductTile";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import globals from "../../styles/globals.css";
 import styles from "../../styles/Search.module.css";
-
 import { urlLocToString } from "../../util/FormTools";
 import { productSearch, productSearchFiltered } from "../../util/API";
 
@@ -26,6 +23,10 @@ export default function Search() {
 
   const loadProducts = () => {
     setLoading(true);
+    if (router.query.location === undefined) {
+      console.log("waiting for route");
+    } else {
+  
     productSearch(router.query.location)
       .then((response) => {
         setProducts(response.products);
@@ -36,6 +37,7 @@ export default function Search() {
         console.log(error);
         setLoading(false);
       });
+    }
   };
 
   let step = maxPrice / 4;
@@ -163,7 +165,8 @@ export default function Search() {
           {products.length} {products.length !== 1 ? "items" : "item"} available{" "}
         </div>
         <h3 className={globals.bold}>
-          Party Essentials in {urlLocToString(router.query.location)}
+      
+          Party Essentials in {router.query.location === undefined?"":urlLocToString(router.query.location)}
         </h3>
         <div className={styles.searchMenu}>
           <div className={styles.filterOptions}>
