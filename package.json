@@ -19,7 +19,7 @@
     "babel-plugin-import": "^1.13.3",
     "file-loader": "^6.2.0",
     "framer-motion": "^4.1.17",
-    "less": "^4.1.1",
+    "less": "^2.7.3",
     "next": "10.2.3",
     "next-auth": "^3.24.0",
     "react": "17.0.2",
