@@ -1,0 +1,148 @@
+.modalContent {
+  padding-top: 3rem;
+}
+
+.modalFullBtn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 0.25rem;
+  height: 4.5rem;
+  margin-bottom: 15px;
+  font-weight: 400;
+  cursor: pointer;
+  padding: .375rem .75rem;
+}
+
+.googleBtn {
+  border: solid 1px #dd4b39;
+  color: #dd4b39;
+}
+
+.googleBtn:hover {
+    text-decoration: none;
+    color: #dd4b39 !important;
+}
+
+.fbBtn {
+    border: solid 1px #3b5998;
+    color: #3b5998;
+  }
+  
+  .fbBtn:hover {
+      text-decoration: none;
+      color: #3b5998 !important;
+  }
+
+.holder {
+    height:3.2rem;
+    width: 3.2rem;
+}
+
+.center {
+    font-size: 1.5rem;
+}
+
+.orRow {
+    width: 100%;
+    text-align: center;
+    border-bottom: 1px solid #909090;
+    line-height: 0.1em;
+    margin: 2rem 0;
+  }
+  
+  .or {
+    background: #fff;
+    padding: 0 10px;
+  }
+
+  .pushRight {
+      float:right;
+  }
+
+  .bounceButton {
+    cursor: pointer;
+    display: inline-block;
+    margin-top: 0px;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    width: 100%;
+    font-size: 14px;
+    line-height: 18px;
+    font-weight: 600;
+    border-radius: 0.5rem;
+    outline-color: initial;
+    outline-style: none;
+    outline-width: initial;
+    padding-top: 14px;
+    padding-bottom: 14px;
+    padding-left: 24px;
+    padding-right: 24px;
+    transition-duration: 0.2s, 0.1s, 0.1s, 0.1s;
+    transition-timing-function: ease, ease, ease, ease;
+    transition-delay: initial, initial, initial, initial;
+    transition-property: box-shadow, -ms-transform, transform, transform;
+    border-top-width: initial;
+    border-right-width: initial;
+    border-bottom-width: initial;
+    border-left-width: initial;
+    border-top-style: none;
+    border-right-style: none;
+    border-bottom-style: none;
+    border-left-style: none;
+    border-top-color: initial;
+    border-right-color: initial;
+    border-bottom-color: initial;
+    border-left-color: initial;
+    border-image-source: initial;
+    border-image-slice: initial;
+    border-image-width: initial;
+    border-image-outset: initial;
+    border-image-repeat: initial;
+    background-image: linear-gradient( to right, rgb(28, 172, 200) 0%, rgb(25, 153, 179) 50%, rgb(22, 136, 156) 100%);
+    background-position-x: initial;
+    background-position-y: initial;
+    background-size: initial;
+    background-attachment: initial;
+    background-origin: initial;
+    background-clip: initial;
+    background-color: initial;
+    color: rgb(255, 255, 255);
+    white-space: nowrap;
+  }
+
+  .bounceColor {
+    color: white;
+    background-image: linear-gradient( to right, rgb(28, 172, 200) 0%, rgb(25, 153, 179) 50%, rgb(22, 136, 156) 100%);
+
+  }
+
+  .bounceColor svg {
+    margin-top: .6rem;
+    width: 3rem;
+    color: white;
+  }
+
+  .socalOptions {
+    text-align: center;
+    width: 100%;
+  }
+
+  .googleLink {
+    color: #dd4b39;
+    font-weight: bold;
+  }
+
+  .fbLink {
+    color: #3b5998;
+    font-weight: bold;
+  }
+
+  .googleLink:hover {
+    color: #dd4b39;
+  }
+
+  .fbLink:hover {
+    color: #3b5998;
+  }

@@ -1,0 +1,260 @@
+@media (min-width: 319px) {
+  /*    Setting background image size to be standalone*/
+
+  label {
+    font-weight: bold;
+
+  }
+  .background {
+    height: 29.2rem;
+    background-repeat: no-repeat;
+    padding: 8rem 2rem;
+    background-position: center;
+    background-size: cover;
+    position: relative;
+  }
+  .inputCard {
+    padding-top: 16rem;
+    width: auto;
+    background-color: transparent;
+  }
+  .welcome {
+    color: white;
+  }
+  .welcomeHeader {
+    font-size: 2.4rem;
+    color: #ffffff;
+    font-weight: bold;
+    margin-bottom: .1rem !important;
+  }
+  .welcomeDescription {
+    display: none;
+  }
+
+
+  #partyInputForm {
+    margin-top: 4rem;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .partyInput {
+    position: relative;
+    margin: 1rem 0;
+  }
+  .date {
+    width: 100%;
+  }
+  #searchButton {
+    margin-top: 2.3rem;
+    border-radius: 0.5rem;
+    width: 100%;
+  }
+  .bounceButton {
+    cursor: pointer;
+    display: inline-block;
+    margin-top: 0px;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    width: auto;
+    font-size: 14px;
+    line-height: 18px;
+    font-weight: 600;
+    border-radius: 0.5rem;
+    outline-color: initial;
+    outline-style: none;
+    outline-width: initial;
+    padding-top: 14px;
+    padding-bottom: 14px;
+    padding-left: 24px;
+    padding-right: 24px;
+    transition-duration: 0.2s, 0.1s, 0.1s, 0.1s;
+    transition-timing-function: ease, ease, ease, ease;
+    transition-delay: initial, initial, initial, initial;
+    transition-property: box-shadow, -ms-transform, transform, transform;
+    border-top-width: initial;
+    border-right-width: initial;
+    border-bottom-width: initial;
+    border-left-width: initial;
+    border-top-style: none;
+    border-right-style: none;
+    border-bottom-style: none;
+    border-left-style: none;
+    border-top-color: initial;
+    border-right-color: initial;
+    border-bottom-color: initial;
+    border-left-color: initial;
+    border-image-source: initial;
+    border-image-slice: initial;
+    border-image-width: initial;
+    border-image-outset: initial;
+    border-image-repeat: initial;
+    background-image: linear-gradient( to right, rgb(28, 172, 200) 0%, rgb(25, 153, 179) 50%, rgb(22, 136, 156) 100%);
+    background-position-x: initial;
+    background-position-y: initial;
+    background-size: initial;
+    background-attachment: initial;
+    background-origin: initial;
+    background-clip: initial;
+    background-color: initial;
+    color: rgb(255, 255, 255);
+    white-space: nowrap;
+  }
+  .homeFooter {
+    height: 37.6rem;
+    width: 100%;
+    border: black;
+    border-radius: 2.5rem;
+    padding: 5rem 7rem 5rem 7rem;
+    margin: 6rem 0rem 5rem 0rem;
+    background-position: center;
+    background-size: cover;
+  }
+  .container {
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+  }
+  .whiteText {
+    color: white;
+  }
+  .blueText {
+    color: #1cacc8;
+    font-weight: bold;
+  }
+  .pointer {
+    cursor: pointer;
+  }
+  .book {
+    margin: 1rem 0rem;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    color: white;
+  }
+  .bookIcon {
+    width: 10px;
+    color: white;
+    cursor: pointer;
+    margin: 0 1rem;
+  }
+  .footerTextHolder {
+    padding-right: 10%;
+  }
+  div {
+    font-size: 1.4rem;
+  }
+
+  .articlesHeader {
+    position: relative;
+    margin-top: 34rem;
+  }
+
+  .articles {
+    display: flex;
+    overflow: auto;
+    white-space: nowrap;
+  }
+  
+  .articles a {
+    text-decoration: none;
+    color: #484848;
+    width: inherit;
+  }
+
+  .articleHolder {
+    width: 22rem;
+    background-color: white;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 1rem;
+    display: inline-block;
+    margin: 2.5rem;
+  }
+  
+  .articlePreviewText {
+    text-align: center;
+    padding: 10px 20px;
+  }
+  
+  .articleHolder img {
+    object-fit: cover;
+    width: 100%;
+    height: 24rem;
+    border-radius: 1rem 1rem 0rem 0rem;
+  }
+  
+  .articleHeader {
+    margin-left: 3rem;
+    padding-left: 2.6rem;
+    font-weight: bold;
+  }
+
+  .flex {
+    display: flex;
+    justify-content: flex-end;
+  }
+}
+
+@media (min-width: 641px) {
+  .background {
+    height: 100vh;
+    background-repeat: no-repeat;
+    padding: 8rem 6rem;
+  }
+  .inputCard {
+    color: #484848;
+    padding-top: 4rem;
+    padding-left: 3rem;
+    padding-right: 3rem;
+    padding-bottom: 3rem;
+    background-color: white;
+    width: 44.1rem;
+    border-radius: 0.5rem;
+    overflow: visible;
+  }
+  .welcome {
+    color: #484848;
+    margin-bottom: 1.5rem;
+  }
+  .welcomeHeader {
+    font-size: 3.2rem;
+    color: #484848;
+    font-weight: bold;
+  }
+  .welcomeDescription {
+    display: inline-block;
+    font-weight: bold;
+  }
+  #partyInputForm {
+    margin-top: 0rem;
+  }
+  #searchButton {
+    width: 11rem;
+  }
+  .footerTextHolder {
+    padding-right: 60%;
+  }
+
+  .articlesHeader {
+    padding-left: 2.6rem;
+    position: relative;
+    margin-top: 4rem;
+    font-weight: bold;
+  }
+}
+
+@media (min-width: 1200px) {
+  .container {
+    max-width: 1140px;
+    margin: auto;
+  }
+}
+
+#content {
+  position: relative;
+  top: 0rem;
+  background-color: white;
+  color: #484848;
+  min-height: calc(100vh - 17rem);
+}

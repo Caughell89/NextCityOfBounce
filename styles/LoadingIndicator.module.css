@@ -1,0 +1,13 @@
+.loadingI {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: calc(100vh - 7.8rem);
+  }
+  
+  .loadingI img {
+    width: 6rem;
+    height: auto;
+    position: relative;
+
+  }

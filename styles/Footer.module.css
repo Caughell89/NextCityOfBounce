@@ -1,0 +1,40 @@
+.footerBackground {
+    top: 7.8rem;
+    padding: 2rem;
+    text-align: center;
+    border-top: 1px solid lightgray;
+    font-size: 1.2rem;
+    background-color: white;
+}
+
+.socialIcon {
+    margin: 0rem 1.2rem;
+}
+
+.socialIcons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
+    color: #484848;
+}
+
+.socialIcon a {
+    color: #484848;
+    text-decoration: none;
+}
+
+.socialIcon a:hover {
+    color: #1cacc8;
+    text-decoration: none;
+}
+
+.socialIcon svg {
+    max-height: 18px;
+    width: 22px;
+}
+
+.copyRight {
+    font-size: 1.3rem;
+    color: #484848;
+  }

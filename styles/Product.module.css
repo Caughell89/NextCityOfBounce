@@ -1,0 +1,47 @@
+.content {
+        background-color: white;
+        padding: 0;
+        min-height: calc(100vh - 16rem);
+        display: flex;
+        flex-wrap: wrap;
+}
+
+
+
+.checkoutCol {
+    flex: 0 0 30rem;
+    background-color: tomato;
+}
+.photos{
+    flex: 1 1;
+}
+
+
+.activePhoto img{
+    width: 100%;
+}
+
+.gallery {
+    width: 100%;
+    display: flex; 
+    overflow-y: scroll;
+}
+
+.gallery img {
+    margin:1rem;
+    width: 10rem;
+}
+
+.gallery img:hover {
+   cursor: pointer;
+   box-shadow: 0 0 5px rgba(28, 172, 200, 1);
+   border: 1px solid rgba(28, 172, 200, 1);
+}
+
+
+
+
+
+
+
+

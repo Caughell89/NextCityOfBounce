@@ -1,0 +1,48 @@
+html,
+body {
+  font-family: "Trebuchet MS", Helvetica, sans-serif !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  height: 100% !important;
+  font-size: 62.5% !important;
+}
+
+div,
+::placeholder {
+  font-size: 1.6rem;
+}
+
+a {
+  color: #1cacc8;
+}
+
+a:hover {
+  color: #1cacc8;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+@media (min-width: 319px) {
+  .content {
+    background-color: white;
+    padding: 3rem 1rem;
+    min-height: calc(100vh - 16rem);
+  }
+
+}
+
+@media (min-width: 374px) {
+
+}
+
+@media (min-width: 641px) {
+  .content {
+
+    padding: 3rem 4rem;
+  }
+  
+}
+
+
