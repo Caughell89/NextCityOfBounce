@@ -1,7 +1,7 @@
 import React from "react";
 import NumberFormat from "react-number-format";
 import Link from "next/link";
-import styles from "../styles/ProductTile.module.css";
+import styles from "../styles/ProductTile.less";
 import { motion } from "framer-motion";
 import { TeamOutlined, FullscreenOutlined, CheckCircleTwoTone, CloseCircleTwoTone } from "@ant-design/icons";
 

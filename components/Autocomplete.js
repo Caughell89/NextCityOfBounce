@@ -2,7 +2,7 @@ import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
 import { Input } from "antd";
 import Backdrop from "./Backdrop";
-import styles from "../styles/Autocomplete.module.css";
+import styles from "../styles/Autocomplete.less";
 import { getLocationsByCity } from "../util/API";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {

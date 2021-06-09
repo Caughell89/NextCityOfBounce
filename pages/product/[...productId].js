@@ -8,7 +8,7 @@ import {
   LeftCircleTwoTone,
   RightCircleTwoTone,
 } from "@ant-design/icons";
-import styles from "../../styles/Product.module.css";
+import styles from "../../styles/Product.less";
 import Link from "next/link";
 import LoadingIndicator from "../../components/LoadingIndicator";
 import globals from "../../styles/globals.less";

@@ -12,7 +12,7 @@ import {
   faSearch,
   faBars,
 } from "@fortawesome/free-solid-svg-icons";
-import styles from "../styles/Navbar.module.css";
+import "../styles/Navbar.less";
 import { useState, useContext } from "react";
 import { UserContext } from "./../context/UserContext";
 
@@ -106,7 +106,7 @@ const Navbar = () => {
 
   return (
     <>
-      <div className={styles.navHolder}>
+      <div className="navHolder">
         <nav>
           <motion.div
             initial="hidden"
@@ -127,7 +127,7 @@ const Navbar = () => {
           >
             <Link href="/">
               <a>
-                <div className={styles.logoText}>
+                <div className="logoText">
                   <Image
                     src="/LogoTealText.png"
                     height="45"
@@ -135,7 +135,7 @@ const Navbar = () => {
                     alt="City of bounce logo"
                   />
                 </div>
-                <div className={styles.logo}>
+                <div className="logo">
                   <Image
                     src="/LogoTeal.png"
                     height="45"
@@ -147,33 +147,33 @@ const Navbar = () => {
             </Link>
           </motion.div>
           {!navSearch && (
-            <div onClick={launchSearch} className={styles.search}>
-              <div className={styles.location}>
+            <div onClick={launchSearch} className="search">
+              <div className="location">
                 {location === "" ? (
-                  <span className={styles.blank}>Add location</span>
+                  <span className="blank">Add location</span>
                 ) : (
-                  <span className={styles.complete}>{location}</span>
+                  <span className="complete">{location}</span>
                 )}
               </div>
-              <div className={styles.date}>
+              <div className="date">
                 {date === "" || date === "all" ? (
-                  <span className={styles.blank}>Add date</span>
+                  <span className="blank">Add date</span>
                 ) : (
-                  <span className={styles.complete}>{date}</span>
+                  <span className="complete">{date}</span>
                 )}
               </div>
-              <div className={styles.searchBtn}>
+              <div className="searchBtn">
                 <span>
                   <FontAwesomeIcon icon={faSearch} />
                 </span>
               </div>
             </div>
           )}
-          <div className={styles.navLinks}>
+          <div className="navLinks">
             {status.loggedIn && user.userDetails.company === null && (
               <Link href="Register Company">
-                <div className={styles.navItem}>
-                  <span className={styles.navItemText}>Register Company</span>
+                <div className="navItem">
+                  <span className="navItemText">Register Company</span>
                 </div>
               </Link>
             )}
@@ -182,9 +182,9 @@ const Navbar = () => {
                 onClick={() => {
                   showLogin(false), showSignup(true);
                 }}
-                className={styles.navItem}
+                className="navItem"
               >
-                <span className={styles.navItemText}>Register Company</span>
+                <span className="navItemText">Register Company</span>
               </div>
             )}
             {status.loggedIn ? (
@@ -193,14 +193,14 @@ const Navbar = () => {
                 placement="bottomRight"
                 trigger={["click"]}
               >
-                <div className={styles.userBtn}>
+                <div className="userBtn">
                   <span>
                     <div>
                       <img
                         src={user.userDetails.imageUrl}
                         alt="User's profile pic"
                       />
-                      <span className={styles.navName}>
+                      <span className="navName">
                         {user.userDetails.firstName}
                       </span>
                     </div>
@@ -213,31 +213,31 @@ const Navbar = () => {
                   onClick={() => {
                     showLogin(false), showSignup(true);
                   }}
-                  className={styles.navItem}
+                  className="navItem"
                 >
-                  <span className={styles.navItemText}>Sign Up</span>
+                  <span className="navItemText">Sign Up</span>
                 </div>
                 <div
                   onClick={() => {
                     showLogin(true), showSignup(false);
                   }}
-                  className={styles.navItem}
+                  className="navItem"
                 >
-                  <span className={styles.navItemText}>Login</span>
+                  <span className="navItemText">Login</span>
                 </div>
               </>
             )}
             <Link href="/cart">
-              <a className={styles.cartLink}>
+              <a className="cartLink">
                 <FontAwesomeIcon icon={faShoppingCart} />
               </a>
             </Link>
-            <div onClick={showSideMenu} className={styles.menuToggler}>
+            <div onClick={showSideMenu} className="menuToggler">
               <FontAwesomeIcon icon={faBars} />
             </div>
           </div>
-          {/* <div className={styles.flexCenter}>
-            <div onClick={showSideMenu} className={styles.navUserBtnMobile}>
+          {/* <div className="flexCenter}>
+            <div onClick={showSideMenu} className="navUserBtnMobile}>
               <img src={user.userDetails.imageUrl} alt="User's profile pic" />
             </div>
            
