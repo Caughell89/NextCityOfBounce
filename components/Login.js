@@ -25,7 +25,7 @@ const Login = ({ showSignup }) => {
         <div>
           <a
             className={`${styles.modalFullBtn} ${styles.googleBtn}`}
-            href={GOOGLE_AUTH_URL}
+            href={process.env.NEXT_PUBLIC_GOOGLE_AUTH_URL}
           >
             <Image src="/google-logo.png" alt="Google" height="32" width="32" />
             <div className={styles.center}>Log in with Google</div>
@@ -35,7 +35,7 @@ const Login = ({ showSignup }) => {
         <div>
           <a
             className={`${styles.modalFullBtn} ${styles.fbBtn}`}
-            href={FACEBOOK_AUTH_URL}
+            href={process.env.NEXT_PUBLIC_FACEBOOK_AUTH_URL}
           >
             <Image src="/fb-logo.png" alt="Google" height="32" width="32" />
             <div className={styles.center}>Log in with Facebook</div>

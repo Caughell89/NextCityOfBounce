@@ -2,10 +2,6 @@ import { useState } from "react";
 import styles from "../styles/Login.module.css";
 import Image from "next/image";
 import Link from "next/link";
-import {
-  GOOGLE_AUTH_URL,
-  FACEBOOK_AUTH_URL,
-} from "../util/constants";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import { Form, Input, Button, Checkbox } from "antd";
@@ -26,7 +22,7 @@ const Signup = ({ showLogin }) => {
             <div>
               <a
                 className={`${styles.modalFullBtn} ${styles.googleBtn}`}
-                href={GOOGLE_AUTH_URL}
+                href={process.env.NEXT_PUBLIC_GOOGLE_AUTH_URL}
               >
                 <Image
                   src="/google-logo.png"
@@ -41,7 +37,7 @@ const Signup = ({ showLogin }) => {
             <div>
               <a
                 className={`${styles.modalFullBtn} ${styles.fbBtn}`}
-                href={FACEBOOK_AUTH_URL}
+                href={process.env.NEXT_PUBLIC_FACEBOOK_AUTH_URL}
               >
                 <Image src="/fb-logo.png" alt="Google" height="32" width="32" />
                 <div className={styles.center}>Sign up with Facebook</div>
@@ -69,11 +65,11 @@ const Signup = ({ showLogin }) => {
             <div className={styles.socalOptions}>
               <span>
                 Sign up with{" "}
-                <a className={styles.googleLink} href={GOOGLE_AUTH_URL}>
+                <a className={styles.googleLink} href={process.env.NEXT_PUBLIC_GOOGLE_AUTH_URL}>
                   Google{" "}
                 </a>
                 or{" "}
-                <a className={styles.fbLink} href={FACEBOOK_AUTH_URL}>
+                <a className={styles.fbLink} href={process.env.NEXT_PUBLIC_FACEBOOK_AUTH_URL}>
                   Facebook
                 </a>
               </span>
