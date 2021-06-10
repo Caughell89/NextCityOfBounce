@@ -1,7 +1,7 @@
 @media (min-width: 319px) {
   /*    Setting background image size to be standalone*/
 
-  label {
+  .label {
     font-weight: bold;
 
   }
@@ -142,9 +142,7 @@
   .footerTextHolder {
     padding-right: 10%;
   }
-  div {
-    font-size: 1.4rem;
-  }
+
 
   .articlesHeader {
     position: relative;

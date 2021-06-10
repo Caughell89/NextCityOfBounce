@@ -1,8 +1,7 @@
-import "../styles/antd.less";
-import "../styles/globals.less";
 import { motion } from "framer-motion";
 import UserProvider from "../context/UserContext";
 import Layout from "../components/Layout";
+import "../styles/globals.css"
 
 function MyApp({ Component, pageProps, router }) {
   return (

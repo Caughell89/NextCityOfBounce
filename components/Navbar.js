@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Modal, Menu, Dropdown, Drawer } from "antd";
 import Login from "./Login";
 import Backdrop from "./Backdrop";
 import Signup from "./Signup";
@@ -12,9 +11,10 @@ import {
   faSearch,
   faBars,
 } from "@fortawesome/free-solid-svg-icons";
-import "../styles/Navbar.less";
+import styles from "../styles/Navbar.module.css";
 import { useState, useContext } from "react";
 import { UserContext } from "./../context/UserContext";
+import { Drawer, Modal, Menu } from 'antd';
 
 import { motion } from "framer-motion";
 
@@ -23,6 +23,8 @@ const Navbar = () => {
   const [signupModalOpen, showSignup] = useState(false);
   const [navSearch, setNavSearch] = useState(false);
   const [sideMenu, setSideMenu] = useState(false);
+
+  
 
   const handleOk = () => {
     alert("Ok Clicked");
@@ -106,8 +108,8 @@ const Navbar = () => {
 
   return (
     <>
-      <div className="navHolder">
-        <nav>
+      <div className={styles.navHolder}>
+        <nav className={styles.nav}>
           <motion.div
             initial="hidden"
             animate="visible"
@@ -127,7 +129,7 @@ const Navbar = () => {
           >
             <Link href="/">
               <a>
-                <div className="logoText">
+                <div className={styles.logoText}>
                   <Image
                     src="/LogoTealText.png"
                     height="45"
@@ -135,7 +137,7 @@ const Navbar = () => {
                     alt="City of bounce logo"
                   />
                 </div>
-                <div className="logo">
+                <div className={styles.logo}>
                   <Image
                     src="/LogoTeal.png"
                     height="45"
@@ -147,97 +149,97 @@ const Navbar = () => {
             </Link>
           </motion.div>
           {!navSearch && (
-            <div onClick={launchSearch} className="search">
-              <div className="location">
+            <div onClick={launchSearch} className={styles.search}>
+              <div className={styles.location}>
                 {location === "" ? (
-                  <span className="blank">Add location</span>
+                  <span className={styles.blank}>Add location</span>
                 ) : (
-                  <span className="complete">{location}</span>
+                  <span className={styles.complete}>{location}</span>
                 )}
               </div>
-              <div className="date">
+              <div className={styles.date}>
                 {date === "" || date === "all" ? (
-                  <span className="blank">Add date</span>
+                  <span className={styles.blank}>Add date</span>
                 ) : (
-                  <span className="complete">{date}</span>
+                  <span className={styles.complete}>{date}</span>
                 )}
               </div>
-              <div className="searchBtn">
+              <div className={styles.searchBtn}>
                 <span>
                   <FontAwesomeIcon icon={faSearch} />
                 </span>
               </div>
             </div>
           )}
-          <div className="navLinks">
+          <div className={styles.navLinks}>
             {status.loggedIn && user.userDetails.company === null && (
               <Link href="Register Company">
-                <div className="navItem">
-                  <span className="navItemText">Register Company</span>
+                <div className={styles.navItem}>
+                  <span className={styles.navItemText}>Register Company</span>
                 </div>
               </Link>
             )}
             {!status.loggedIn && (
-              <div
-                onClick={() => {
-                  showLogin(false), showSignup(true);
-                }}
-                className="navItem"
-              >
-                <span className="navItemText">Register Company</span>
-              </div>
+              
+               
+                <div
+                  onClick={() => {
+                    showLogin(false), showSignup(true);
+                  }}
+                  className={styles.navItem}
+                >
+                  <span className={styles.navItemText}>Register Company</span>
+                </div>
+            
             )}
             {status.loggedIn ? (
-              <Dropdown
-                overlay={menu}
-                placement="bottomRight"
-                trigger={["click"]}
-              >
-                <div className="userBtn">
+              <>
+                <div className={styles.userBtn}>
                   <span>
                     <div>
                       <img
                         src={user.userDetails.imageUrl}
                         alt="User's profile pic"
                       />
-                      <span className="navName">
+                      <span className={styles.navName}>
                         {user.userDetails.firstName}
                       </span>
                     </div>
                   </span>
                 </div>
-              </Dropdown>
+                
+              </>
             ) : (
               <>
                 <div
                   onClick={() => {
                     showLogin(false), showSignup(true);
                   }}
-                  className="navItem"
+                  className={styles.navItem}
                 >
-                  <span className="navItemText">Sign Up</span>
+                  <span className={styles.navItemText}>Sign Up</span>
                 </div>
                 <div
                   onClick={() => {
                     showLogin(true), showSignup(false);
                   }}
-                  className="navItem"
+                  className={styles.navItem}
                 >
-                  <span className="navItemText">Login</span>
+                  <span className={styles.navItemText}>Login</span>
                 </div>
               </>
             )}
             <Link href="/cart">
-              <a className="cartLink">
+              <a className={styles.cartLink}>
                 <FontAwesomeIcon icon={faShoppingCart} />
               </a>
             </Link>
-            <div onClick={showSideMenu} className="menuToggler">
+            <div onClick={showSideMenu} className={styles.menuToggler}>
               <FontAwesomeIcon icon={faBars} />
             </div>
           </div>
-          {/* <div className="flexCenter}>
-            <div onClick={showSideMenu} className="navUserBtnMobile}>
+          {/* <div className={styles.flexCenter}>
+            <div onClick={showSideMenu} className={styles.navUserBtnMobile}>
               <img src={user.userDetails.imageUrl} alt="User's profile pic" />
             </div>
            
@@ -250,7 +252,9 @@ const Navbar = () => {
         )}
       </div>
 
-      <Modal
+      
+
+       <Modal
         centered
         title={null}
         visible={loginModalOpen}
@@ -280,7 +284,7 @@ const Navbar = () => {
         <p>Some contents...</p>
         <p>Some contents...</p>
         <p>Some contents...</p>
-      </Drawer>
+      </Drawer> 
     </>
   );
 };

@@ -1,12 +1,6 @@
 import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSpinner } from "@fortawesome/free-solid-svg-icons";
-import styles from "../styles/LoadingIndicator.less";
+import styles from "../styles/LoadingIndicator.module.css";
 import { motion } from "framer-motion";
-
-
-
-
 
 const bounceVars = {
   visible: {

@@ -2,14 +2,13 @@ import Head from "next/head";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import NumberFormat from "react-number-format";
-import { Menu, Dropdown, InputNumber, Slider, Checkbox } from "antd";
-import { DownOutlined } from "@ant-design/icons";
 import ProductTile from "../../components/ProductTile";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import globals from "../../styles/globals.less";
-import styles from "../../styles/Search.less";
+import styles from "../../styles/Search.module.css";
 import { urlLocToString } from "../../util/FormTools";
 import { productSearch, productSearchFiltered } from "../../util/API";
+import { Menu, Dropdown ,Slider,InputNumber,Checkbox} from "antd";
+import { DownOutlined } from "@ant-design/icons";
 
 import moment from "moment";
 
@@ -26,17 +25,16 @@ export default function Search() {
     if (router.query.location === undefined) {
       console.log("waiting for route");
     } else {
-  
-    productSearch(router.query.location)
-      .then((response) => {
-        setProducts(response.products);
-        setMaxPrice(response.maxPrice);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.log(error);
-        setLoading(false);
-      });
+      productSearch(router.query.location)
+        .then((response) => {
+          setProducts(response.products);
+          setMaxPrice(response.maxPrice);
+          setLoading(false);
+        })
+        .catch((error) => {
+          console.log(error);
+          setLoading(false);
+        });
     }
   };
 
@@ -160,13 +158,15 @@ export default function Search() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className={globals.content}>
+      <div className="content">
         <div>
           {products.length} {products.length !== 1 ? "items" : "item"} available{" "}
         </div>
-        <h3 className={globals.bold}>
-      
-          Party Essentials in {router.query.location === undefined?"":urlLocToString(router.query.location)}
+        <h3 className="bold">
+          Party Essentials in{" "}
+          {router.query.location === undefined
+            ? ""
+            : urlLocToString(router.query.location)}
         </h3>
         <div className={styles.searchMenu}>
           <div className={styles.filterOptions}>
@@ -204,16 +204,18 @@ export default function Search() {
               INSTANT BOOK <DownOutlined />
             </div>
           </div>
-          <Dropdown
-            trigger={["click"]}
-            className={styles.option}
-            overlay={sortMenu}
-          >
-            <div>
-              {sort === "" ? "SORT" : sort}
-              <DownOutlined />
-            </div>
-          </Dropdown>
+          <div>
+            <Dropdown
+              trigger={["click"]}
+              className={styles.option}
+              overlay={sortMenu}
+            >
+              <div>
+                {sort === "" ? "SORT" : sort}
+                <DownOutlined />
+              </div>
+            </Dropdown>
+          </div>
         </div>
         <div className={styles.searchResults}>{productTiles}</div>
         {products.length === 0 && !loading && (

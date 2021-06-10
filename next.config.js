@@ -1,25 +1,24 @@
-const withSass = require("@zeit/next-sass");
-const withLess = require("@zeit/next-less");
-const withCSS = require("@zeit/next-css");
+// next.config.js
+const withAntdLess = require('next-plugin-antd-less');
 
-const isProd = process.env.NODE_ENV === "production";
+module.exports = withAntdLess({
+  // optional
+  modifyVars: { '@primary-color': '#1cacc8' },
+  // optional
+  lessVarsFilePath: './src/styles/variables.less',
+  // optional
+  lessVarsFilePathAppendToEndOfContent: false,
+  // optional https://github.com/webpack-contrib/css-loader#object
+  cssLoaderOptions: {},
 
-// fix: prevents error when .less files are required by node
-if (typeof require !== "undefined") {
-  require.extensions[".less"] = (file) => {};
-}
+  // Other Config Here...
 
-module.exports = withCSS({
-  cssModules: true,
-  cssLoaderOptions: {
-    importLoaders: 1,
-    localIdentName: "[local]___[hash:base64:5]",
+  webpack(config) {
+    return config;
   },
-  ...withLess(
-    withSass({
-      lessLoaderOptions: {
-        javascriptEnabled: true,
-      },
-    })
-  ),
+
+  future: {
+    // if you use webpack5
+    webpack5: true,
+  },
 });

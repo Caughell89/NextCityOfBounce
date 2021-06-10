@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { UserContext } from "./../context/UserContext";
 import LoadingIndicator from "../components/LoadingIndicator"
-import  globals from "../styles/globals.less"
 import { preventBlanks, emailIsValid, phoneIsValid } from "../util/FormTools";
 import { updateUser, updateUserPhoto } from "../util/API";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -227,7 +226,7 @@ class Account extends Component {
     }
     return (
       <>
-        <div className={globals.content}>
+        <div className="content">
           <div className="row justify-content-center">
             <div className="user-info-box">
               <div className="user-photo-holder">

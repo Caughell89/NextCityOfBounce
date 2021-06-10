@@ -1,12 +1,12 @@
-import { DatePicker } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import moment from "moment";
-import styles from "../styles/NavSearch.less";
+import styles from "../styles/NavSearch.module.css";
 import Autocomplete from "./Autocomplete";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useContext } from "react";
 import { UserContext } from "./../context/UserContext";
+import { DatePicker } from 'antd';
 
 const searchVars = {
   hidden: {

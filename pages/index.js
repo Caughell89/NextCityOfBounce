@@ -1,10 +1,10 @@
 import Head from "next/head";
 import { useRef, useState, useContext } from "react";
-import { Drawer, DatePicker } from "antd";
 import Image from "next/image";
 import Link from "next/link";
-import styles from "../styles/Home.less";
-import globals from "../styles/globals.less";
+import { DatePicker} from "antd";
+
+import styles from "../styles/Home.module.css";
 import { UserContext } from "./../context/UserContext";
 import AutoComplete from "../components/Autocomplete";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -94,13 +94,15 @@ export default function Home() {
                     </label>
                   </div>
                 </div>
+              
+
                 <DatePicker
                   format={"MM/DD/YYYY"}
                   size="large"
                   className={styles.date}
                   disabledDate={disabledDate}
                   onChange={(date, dateString) => setDate(date)}
-                />
+                /> 
               </div>
               <motion.div className={styles.flex} whileTap={{ scale: 0.9 }}>
                 <button

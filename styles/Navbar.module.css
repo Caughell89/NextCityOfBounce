@@ -1,6 +1,6 @@
 @media (min-width: 319px) {
 
-  nav {
+  .nav {
     padding: 0.6rem 1rem;
     display: flex;
     align-items: center;
@@ -58,7 +58,7 @@
 
 @media (min-width: 641px) {
 
-  nav {
+  .nav {
     padding: 0.6rem 2rem;
   }
 
@@ -97,12 +97,12 @@
 
 
 
-nav img,
-nav svg {
+.nav img,
+.nav svg {
   cursor: pointer;
 }
 
-nav svg {
+.nav svg {
   margin-left: 2rem;
   width: 1.8rem !important;
   color: rgb(72, 72, 72);
@@ -176,7 +176,7 @@ nav svg {
   transform: translateX(-50%);
   padding: 0.4rem 0 0.4rem 0.4rem;
   align-items: center;
-  border-radius: 2rem;
+  border-radius: 4rem;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.3), 0 2px 7px 0 rgba(0, 0, 0, 0.2);
 }
 
@@ -222,7 +222,6 @@ nav svg {
     rgb(22, 136, 156) 100%
   );
   border-radius: 50%;
-  padding: 0.8rem;
   align-content: center;
   justify-content: center;
 }

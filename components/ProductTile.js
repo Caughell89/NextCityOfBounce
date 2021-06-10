@@ -1,9 +1,8 @@
 import React from "react";
 import NumberFormat from "react-number-format";
 import Link from "next/link";
-import styles from "../styles/ProductTile.less";
+import styles from "../styles/ProductTile.module.css";
 import { motion } from "framer-motion";
-import { TeamOutlined, FullscreenOutlined, CheckCircleTwoTone, CloseCircleTwoTone } from "@ant-design/icons";
 
 const ProductTile = ({ product }) => {
   let linkPath = "/product/" + product.productId;
@@ -41,17 +40,17 @@ const ProductTile = ({ product }) => {
               {product.productType !== "Chair" && (
                 <>
                   <div className={styles.pFeatureRow}>
-                    <TeamOutlined /> <div>{product.capacity} max capacity</div>
+                    {/* <TeamOutlined /> <div>{product.capacity} max capacity</div> */}
                   </div>
                   <div className={styles.pFeatureRow}>
-                    <FullscreenOutlined />
+                    {/* <FullscreenOutlined /> */}
                     <div>
                       {product.length}' L. x {product.width}' W. x {product.height}' H.
                       
                     </div>
                     </div>
                     <div className={styles.pFeatureRow}>
-                     {product.instantBook?<CheckCircleTwoTone twoToneColor="#52c41a"/>:<CloseCircleTwoTone twoToneColor="#eb2f96"/>}
+                     {/* {product.instantBook?<CheckCircleTwoTone twoToneColor="#52c41a"/>:<CloseCircleTwoTone twoToneColor="#eb2f96"/>} */}
           
                     <div>
                       Instant Book  

@@ -5,7 +5,7 @@ import {
   faTwitter,
   faInstagram
 } from "@fortawesome/free-brands-svg-icons";
-import styles from '../styles/Footer.less'
+import styles from '../styles/Footer.module.css'
 
 
 class Footer extends React.Component {

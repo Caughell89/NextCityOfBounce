@@ -1,17 +1,10 @@
 import Head from "next/head";
 import { useEffect, useState, useRef } from "react";
 import { useRouter } from "next/router";
-import { Button, DatePicker, Breadcrumb, Carousel } from "antd";
-import { getTwoToneColor, setTwoToneColor } from "@ant-design/icons";
-import {
-  HomeOutlined,
-  LeftCircleTwoTone,
-  RightCircleTwoTone,
-} from "@ant-design/icons";
-import styles from "../../styles/Product.less";
+
+import styles from "../../styles/Product.module.css";
 import Link from "next/link";
 import LoadingIndicator from "../../components/LoadingIndicator";
-import globals from "../../styles/globals.less";
 import {
   getItem,
   getCompanyById,
@@ -26,8 +19,6 @@ export default function Product() {
   const [company, setCompany] = useState({});
   const [blockedDates, setBlockedDates] = useState([]);
   const [activePhoto, setActivePhoto] = useState();
-
-  setTwoToneColor("#1cacc8");
 
   const carouselRef = useRef(null);
   const loadItem = () => {
@@ -93,12 +84,12 @@ export default function Product() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className={globals.content}>
+      <div className="content">
         {loading ? (
           <LoadingIndicator />
         ) : (
           <>
-            <Breadcrumb>
+            {/* <Breadcrumb>
               <Breadcrumb.Item>
                 <Link href="/">
                   <HomeOutlined />
@@ -111,7 +102,7 @@ export default function Product() {
               >
                 <a>Search</a>
               </Breadcrumb.Item>
-            </Breadcrumb>
+            </Breadcrumb> */}
             <div className={styles.content}>
               <div className={styles.photos}>
                 <div className={styles.activePhoto}>

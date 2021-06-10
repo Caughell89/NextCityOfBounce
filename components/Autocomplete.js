@@ -1,8 +1,8 @@
 import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
-import { Input } from "antd";
 import Backdrop from "./Backdrop";
-import styles from "../styles/Autocomplete.less";
+import { Input } from 'antd';
+import styles from "../styles/Autocomplete.module.css";
 import { getLocationsByCity } from "../util/API";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -286,10 +286,9 @@ class Autocomplete extends Component {
       );
     }
     return (
-      <Fragment>
+      <>
         <div>
-          <Input
-            size={style === "nav" ? "" : "large"}
+        <Input  size={style === "nav" ? "" : "large"}
             bordered={style === "nav" ? false : true}
             placeholder={this.props.placeholder}
             name={this.props.name}
@@ -300,24 +299,11 @@ class Autocomplete extends Component {
             type="text"
             onChange={onChange}
             onKeyDown={onKeyDown}
-            value={userInput}
-          />
-
-          {/* <input
-            name={this.props.name}
-            id={this.props.id}
-            disabled={this.props.disabled}
-            placeholder={this.props.placeholder}
-            className={style}
-            type="text"
-            onChange={onChange}
-            onKeyDown={onKeyDown}
-            value={userInput}
-          /> */}
+            value={userInput} />
           {suggestionsListComponent}
         </div>
         {backdrop}
-      </Fragment>
+      </>
     );
   }
 }

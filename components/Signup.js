@@ -1,11 +1,10 @@
 import { useState } from "react";
-import styles from "../styles/Login.less";
+import styles from "../styles/Login.module.css";
 import Image from "next/image";
 import Link from "next/link";
 import {
   GOOGLE_AUTH_URL,
   FACEBOOK_AUTH_URL,
-  ACCESS_TOKEN,
 } from "../util/constants";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
