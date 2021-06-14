@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styles from "../../styles/Search.module.css";
 import { urlLocToString } from "../../util/FormTools";
 import { productSearch, productSearchFiltered } from "../../util/API";
-import { Menu, Dropdown ,Slider,InputNumber,Checkbox} from "antd";
+import { Menu, Dropdown ,Slider, InputNumber, Checkbox} from "antd";
 import { DownOutlined } from "@ant-design/icons";
 
 import moment from "moment";

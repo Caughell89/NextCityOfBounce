@@ -6,8 +6,7 @@ import { updateUser, updateUserPhoto } from "../util/API";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faExclamationTriangle,
-  faTimes,
-  faSync,
+
 } from "@fortawesome/free-solid-svg-icons";
 
 class Account extends Component {

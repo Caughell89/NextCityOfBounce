@@ -1,11 +1,6 @@
 import styles from "../styles/Login.module.css";
 import Image from "next/image";
 import Link from "next/link";
-import {
-  GOOGLE_AUTH_URL,
-  FACEBOOK_AUTH_URL,
-
-} from "../util/constants";
 import React, { useContext } from "react";
 import { Input, Form, Button,Checkbox } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';

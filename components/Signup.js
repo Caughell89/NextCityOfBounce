@@ -164,9 +164,8 @@ const Signup = ({ showLogin }) => {
               </Form.Item>
 
               <Form.Item>
-                <span>Don't Have an Account?</span>
-
-                <Button className={styles.pushRight}>Register now!</Button>
+                <span>Already have an account</span>
+                <Button onClick={showLogin} className={styles.pushRight}>Log in</Button>
               </Form.Item>
             </Form>
           </>

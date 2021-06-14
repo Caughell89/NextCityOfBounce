@@ -14,20 +14,39 @@ import {
 import styles from "../styles/Navbar.module.css";
 import { useState, useContext } from "react";
 import { UserContext } from "./../context/UserContext";
-import { Drawer, Modal, Menu } from 'antd';
+import { Drawer, Modal, Menu, Dropdown,Badge } from "antd";
+import {
+  LoginOutlined,
+  FormOutlined,
+  QuestionCircleOutlined,
+  LogoutOutlined,
+  MailOutlined,
+  CalendarOutlined,
+  DesktopOutlined,
+  SolutionOutlined,
+  SearchOutlined ,
+} from "@ant-design/icons";
 
 import { motion } from "framer-motion";
 
-const Navbar = () => {
+const Navbar = (...pageProps) => {
   const [loginModalOpen, showLogin] = useState(false);
   const [signupModalOpen, showSignup] = useState(false);
   const [navSearch, setNavSearch] = useState(false);
   const [sideMenu, setSideMenu] = useState(false);
-
-  
-
+  console.log(pageProps);
   const handleOk = () => {
     alert("Ok Clicked");
+  };
+
+  const openLoginModal = () => {
+    showLogin(true);
+    showSignup(false);
+  };
+
+  const openSignUpModal = () => {
+    showLogin(false);
+    showSignup(true);
   };
 
   const showSideMenu = () => {
@@ -166,7 +185,8 @@ const Navbar = () => {
               </div>
               <div className={styles.searchBtn}>
                 <span>
-                  <FontAwesomeIcon icon={faSearch} />
+                <SearchOutlined className={styles.flexCenter}/>
+                  {/* <FontAwesomeIcon icon={faSearch} /> */}
                 </span>
               </div>
             </div>
@@ -180,70 +200,95 @@ const Navbar = () => {
               </Link>
             )}
             {!status.loggedIn && (
-              
-               
-                <div
-                  onClick={() => {
-                    showLogin(false), showSignup(true);
-                  }}
-                  className={styles.navItem}
-                >
-                  <span className={styles.navItemText}>Register Company</span>
-                </div>
-            
+              <motion.div
+                initial={{ borderBottom: "2px solid rgb(255, 255, 255)" }}
+                whileTap={{ scale: 0.9 }}
+                whileHover={{
+                  scale: 1.1,
+                  color: "rgb(28, 172, 200)",
+                  borderBottom: "2px solid rgb(28, 172, 200)",
+                }}
+                onClick={() => {
+                  showLogin(false), showSignup(true);
+                }}
+                className={styles.navItem}
+              >
+                <span className={styles.navItemText}>Register Company</span>
+              </motion.div>
             )}
             {status.loggedIn ? (
-              <>
-                <div className={styles.userBtn}>
-                  <span>
-                    <div>
-                      <img
-                        src={user.userDetails.imageUrl}
-                        alt="User's profile pic"
-                      />
-                      <span className={styles.navName}>
-                        {user.userDetails.firstName}
-                      </span>
-                    </div>
-                  </span>
+              <div>
+                <Dropdown
+                  className={styles.userDrop}
+                  trigger={["click"]}
+                  overlay={menu}
+                  placement="bottomRight"
+                >
+                  <div className={styles.userBtn}>
+                    <span>
+                      <div>
+                        <img
+                          src={user.userDetails.imageUrl}
+                          alt="User's profile pic"
+                        />
+                        <span className={styles.navName}>
+                          {user.userDetails.firstName}
+                        </span>
+                      </div>
+                    </span>
+                  </div>
+                </Dropdown>
+                <div onClick={showSideMenu} className={styles.navUserBtnMobile}>
+                  <img
+                    src={user.userDetails.imageUrl}
+                    alt="User's profile pic"
+                  />
                 </div>
-                
-              </>
+              </div>
             ) : (
               <>
-                <div
-                  onClick={() => {
-                    showLogin(false), showSignup(true);
+                <motion.div
+                  initial={{ borderBottom: "2px solid rgb(255, 255, 255)" }}
+                  whileTap={{ scale: 0.9 }}
+                  whileHover={{
+                    scale: 1.1,
+                    color: "rgb(28, 172, 200)",
+                    borderBottom: "2px solid rgb(28, 172, 200)",
                   }}
+                  onClick={openSignUpModal}
                   className={styles.navItem}
                 >
                   <span className={styles.navItemText}>Sign Up</span>
-                </div>
-                <div
-                  onClick={() => {
-                    showLogin(true), showSignup(false);
+                </motion.div>
+                <motion.div
+                  initial={{ borderBottom: "2px solid rgb(255, 255, 255)" }}
+                  whileTap={{ scale: 0.9 }}
+                  whileHover={{
+                    scale: 1.1,
+                    color: "rgb(28, 172, 200)",
+                    borderBottom: "2px solid rgb(28, 172, 200)",
                   }}
+                  onClick={openLoginModal}
                   className={styles.navItem}
                 >
                   <span className={styles.navItemText}>Login</span>
-                </div>
+                </motion.div>
               </>
             )}
             <Link href="/cart">
-              <a className={styles.cartLink}>
-                <FontAwesomeIcon icon={faShoppingCart} />
-              </a>
+              <div>
+                <a className={styles.cartLink}>
+                  <FontAwesomeIcon icon={faShoppingCart} />
+             
+                </a>
+              </div>
             </Link>
-            <div onClick={showSideMenu} className={styles.menuToggler}>
-              <FontAwesomeIcon icon={faBars} />
-            </div>
+            {!status.loggedIn && (
+              <div onClick={showSideMenu} className={styles.menuToggler}>
+                <FontAwesomeIcon icon={faBars} />
+              </div>
+            )}
           </div>
-          {/* <div className={styles.flexCenter}>
-            <div onClick={showSideMenu} className={styles.navUserBtnMobile}>
-              <img src={user.userDetails.imageUrl} alt="User's profile pic" />
-            </div>
-           
-          </div> */}
         </nav>
 
         <NavSearch navSearch={navSearch} close={setNavSearch} />
@@ -252,9 +297,7 @@ const Navbar = () => {
         )}
       </div>
 
-      
-
-       <Modal
+      <Modal
         centered
         title={null}
         visible={loginModalOpen}
@@ -262,7 +305,7 @@ const Navbar = () => {
         onCancel={handleCancel}
         footer={null}
       >
-        <Login showSignup={signupModalOpen} />
+        <Login showSignup={openSignUpModal} />
       </Modal>
       <Modal
         centered
@@ -271,8 +314,9 @@ const Navbar = () => {
         onOk={handleOk}
         onCancel={handleCancel}
         footer={null}
+      
       >
-        <Signup showLogin={loginModalOpen} />
+        <Signup showLogin={openLoginModal} />
       </Modal>
       <Drawer
         placement="right"
@@ -281,10 +325,63 @@ const Navbar = () => {
         visible={sideMenu}
         key="Side Menu"
       >
-        <p>Some contents...</p>
-        <p>Some contents...</p>
-        <p>Some contents...</p>
-      </Drawer> 
+        <div className={styles.sideMenu}>
+          {status.loggedIn ? (
+            <div className={styles.sideMenuU}>
+              <div>
+                <Link onClick={() => setSideMenu(false)} href="account">
+                  <a>
+                    <span className={styles.sideMenuImg}>
+                      <img
+                        src={user.userDetails.imageUrl}
+                        alt="User's profile pic"
+                      />
+                    </span>
+                    <div className={styles.sideMenuName}>
+                      {user.userDetails.firstName +
+                        " " +
+                        user.userDetails.lastName}
+                    </div>
+                  </a>
+                </Link>
+                <div onClick={( )=> setSideMenu(false)}><MailOutlined className="mr1"/>Messages</div>
+                <div ><CalendarOutlined className="mr1"/>Events</div>
+                <div> <DesktopOutlined className="mr1"/>Manage Company</div>
+                <div><SolutionOutlined  className="mr1"/>Admin</div>
+              </div>
+              <div className={styles.sideMenuFooter}>
+                <div > <QuestionCircleOutlined className="mr1" />Help</div>
+                <div onClick={() => status.logout()}> <LogoutOutlined className="mr1" />Logout</div>
+              </div>
+            </div>
+          ) : (
+            <>
+              <div
+                className={styles.sideMenuItem}
+                onClick={() => {
+                  showLogin(false), showSignup(true), onClose;
+                }}
+              >
+                <FormOutlined className="mr1" />
+                Sign up
+              </div>
+              <div
+                className={styles.sideMenuItem}
+                onClick={() => {
+                  showLogin(true), showSignup(false), onClose;
+                }}
+              >
+                <LoginOutlined className="mr1" />
+                Login
+              </div>
+              <div className={styles.sideMenuItem}>
+                <QuestionCircleOutlined className="mr1" />
+                Help
+              </div>
+            </>
+          )}
+        </div>
+      </Drawer>
     </>
   );
 };

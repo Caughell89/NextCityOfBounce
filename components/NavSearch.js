@@ -6,7 +6,9 @@ import Autocomplete from "./Autocomplete";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useContext } from "react";
 import { UserContext } from "./../context/UserContext";
-import { DatePicker } from 'antd';
+import { DatePicker, Button } from "antd";
+import { LeftOutlined } from "@ant-design/icons";
+import { useMediaQuery } from "react-responsive";
 
 const searchVars = {
   hidden: {
@@ -16,7 +18,6 @@ const searchVars = {
     transition: {
       type: "spring",
       mass: 0.5,
-
     },
   },
   visible: {
@@ -43,6 +44,11 @@ const NavSearch = ({ navSearch, close }) => {
     setLoc(res);
   };
 
+  const saveLoc = () =>
+    loc === "" ? console.log(loc) : console.log(loc + " this is bs");
+
+  const isTabletOrMobile = useMediaQuery({ maxWidth: 641 });
+
   return (
     <AnimatePresence exitBeforeEnter>
       {navSearch && (
@@ -52,47 +58,86 @@ const NavSearch = ({ navSearch, close }) => {
           exit="hidden"
           animate="visible"
         >
-          <div className={styles.searchBarHolder}>
-            <div className={styles.searchBar}>
-              <div className={styles.location}>
-                <span>Location</span>
-                <Autocomplete
-                  look="nav"
-                  name="location"
-                  placeholder="Where's your party?"
-                  noneFound="Unfortunately there are no companies serving this area"
-                  onUpdate={onUpdate}
-                />
-              </div>
-              <div className={styles.date}>
-                
-                  <span>Event date</span>
-              
-
-                <DatePicker
-                className={styles.datePicker}
-                  format={"M/D/YYYY"}
-                  disabledDate={disabledDate}
-                  bordered={false}
-                  onChange={(date, dateString) => setDate(date)}
-                />
-              </div>
-              <div className={styles.btnHolder}>
-              <motion.div whileTap={{ scale: 0.9 }}>
-
-                <div
-                  onClick={() => {
-                    setParty(loc, date), close(false);
-                  }}
-                  className={styles.btn}
-                >
-                  <FontAwesomeIcon icon={faSearch} />
-                  Search
+          {isTabletOrMobile ? (
+            <div className={styles.fullScreen}>
+              <div>
+                <div className={styles.mobileSearchNav}>
+                  <LeftOutlined onClick={() => close(false)} />
                 </div>
-                </motion.div>
+                <div className={styles.mobileSearch}>
+                  <div className={styles.location}>
+                    <span>Location</span>
+                    <Autocomplete
+                      look="nav"
+                      name="location"
+                      placeholder="Where's your party?"
+                      noneFound="Unfortunately there are no companies serving this area"
+                      onUpdate={onUpdate}
+                    />
+                  </div>
+
+                  <div className={styles.location}>
+                    <span>Event date</span>
+
+                    <DatePicker
+                      className={styles.datePicker}
+                      format={"M/D/YYYY"}
+                      disabledDate={disabledDate}
+                      bordered={false}
+                      onChange={(date, dateString) => setDate(date)}
+                    />
+                  </div>
+                </div>
+                <div className={styles.mobileSearchFooter}>
+                  <div className={styles.locationFooter}>
+                    <div onClick={saveLoc} className="bounceButton">
+                      Save
+                    </div>
+                  </div>
+                  <div></div>
+                </div>
               </div>
             </div>
-          </div>
+          ) : (
+            <div className={styles.searchBarHolder}>
+              <div className={styles.searchBar}>
+                <div className={styles.location}>
+                  <span>Location</span>
+                  <Autocomplete
+                    look="nav"
+                    name="location"
+                    placeholder="Where's your party?"
+                    noneFound="Unfortunately there are no companies serving this area"
+                    onUpdate={onUpdate}
+                  />
+                </div>
+                <div className={styles.date}>
+                  <span>Event date</span>
+
+                  <DatePicker
+                    className={styles.datePicker}
+                    format={"M/D/YYYY"}
+                    disabledDate={disabledDate}
+                    bordered={false}
+                    onChange={(date, dateString) => setDate(date)}
+                  />
+                </div>
+                <div className={styles.btnHolder}>
+                  <motion.div whileTap={{ scale: 0.9 }}>
+                    <div
+                      onClick={() => {
+                        setParty(loc, date), close(false);
+                      }}
+                      className={styles.btn}
+                    >
+                      <FontAwesomeIcon icon={faSearch} />
+                      Search
+                    </div>
+                  </motion.div>
+                </div>
+              </div>
+            </div>
+          )}
         </motion.div>
       )}
     </AnimatePresence>
