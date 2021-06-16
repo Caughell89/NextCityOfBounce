@@ -2,7 +2,6 @@ import Head from 'next/head'
 import { useRef, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import styles from '../styles/Home.module.css'
 import AutoComplete from '../components/Autocomplete'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
@@ -24,8 +23,8 @@ export default function Cart() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div id={styles.content}>
-          Cart
+      <div className="content">
+          <h1>Shopping Cart</h1>
         </div>
     </div>
   )

@@ -347,26 +347,26 @@ const Navbar = (...pageProps) => {
                     </div>
                   </a>
                 </Link>
-                <div onClick={() => setSideMenu(false)}>
+                <div className="mb1" onClick={() => setSideMenu(false)}>
                   <MailOutlined className="mr1" />
                   Messages
                 </div>
-                <div>
+                <div className="mb1">
                   <CalendarOutlined className="mr1" />
                   Events
                 </div>
-                <div>
-                  {" "}
+                <div className="mb1">
+                 
                   <DesktopOutlined className="mr1" />
                   Manage Company
                 </div>
-                <div>
+                <div className="mb1">
                   <SolutionOutlined className="mr1" />
                   Admin
                 </div>
               </div>
               <div className={styles.sideMenuFooter}>
-                <div>
+                <div className="mb1">
                   {" "}
                   <QuestionCircleOutlined className="mr1" />
                   Help
