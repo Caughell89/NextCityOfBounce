@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { UserContext } from "./../context/UserContext";
 import LoadingIndicator from "../components/LoadingIndicator"
-import { preventBlanks, emailIsValid, phoneIsValid } from "../util/FormTools";
-import { updateUser, updateUserPhoto } from "../util/API";
+import { preventBlanks, emailIsValid, phoneIsValid } from "../utils/FormTools";
+import { updateUser, updateUserPhoto } from "../utils/API";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faExclamationTriangle,

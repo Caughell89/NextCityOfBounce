@@ -1,7 +1,6 @@
 import Head from "next/head";
 import { useEffect, useState, useRef } from "react";
 import { useRouter } from "next/router";
-
 import styles from "../../styles/Product.module.css";
 import Link from "next/link";
 import LoadingIndicator from "../../components/LoadingIndicator";
@@ -10,7 +9,7 @@ import {
   getCompanyById,
   sendMessage,
   getItemBlockedDates,
-} from "../../util/API";
+} from "../../utils/API";
 
 export default function Product() {
   const router = useRouter();

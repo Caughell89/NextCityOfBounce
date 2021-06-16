@@ -2,11 +2,23 @@ import styles from "../styles/Login.module.css";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useContext } from "react";
-import { Input, Form, Button,Checkbox } from 'antd';
-import { UserOutlined, LockOutlined } from '@ant-design/icons';
-
-
+import { Input, Form, Button, Checkbox } from "antd";
+import { UserOutlined, LockOutlined } from "@ant-design/icons";
+import { motion } from "framer-motion";
+import { supabase } from "../utils/supabaseClient";
 import { UserContext } from "../context/UserContext";
+
+async function facebookSignIn() {
+  const { user, session, error } = await supabase.auth.signIn({
+    provider: "facebook",
+  });
+}
+
+async function googleSignIn() {
+  const { user, session, error } = await supabase.auth.signIn({
+    provider: "google",
+  });
+}
 
 const Login = ({ showSignup }) => {
   const userCtx = useContext(UserContext);
@@ -17,26 +29,28 @@ const Login = ({ showSignup }) => {
   return (
     <>
       <div className={styles.modalContent}>
-        <div>
+        <motion.div whileTap={{ scale: 0.9 }}>
           <a
             className={`${styles.modalFullBtn} ${styles.googleBtn}`}
-            href={process.env.NEXT_PUBLIC_GOOGLE_AUTH_URL}
+            // href={process.env.NEXT_PUBLIC_GOOGLE_AUTH_URL}
+            onClick={googleSignIn}
           >
             <Image src="/google-logo.png" alt="Google" height="32" width="32" />
             <div className={styles.center}>Log in with Google</div>
             <div className={styles.holder}></div>
           </a>
-        </div>
-        <div>
+        </motion.div>
+        <motion.div whileTap={{ scale: 0.9 }}>
           <a
             className={`${styles.modalFullBtn} ${styles.fbBtn}`}
-            href={process.env.NEXT_PUBLIC_FACEBOOK_AUTH_URL}
+            // href={process.env.NEXT_PUBLIC_GOOGLE_AUTH_URL}
+            onClick={facebookSignIn}
           >
             <Image src="/fb-logo.png" alt="Google" height="32" width="32" />
             <div className={styles.center}>Log in with Facebook</div>
             <div className={styles.holder}></div>
           </a>
-        </div>
+        </motion.div>
         <div className={styles.orRow}>
           <span className={styles.or}>or</span>
         </div>

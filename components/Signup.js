@@ -5,24 +5,89 @@ import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import { Form, Input, Button, Checkbox } from "antd";
-import { UserOutlined, LockOutlined } from "@ant-design/icons";
-import { signup } from "../util/API";
+import { UserOutlined, LockOutlined, MailOutlined } from "@ant-design/icons";
+import { supabase, updateUserName } from "../utils/supabaseClient";
+import { motion } from "framer-motion";
+
+
+
+
+// async function signUp(values) {
+//   const { user, session, error } = await supabase.auth.signUp({
+//     email: values.Email,
+//     password: values.password,
+//   })
+
+//   if(user) {
+
+//   }
+//   console.log(user);
+//   console.log(session);
+//   console.log(error);
+//   alert("Check your database");
+// };
+
+async function facebookSignUp() {
+  const { user, session, error } = await supabase.auth.signIn({
+    provider: 'facebook'
+  }, {
+    scopes: 'email public_profile'
+  })
+
+}
+
+async function googleSignUp() {
+  const { user, session, error } = await supabase.auth.signIn({
+    provider: 'google'
+  }, {
+    scopes: 'email profile'
+  })
+
+}
+
+
 
 const Signup = ({ showLogin }) => {
   const [socialSignup, setSocialSignup] = useState(true);
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState({ type: '', content: '' });
 
-  const onFinish = () => {
-    alert("done");
+  const handleSignup = async (e) => {
+    setLoading(true);
+    setMessage({});
+    const { error, user } = await supabase.auth.signUp({ email: e.Email,
+      password: e.password, });
+    if (error) {
+      setMessage({ type: 'error', content: error.message });
+    } else {
+      if (user) {
+        await updateUserName(user, e.firstName, e.lastName);
+        setUser(user);
+      } else {
+        setMessage({
+          type: 'note',
+          content: 'Check your email for the confirmation link.'
+        });
+      }
+    }
+    setLoading(false);
+  };
+  const onFinish = (values) => {
+    handleSignup(values)
+    // signUp(values)
+    console.log(values);
   };
   return (
     <>
       <div className={styles.modalContent}>
         {socialSignup && (
           <>
-            <div>
+            <motion.div
+                  whileTap={{ scale: 0.9 }}>
               <a
                 className={`${styles.modalFullBtn} ${styles.googleBtn}`}
-                href={process.env.NEXT_PUBLIC_GOOGLE_AUTH_URL}
+                onClick={googleSignUp}
               >
                 <Image
                   src="/google-logo.png"
@@ -33,22 +98,24 @@ const Signup = ({ showLogin }) => {
                 <div className={styles.center}>Sign up with Google</div>
                 <div className={styles.holder}></div>
               </a>
-            </div>
-            <div>
+            </motion.div>
+            <motion.div
+                  whileTap={{ scale: 0.9 }}>
               <a
                 className={`${styles.modalFullBtn} ${styles.fbBtn}`}
-                href={process.env.NEXT_PUBLIC_FACEBOOK_AUTH_URL}
+                onClick={facebookSignUp}
               >
                 <Image src="/fb-logo.png" alt="Google" height="32" width="32" />
                 <div className={styles.center}>Sign up with Facebook</div>
                 <div className={styles.holder}></div>
               </a>
-            </div>
+            </motion.div>
             <div className={styles.orRow}>
               <span className={styles.or}>or</span>
             </div>
 
-            <div
+            <motion.div
+                  whileTap={{ scale: 0.9 }}
               onClick={() => setSocialSignup(false)}
               className={`${styles.modalFullBtn} ${styles.bounceColor}`}
             >
@@ -57,7 +124,7 @@ const Signup = ({ showLogin }) => {
               </div>
               <div className={styles.center}>Sign up with Email</div>
               <div className={styles.holder}></div>
-            </div>
+            </motion.div>
           </>
         )}
         {!socialSignup && (
@@ -65,11 +132,11 @@ const Signup = ({ showLogin }) => {
             <div className={styles.socalOptions}>
               <span>
                 Sign up with{" "}
-                <a className={styles.googleLink} href={process.env.NEXT_PUBLIC_GOOGLE_AUTH_URL}>
+                <a className={styles.googleLink} onClick={googleSignUp}>
                   Google{" "}
                 </a>
                 or{" "}
-                <a className={styles.fbLink} href={process.env.NEXT_PUBLIC_FACEBOOK_AUTH_URL}>
+                <a className={styles.fbLink} onClick={facebookSignUp}>
                   Facebook
                 </a>
               </span>
@@ -87,13 +154,7 @@ const Signup = ({ showLogin }) => {
             >
               <Form.Item
                 name="FirstName"
-                rules={[
-                  {
-                    required: true,
-                    type: "text",
-                    message: "Please input your first name!",
-                  },
-                ]}
+                
               >
                 <Input
                   size="large"
@@ -103,13 +164,7 @@ const Signup = ({ showLogin }) => {
               </Form.Item>
               <Form.Item
                 name="lastName"
-                rules={[
-                  {
-                    required: true,
-                    type: "text",
-                    message: "Please input your last name!",
-                  },
-                ]}
+                
               >
                 <Input
                   size="large"
@@ -119,18 +174,14 @@ const Signup = ({ showLogin }) => {
               </Form.Item>
               <Form.Item
                 name="Email"
-                rules={[
-                  {
-                    required: true,
-                    type: "email",
-                    message: "Please input your Email!",
-                  },
-                ]}
+                
               >
                 <Input
                   size="large"
-                  prefix={<UserOutlined className="site-form-item-icon" />}
+                  prefix={<MailOutlined className="site-form-item-icon" />}
                   placeholder="Email"
+                  
+
                 />
               </Form.Item>
               <Form.Item
@@ -158,9 +209,13 @@ const Signup = ({ showLogin }) => {
                 </span>
               </Form.Item>
               <Form.Item>
-                <button className={styles.bounceButton} htmlType="submit">
+              <motion.div
+                  whileTap={{ scale: 0.9 }}>
+                 
+                <button className={styles.bounceButton} htmltype="submit">
                   Sign Up
                 </button>
+                </motion.div>
               </Form.Item>
 
               <Form.Item>

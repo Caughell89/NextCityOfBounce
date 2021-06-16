@@ -14,7 +14,9 @@ import {
 import styles from "../styles/Navbar.module.css";
 import { useState, useContext } from "react";
 import { UserContext } from "./../context/UserContext";
-import { Drawer, Modal, Menu, Dropdown,Badge } from "antd";
+import { useUser } from "../utils/useUser";
+
+import { Drawer, Modal, Menu, Dropdown, Badge } from "antd";
 import {
   LoginOutlined,
   FormOutlined,
@@ -24,12 +26,17 @@ import {
   CalendarOutlined,
   DesktopOutlined,
   SolutionOutlined,
-  SearchOutlined ,
+  SearchOutlined,
 } from "@ant-design/icons";
 
 import { motion } from "framer-motion";
 
 const Navbar = (...pageProps) => {
+  const { userLoaded, user, session, userDetails, signOut } = useUser();
+  console.log(userLoaded);
+  console.log(user);
+  console.log(userDetails);
+  console.log(session);
   const [loginModalOpen, showLogin] = useState(false);
   const [signupModalOpen, showSignup] = useState(false);
   const [navSearch, setNavSearch] = useState(false);
@@ -66,10 +73,9 @@ const Navbar = (...pageProps) => {
     setNavSearch(true);
   };
 
-  const { status, user, location, date } = useContext(UserContext);
+  const { status, location, date } = useContext(UserContext);
   console.log(status);
   console.log(user);
-
   const defaultState = {
     opacity: 0,
     scale: 0.6,
@@ -119,12 +125,11 @@ const Navbar = (...pageProps) => {
       <Menu.Item key="help">
         <div>Help</div>
       </Menu.Item>
-      <Menu.Item key="logout" onClick={() => status.logout()}>
+      <Menu.Item key="logout" onClick={() => signOut()}>
         <div>Logout</div>
       </Menu.Item>
     </Menu>
   );
-
   return (
     <>
       <div className={styles.navHolder}>
@@ -185,21 +190,21 @@ const Navbar = (...pageProps) => {
               </div>
               <div className={styles.searchBtn}>
                 <span>
-                <SearchOutlined className={styles.flexCenter}/>
+                  <SearchOutlined className={styles.flexCenter} />
                   {/* <FontAwesomeIcon icon={faSearch} /> */}
                 </span>
               </div>
             </div>
           )}
           <div className={styles.navLinks}>
-            {status.loggedIn && user.userDetails.company === null && (
-              <Link href="Register Company">
+            {userLoaded && (
+              <Link href="company_registration">
                 <div className={styles.navItem}>
                   <span className={styles.navItemText}>Register Company</span>
                 </div>
               </Link>
             )}
-            {!status.loggedIn && (
+            {!userLoaded && (
               <motion.div
                 initial={{ borderBottom: "2px solid rgb(255, 255, 255)" }}
                 whileTap={{ scale: 0.9 }}
@@ -216,7 +221,7 @@ const Navbar = (...pageProps) => {
                 <span className={styles.navItemText}>Register Company</span>
               </motion.div>
             )}
-            {status.loggedIn ? (
+            {userLoaded ? (
               <div>
                 <Dropdown
                   className={styles.userDrop}
@@ -226,21 +231,23 @@ const Navbar = (...pageProps) => {
                 >
                   <div className={styles.userBtn}>
                     <span>
-                      <div>
-                        <img
-                          src={user.userDetails.imageUrl}
-                          alt="User's profile pic"
-                        />
-                        <span className={styles.navName}>
-                          {user.userDetails.firstName}
-                        </span>
-                      </div>
+                  
+                        <div>
+                          <img
+                            src={userDetails.data.avatar_url}
+                            alt="User's profile pic"
+                          />
+                          <span className={styles.navName}>
+                            {userDetails.data.full_name.split(" ")[0]}
+                          </span>
+                        </div>
+                 
                     </span>
                   </div>
                 </Dropdown>
                 <div onClick={showSideMenu} className={styles.navUserBtnMobile}>
                   <img
-                    src={user.userDetails.imageUrl}
+                    src={userDetails.data.avatar_url}
                     alt="User's profile pic"
                   />
                 </div>
@@ -279,11 +286,10 @@ const Navbar = (...pageProps) => {
               <div>
                 <a className={styles.cartLink}>
                   <FontAwesomeIcon icon={faShoppingCart} />
-             
                 </a>
               </div>
             </Link>
-            {!status.loggedIn && (
+            {!userLoaded && (
               <div onClick={showSideMenu} className={styles.menuToggler}>
                 <FontAwesomeIcon icon={faBars} />
               </div>
@@ -314,7 +320,6 @@ const Navbar = (...pageProps) => {
         onOk={handleOk}
         onCancel={handleCancel}
         footer={null}
-      
       >
         <Signup showLogin={openLoginModal} />
       </Modal>
@@ -326,32 +331,51 @@ const Navbar = (...pageProps) => {
         key="Side Menu"
       >
         <div className={styles.sideMenu}>
-          {status.loggedIn ? (
+          {userLoaded ? (
             <div className={styles.sideMenuU}>
               <div>
                 <Link onClick={() => setSideMenu(false)} href="account">
                   <a>
                     <span className={styles.sideMenuImg}>
                       <img
-                        src={user.userDetails.imageUrl}
+                        src={userDetails.data.avatar_url}
                         alt="User's profile pic"
                       />
                     </span>
                     <div className={styles.sideMenuName}>
-                      {user.userDetails.firstName +
-                        " " +
-                        user.userDetails.lastName}
+                      {userDetails.data.full_name}
                     </div>
                   </a>
                 </Link>
-                <div onClick={( )=> setSideMenu(false)}><MailOutlined className="mr1"/>Messages</div>
-                <div ><CalendarOutlined className="mr1"/>Events</div>
-                <div> <DesktopOutlined className="mr1"/>Manage Company</div>
-                <div><SolutionOutlined  className="mr1"/>Admin</div>
+                <div onClick={() => setSideMenu(false)}>
+                  <MailOutlined className="mr1" />
+                  Messages
+                </div>
+                <div>
+                  <CalendarOutlined className="mr1" />
+                  Events
+                </div>
+                <div>
+                  {" "}
+                  <DesktopOutlined className="mr1" />
+                  Manage Company
+                </div>
+                <div>
+                  <SolutionOutlined className="mr1" />
+                  Admin
+                </div>
               </div>
               <div className={styles.sideMenuFooter}>
-                <div > <QuestionCircleOutlined className="mr1" />Help</div>
-                <div onClick={() => status.logout()}> <LogoutOutlined className="mr1" />Logout</div>
+                <div>
+                  {" "}
+                  <QuestionCircleOutlined className="mr1" />
+                  Help
+                </div>
+                <div onClick={() => status.logout()}>
+                  {" "}
+                  <LogoutOutlined className="mr1" />
+                  Logout
+                </div>
               </div>
             </div>
           ) : (

@@ -12,8 +12,11 @@
     "@fortawesome/free-brands-svg-icons": "^5.15.3",
     "@fortawesome/free-solid-svg-icons": "^5.15.3",
     "@fortawesome/react-fontawesome": "^0.1.14",
+    "@supabase/supabase-js": "^1.15.1",
+    "@supabase/ui": "^0.27.3",
     "antd": "^4.16.2",
     "babel-plugin-import": "^1.13.3",
+    "easymde": "^2.15.0",
     "file-loader": "^6.2.0",
     "framer-motion": "^4.1.17",
     "less": "^4.1.1",
@@ -22,8 +25,11 @@
     "next-plugin-antd-less": "^1.2.2",
     "react": "17.0.2",
     "react-dom": "17.0.2",
+    "react-markdown": "^6.0.2",
     "react-number-format": "^4.6.0",
     "react-responsive": "^8.2.0",
-    "url-loader": "^4.1.1"
+    "react-simplemde-editor": "^5.0.1",
+    "url-loader": "^4.1.1",
+    "uuid": "^8.3.2"
   }
 }

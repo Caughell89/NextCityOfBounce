@@ -1,8 +1,8 @@
 import { useState, createContext, useEffect } from "react";
-import { getCurrentUser, loginUser } from "../util/API";
-import { ACCESS_TOKEN } from "../util/constants";
+import { getCurrentUser, loginUser } from "../utils/API";
+import { ACCESS_TOKEN } from "../utils/constants";
 import { useRouter } from "next/router";
-import {stringLocToUrl} from '../util/FormTools'
+import {stringLocToUrl} from '../utils/FormTools'
 import moment from "moment";
 
 

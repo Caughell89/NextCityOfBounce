@@ -5,8 +5,8 @@ import NumberFormat from "react-number-format";
 import ProductTile from "../../components/ProductTile";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styles from "../../styles/Search.module.css";
-import { urlLocToString } from "../../util/FormTools";
-import { productSearch, productSearchFiltered } from "../../util/API";
+import { urlLocToString } from "../../utils/FormTools";
+import { productSearch, productSearchFiltered } from "../../utils/API";
 import { Menu, Dropdown ,Slider, InputNumber, Checkbox} from "antd";
 import { DownOutlined } from "@ant-design/icons";
 
