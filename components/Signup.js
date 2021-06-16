@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import { Form, Input, Button, Checkbox } from "antd";
 import { UserOutlined, LockOutlined, MailOutlined } from "@ant-design/icons";
-import { supabase, updateUserName } from "../utils/supabaseClient";
+import { supabase } from "../utils/supabaseClient";
 import { motion } from "framer-motion";
 
 
@@ -62,7 +62,6 @@ const Signup = ({ showLogin }) => {
       setMessage({ type: 'error', content: error.message });
     } else {
       if (user) {
-        await updateUserName(user, e.firstName, e.lastName);
         setUser(user);
       } else {
         setMessage({
