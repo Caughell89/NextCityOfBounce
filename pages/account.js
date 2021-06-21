@@ -22,7 +22,8 @@ export default function Account() {
 
       <div className="content">
           <h1>Your Account</h1>
-<div>{userDetails.full_name} </div>
+          {/* {userDetails.data == undefined?<div>Name</div>:<div>{userDetails.data.full_name} </div>} */}
+
         </div>
     </div>
   )

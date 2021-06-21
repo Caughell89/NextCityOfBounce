@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import Backdrop from "./Backdrop";
 import { Input } from 'antd';
 import styles from "../styles/Autocomplete.module.css";
-import { getLocationsByCity } from "../utils/API";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faMapMarkerAlt,
