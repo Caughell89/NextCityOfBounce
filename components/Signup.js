@@ -6,26 +6,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import { Form, Input, Button, Checkbox } from "antd";
 import { UserOutlined, LockOutlined, MailOutlined } from "@ant-design/icons";
-import { supabase } from "../utils/supabaseClient";
+import { supabase, updateUserSignUp } from "../utils/supabaseClient";
 import { motion } from "framer-motion";
 
-
-
-
-// async function signUp(values) {
-//   const { user, session, error } = await supabase.auth.signUp({
-//     email: values.Email,
-//     password: values.password,
-//   })
-
-//   if(user) {
-
-//   }
-//   console.log(user);
-//   console.log(session);
-//   console.log(error);
-//   alert("Check your database");
-// };
 
 async function facebookSignUp() {
   const { user, session, error } = await supabase.auth.signIn({
@@ -45,8 +28,6 @@ async function googleSignUp() {
 
 }
 
-
-
 const Signup = ({ showLogin }) => {
   const [socialSignup, setSocialSignup] = useState(true);
   const [user, setUser] = useState(null);
@@ -56,12 +37,13 @@ const Signup = ({ showLogin }) => {
   const handleSignup = async (e) => {
     setLoading(true);
     setMessage({});
-    const { error, user } = await supabase.auth.signUp({ email: e.Email,
+    const { error, user } = await supabase.auth.signUp({ email: e.email,
       password: e.password, });
     if (error) {
       setMessage({ type: 'error', content: error.message });
     } else {
       if (user) {
+        await updateUserSignUp(user, e.name);
         setUser(user);
       } else {
         setMessage({
@@ -151,28 +133,19 @@ const Signup = ({ showLogin }) => {
               }}
               onFinish={onFinish}
             >
+             
               <Form.Item
-                name="FirstName"
+                name="name"
                 
               >
                 <Input
                   size="large"
                   prefix={<UserOutlined className="site-form-item-icon" />}
-                  placeholder="First Name"
+                  placeholder="Full Name"
                 />
               </Form.Item>
               <Form.Item
-                name="lastName"
-                
-              >
-                <Input
-                  size="large"
-                  prefix={<UserOutlined className="site-form-item-icon" />}
-                  placeholder="Last Name"
-                />
-              </Form.Item>
-              <Form.Item
-                name="Email"
+                name="email"
                 
               >
                 <Input
@@ -185,12 +158,7 @@ const Signup = ({ showLogin }) => {
               </Form.Item>
               <Form.Item
                 name="password"
-                rules={[
-                  {
-                    required: true,
-                    message: "Please input your Password!",
-                  },
-                ]}
+               
               >
                 <Input
                   size="large"

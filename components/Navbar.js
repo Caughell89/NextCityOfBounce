@@ -191,7 +191,6 @@ const Navbar = (...pageProps) => {
               <div className={styles.searchBtn}>
                 <span>
                   <SearchOutlined className={styles.flexCenter} />
-                  {/* <FontAwesomeIcon icon={faSearch} /> */}
                 </span>
               </div>
             </div>
@@ -231,25 +230,42 @@ const Navbar = (...pageProps) => {
                 >
                   <div className={styles.userBtn}>
                     <span>
-                  
-                        <div>
-                          <img
-                            src={userDetails.data.avatar_url}
-                            alt="User's profile pic"
-                          />
-                          <span className={styles.navName}>
-                            {userDetails.data.full_name.split(" ")[0]}
-                          </span>
-                        </div>
-                 
+                      <div>
+                        {userDetails.data == undefined ? (
+                          <>
+                            <img
+                              src="https://res.cloudinary.com/city-of-bounce/image/upload/v1557940124/no-profile-pic.png"
+                              alt="User's profile pic"
+                            />{" "}
+                            <span className={styles.navName}>Name</span>
+                          </>
+                        ) : (
+                          <>
+                            <img
+                              src={userDetails.data.avatar_url}
+                              alt="User's profile pic"
+                            />
+                            <span className={styles.navName}>
+                              {userDetails.data.full_name.split(" ")[0]}
+                            </span>
+                          </>
+                        )}
+                      </div>
                     </span>
                   </div>
                 </Dropdown>
                 <div onClick={showSideMenu} className={styles.navUserBtnMobile}>
-                  <img
-                    src={userDetails.data.avatar_url}
-                    alt="User's profile pic"
-                  />
+                  {userDetails.data == undefined ? (
+                    <img
+                      src="https://res.cloudinary.com/city-of-bounce/image/upload/v1557940124/no-profile-pic.png"
+                      alt="User's profile pic"
+                    />
+                  ) : (
+                    <img
+                      src={userDetails.data.avatar_url}
+                      alt="User's profile pic"
+                    />
+                  )}
                 </div>
               </div>
             ) : (
@@ -336,15 +352,30 @@ const Navbar = (...pageProps) => {
               <div>
                 <Link onClick={() => setSideMenu(false)} href="account">
                   <a>
-                    <span className={styles.sideMenuImg}>
-                      <img
-                        src={userDetails.data.avatar_url}
-                        alt="User's profile pic"
-                      />
-                    </span>
-                    <div className={styles.sideMenuName}>
-                      {userDetails.data.full_name}
-                    </div>
+                    {userDetails.data == undefined ? (
+                      <>
+                        <span className={styles.sideMenuImg}>
+                          <img
+                            src="https://res.cloudinary.com/city-of-bounce/image/upload/v1557940124/no-profile-pic.png"
+                            alt="User's profile pic"
+                          />
+                        </span>
+                        <div className={styles.sideMenuName}>Name</div>
+                      </>
+                    ) : (
+                      <>
+                        <span className={styles.sideMenuImg}>
+                          <img
+                            src={userDetails.data.avatar_url}
+                            alt="User's profile pic"
+                          />
+                        </span>
+                        <div className={styles.sideMenuName}>
+                          {userDetails.data.full_name}
+                        </div>
+                      </>
+                    )}
+            
                   </a>
                 </Link>
                 <div className="mb1" onClick={() => setSideMenu(false)}>
@@ -356,7 +387,6 @@ const Navbar = (...pageProps) => {
                   Events
                 </div>
                 <div className="mb1">
-                 
                   <DesktopOutlined className="mr1" />
                   Manage Company
                 </div>

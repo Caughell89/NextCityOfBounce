@@ -106,7 +106,7 @@
     width: 100%;
     border: black;
     border-radius: 2.5rem;
-    padding: 5rem 7rem 5rem 7rem;
+    padding: 3rem;
     margin: 6rem 0rem 5rem 0rem;
     background-position: center;
     background-size: cover;
@@ -182,8 +182,7 @@
     border-radius: 1rem 1rem 0rem 0rem;
   }
   
-  .articleHeader {
-    margin-left: 3rem;
+  .articlesHeader {
     padding-left: 2.6rem;
     font-weight: bold;
   }
@@ -247,6 +246,7 @@
     max-width: 1140px;
     margin: auto;
   }
+
 }
 
 #content {

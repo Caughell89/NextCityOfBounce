@@ -1,3 +1,4 @@
+
 const request = (options) => {
   const headers = new Headers({
     "Content-Type": "application/json",
@@ -219,13 +220,6 @@ export function getAllCities() {
 export function getAllLocations() {
   return request({
     url: process.env.NEXT_PUBLIC_API_BASE_URL + "/resource/all-locations",
-    method: "GET",
-  });
-}
-
-export function getLocationsByCity(userInput) {
-  return request({
-    url: process.env.NEXT_PUBLIC_API_BASE_URL + "/resource/locations=" + userInput,
     method: "GET",
   });
 }

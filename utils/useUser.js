@@ -8,7 +8,8 @@ export const UserContextProvider = (props) => {
   const [session, setSession] = useState(null);
   const [user, setUser] = useState(null);
   const [userDetails, setUserDetails] = useState(null);
-
+  console.log("getting session");
+  console.log(session);
   useEffect(() => {
     const session = supabase.auth.session();
     setSession(session);

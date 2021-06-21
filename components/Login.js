@@ -1,12 +1,11 @@
 import styles from "../styles/Login.module.css";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Input, Form, Button, Checkbox } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { motion } from "framer-motion";
 import { supabase } from "../utils/supabaseClient";
-import { UserContext } from "../context/UserContext";
 
 async function facebookSignIn() {
   const { user, session, error } = await supabase.auth.signIn({
@@ -18,13 +17,35 @@ async function googleSignIn() {
   const { user, session, error } = await supabase.auth.signIn({
     provider: "google",
   });
+  console.log(session);
 }
 
-const Login = ({ showSignup }) => {
-  const userCtx = useContext(UserContext);
 
+
+const Login = ({ close, showSignup }) => {
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState({ type: '', content: '' });
+  
+  const handleSignin = async (values) => {
+    console.log(values);
+    setLoading(true);
+    setMessage({});
+  
+    const { error } = await supabase.auth.signIn({ email: values.email, password: values.password });
+    if (error) {
+      setMessage({ type: 'error', content: error.message });
+    }
+    if (!password) {
+      setMessage({
+        type: 'note',
+        content: 'Check your email for the magic link.'
+      });
+    }
+    setLoading(false);
+  };
   const onFinish = (values) => {
-    userCtx.status.login(values);
+    console.log(values);
+    handleSignin(values);
   };
   return (
     <>
@@ -63,14 +84,8 @@ const Login = ({ showSignup }) => {
           onFinish={onFinish}
         >
           <Form.Item
-            name="Email"
-            rules={[
-              {
-                required: true,
-                type: "email",
-                message: "Please input your Email!",
-              },
-            ]}
+            name="email"
+           
           >
             <Input
               size="large"
@@ -103,7 +118,7 @@ const Login = ({ showSignup }) => {
             </span>
           </Form.Item>
           <Form.Item>
-            <button className={styles.bounceButton} htmlType="submit">
+            <button className={styles.bounceButton} htmltype="submit">
               Login
             </button>
           </Form.Item>
