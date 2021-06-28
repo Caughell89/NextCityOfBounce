@@ -7,7 +7,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faMapMarkerAlt,
   faExclamationTriangle,
-} from "@fortawesome/free-solid-svg-icons";
+} from "@fortawesome/free-solid-svg-icons"; 
+import { supabase } from "../utils/supabaseClient";
+
 
 class Autocomplete extends Component {
   static propTypes = {
@@ -78,6 +80,28 @@ class Autocomplete extends Component {
     }
   };
 
+   getLocationsByCity = async userInput => {
+    const loc = userInput.split(',');
+    const city = loc[0]
+    let state = "%"
+    if(loc.length > 1) {
+      state = loc[1].trim()
+    }
+    const { data, error } = await supabase
+    .from('locations')
+    .select()
+    .ilike('city', city+'%')
+    .ilike('state_id', state+'%');
+    this.setState({
+      activeSuggestion: 0,
+      filteredSuggestions: data,
+      showSuggestions: true,
+      loadingLocations: false,
+    });
+    console.log(data);
+    console.log(error);
+  }
+
   // Event fired when the input value is changed
   onChange = (e) => {
     const userInput = e.currentTarget.value;
@@ -86,18 +110,19 @@ class Autocomplete extends Component {
       if (this.state.filteredSuggestions.length === 0) {
         this.setState({ loadingLocations: true });
       }
-      getLocationsByCity(userInput)
-        .then((response) => {
-          this.setState({
-            activeSuggestion: 0,
-            filteredSuggestions: response,
-            showSuggestions: true,
-            loadingLocations: false,
-          });
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+     this.getLocationsByCity(userInput)
+      // getLocationsByCity(userInput)
+      //   .then((response) => {
+      //     this.setState({
+      //       activeSuggestion: 0,
+      //       filteredSuggestions: response,
+      //       showSuggestions: true,
+      //       loadingLocations: false,
+      //     });
+      //   })
+      //   .catch((error) => {
+      //     console.log(error);
+      //   });
     } else {
       this.setState({
         showSuggestions: false,
@@ -249,7 +274,7 @@ class Autocomplete extends Component {
                 <li
                   ref={activeRowRef}
                   className={className}
-                  key={suggestion.place + ", " + suggestion.stateAbbr}
+                  key={suggestion.city + ", " + suggestion.state_id}
                   onClick={onClick}
                 >
                   <FontAwesomeIcon
@@ -258,7 +283,7 @@ class Autocomplete extends Component {
                     size="lg"
                   />
 
-                  {suggestion.place + ", " + suggestion.stateAbbr}
+                  {suggestion.city + ", " + suggestion.state_id}
                 </li>
               );
             })}

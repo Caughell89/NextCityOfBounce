@@ -37,5 +37,8 @@ export function preventBlanks(input) {
     } else {
       return false;
     }
+
+    
   }
+
   
