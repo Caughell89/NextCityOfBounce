@@ -218,6 +218,7 @@ export default function Search() {
           </div>
         </div>
         <div className={styles.searchResults}>{productTiles}</div>
+        {loading && <>Loading...</>}
         {products.length === 0 && !loading && (
           <div>
             <h3 className="bold">No results</h3>
