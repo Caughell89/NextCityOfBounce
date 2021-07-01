@@ -49,7 +49,7 @@ export default function Search() {
 
   useEffect(() => {
     console.log("use effect causing pull of new data");
-    loadProducts();
+    // loadProducts();
   }, [router.query]);
 
   const sortMenu = (
@@ -218,7 +218,6 @@ export default function Search() {
           </div>
         </div>
         <div className={styles.searchResults}>{productTiles}</div>
-        {loading && <>Loading...</>}
         {products.length === 0 && !loading && (
           <div>
             <h3 className="bold">No results</h3>
