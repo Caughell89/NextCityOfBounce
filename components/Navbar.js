@@ -375,20 +375,23 @@ const Navbar = (...pageProps) => {
                         </div>
                       </>
                     )}
-            
                   </a>
                 </Link>
-                <div className="mb1" onClick={() => setSideMenu(false)}>
+                <div className="mb1 pointer" onClick={() => setSideMenu(false)}>
                   <MailOutlined className="mr1" />
                   Messages
                 </div>
-                <div className="mb1">
+                <div className="mb1 pointer">
                   <CalendarOutlined className="mr1" />
                   Events
                 </div>
-                <div className="mb1">
-                  <DesktopOutlined className="mr1" />
-                  Manage Company
+                <div className="mb1 pointer">
+                  <Link href="/cart">
+                    <a onClick={() => setSideMenu(false)}>
+                      <DesktopOutlined className="mr1" />
+                      Manage Company
+                    </a>
+                  </Link>
                 </div>
                 <div className="mb1">
                   <SolutionOutlined className="mr1" />
@@ -397,12 +400,12 @@ const Navbar = (...pageProps) => {
               </div>
               <div className={styles.sideMenuFooter}>
                 <div className="mb1">
-                  {" "}
+
                   <QuestionCircleOutlined className="mr1" />
                   Help
                 </div>
-                <div onClick={() => status.logout()}>
-                  {" "}
+                <div  onClick={() => signOut()}>
+              
                   <LogoutOutlined className="mr1" />
                   Logout
                 </div>
@@ -428,9 +431,12 @@ const Navbar = (...pageProps) => {
                 <LoginOutlined className="mr1" />
                 Login
               </div>
-              <div className={styles.sideMenuItem}>
-                <QuestionCircleOutlined className="mr1" />
-                Help
+              <div className={styles.sideMenuFooter}>
+                <div className="mb1">
+                  <QuestionCircleOutlined className="mr1" />
+                  Help
+                </div>
+               
               </div>
             </>
           )}

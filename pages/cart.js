@@ -28,7 +28,7 @@ export default function Cart() {
       </Head>
 
       <div className="content">
-        <h1>Shopping Cart</h1>
+        <h1 className="mb4">Shopping Cart</h1>
         <div>
           {items.length < 1 ? (
               <div className="box">
