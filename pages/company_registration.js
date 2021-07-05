@@ -1,16 +1,19 @@
-import Head from 'next/head'
-import { useRef, useState } from 'react'
-import Image from 'next/image'
-import Link from 'next/link'
-import AutoComplete from '../components/Autocomplete'
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
-
-import moment from 'moment';
-
+import Head from "next/head";
+import { useRef, useState } from "react";
+import Link from "next/link";
+import AutoComplete from "../components/Autocomplete";
+import { Steps } from "antd";
+import { Form, Input, Button, Checkbox, Row, Col } from "antd";
 
 export default function RegisterCompany() {
-  
+  const { Step } = Steps;
+  const [step, setStep] = useState(0);
+  const onFinish = () => {
+    alert("Finished");
+  };
+  const onFinishFailed = () => {
+    alert("Finish Failed!");
+  };
   return (
     <div>
       <Head>
@@ -24,8 +27,75 @@ export default function RegisterCompany() {
       </Head>
 
       <div className="content">
-          Company Registration
-        </div>
+        <h1>Company Registration</h1>
+        <Steps current={step}>
+          <Step
+            title="The Basics"
+            description="What's your company name and location"
+          />
+          <Step
+            title="Branding"
+            description="Upload a logo and background image"
+          />
+          <Step
+            title="Locations"
+            description="List locations you provide services"
+          />
+        </Steps>
+        {step === 0 && (
+          <div>
+            <Row>
+              <Col span={12} offset={6}>
+                Provide your company name and primary location. This will allow
+                users to search for you and your services as well as generate
+                your own website url to share with your customers.
+              </Col>
+            </Row>
+            <Form
+              name="basic"
+              labelCol={{ span: 6 }}
+              wrapperCol={{ span: 12 }}
+              initialValues={{ remember: true }}
+              onFinish={onFinish}
+              onFinishFailed={onFinishFailed}
+            >
+              <Form.Item
+                label="Username"
+                name="username"
+                rules={[
+                  { required: true, message: "Please input your username!" },
+                ]}
+              >
+                <Input />
+              </Form.Item>
+
+              <Form.Item
+                label="Password"
+                name="password"
+                rules={[
+                  { required: true, message: "Please input your password!" },
+                ]}
+              >
+                <Input.Password />
+              </Form.Item>
+
+              <Form.Item
+                name="remember"
+                valuePropName="checked"
+                wrapperCol={{ offset: 6, span: 16 }}
+              >
+                <Checkbox>Remember me</Checkbox>
+              </Form.Item>
+
+              <Form.Item wrapperCol={{ offset: 6, span: 16 }}>
+                <Button type="primary" htmlType="submit">
+                  Submit
+                </Button>
+              </Form.Item>
+            </Form>
+          </div>
+        )}
+      </div>
     </div>
-  )
+  );
 }

@@ -108,13 +108,13 @@ const Navbar = (...pageProps) => {
   const menu = (
     <Menu>
       <Menu.Item key="messages">
-        <Link href="/messages">Messages</Link>
+        <Link href="/u/messages">Messages</Link>
       </Menu.Item>
       <Menu.Item key="events">
-        <Link href="/events">Events</Link>
+        <Link href="/u/events">Events</Link>
       </Menu.Item>
       <Menu.Item key="account">
-        <Link href="/account">Account</Link>
+        <Link href="/u/account">Account</Link>
       </Menu.Item>
       <Menu.Item key="company">
         <Link href="/company_manager">Manage Company</Link>
@@ -197,10 +197,20 @@ const Navbar = (...pageProps) => {
           )}
           <div className={styles.navLinks}>
             {userLoaded && (
-              <Link href="company_registration">
-                <div className={styles.navItem}>
+              <Link href="/company_registration">
+                <motion.a
+                  initial={{ borderBottom: "2px solid rgb(255, 255, 255)" }}
+                  whileTap={{ scale: 0.9 }}
+                  whileHover={{
+                    scale: 1.1,
+                    color: "rgb(28, 172, 200)",
+                    borderBottom: "2px solid rgb(28, 172, 200)",
+                  }}
+                
+                  className={styles.navItem}
+                >
                   <span className={styles.navItemText}>Register Company</span>
-                </div>
+                </motion.a>
               </Link>
             )}
             {!userLoaded && (
@@ -350,7 +360,7 @@ const Navbar = (...pageProps) => {
           {userLoaded ? (
             <div className={styles.sideMenuU}>
               <div>
-                <Link onClick={() => setSideMenu(false)} href="account">
+                <Link onClick={() => setSideMenu(false)} href="/u/account">
                   <a>
                     {userDetails.data == undefined ? (
                       <>
@@ -377,14 +387,25 @@ const Navbar = (...pageProps) => {
                     )}
                   </a>
                 </Link>
-                <div className="mb1 pointer" onClick={() => setSideMenu(false)}>
-                  <MailOutlined className="mr1" />
-                  Messages
-                </div>
-                <div className="mb1 pointer">
-                  <CalendarOutlined className="mr1" />
-                  Events
-                </div>
+                <Link onClick={() => setSideMenu(false)} href="/u/messages">
+                  <a>
+                    <div
+                      className="mb1 pointer"
+                      onClick={() => setSideMenu(false)}
+                    >
+                      <MailOutlined className="mr1" />
+                      Messages
+                    </div>
+                  </a>
+                </Link>
+                <Link onClick={() => setSideMenu(false)} href="/u/events">
+                  <a>
+                    <div className="mb1 pointer">
+                      <CalendarOutlined className="mr1" />
+                      Events
+                    </div>
+                  </a>
+                </Link>
                 <div className="mb1 pointer">
                   <Link href="/cart">
                     <a onClick={() => setSideMenu(false)}>
@@ -400,45 +421,44 @@ const Navbar = (...pageProps) => {
               </div>
               <div className={styles.sideMenuFooter}>
                 <div className="mb1">
-
                   <QuestionCircleOutlined className="mr1" />
                   Help
                 </div>
-                <div  onClick={() => signOut()}>
-              
+                <div onClick={() => signOut()}>
                   <LogoutOutlined className="mr1" />
                   Logout
                 </div>
               </div>
             </div>
           ) : (
-            <>
-              <div
-                className={styles.sideMenuItem}
-                onClick={() => {
-                  showLogin(false), showSignup(true), onClose;
-                }}
-              >
-                <FormOutlined className="mr1" />
-                Sign up
-              </div>
-              <div
-                className={styles.sideMenuItem}
-                onClick={() => {
-                  showLogin(true), showSignup(false), onClose;
-                }}
-              >
-                <LoginOutlined className="mr1" />
-                Login
+            <div className={styles.sideMenuU}>
+              <div>
+                <div
+                  className={styles.sideMenuItem}
+                  onClick={() => {
+                    showLogin(false), showSignup(true), onClose;
+                  }}
+                >
+                  <FormOutlined className="mr1" />
+                  Sign up
+                </div>
+                <div
+                  className={styles.sideMenuItem}
+                  onClick={() => {
+                    showLogin(true), showSignup(false), onClose;
+                  }}
+                >
+                  <LoginOutlined className="mr1" />
+                  Login
+                </div>
               </div>
               <div className={styles.sideMenuFooter}>
                 <div className="mb1">
                   <QuestionCircleOutlined className="mr1" />
                   Help
                 </div>
-               
               </div>
-            </>
+            </div>
           )}
         </div>
       </Drawer>
