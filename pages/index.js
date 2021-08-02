@@ -42,6 +42,13 @@ export default function Home() {
         />
 
         <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/facicon-128.icpng" />
+        <link rel="apple-touch-icon" type="image/png" sizes="32x32" href="/favicon-apple-touch-32.png" />
+        <link rel="apple-touch-icon" type="image/png" sizes="114x114" href="/favicon-apple-touch-114.png" />
+        <link rel="apple-touch-icon" type="image/png" sizes="144x144" href="/favicon-apple-touch-122.png" />
+        <link rel="icon" href="/logo192.png" />
+        <link rel="icon" href="/logo512.png" />
+        <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <div id={styles.content}>

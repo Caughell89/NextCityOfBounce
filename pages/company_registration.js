@@ -2,7 +2,7 @@ import Head from "next/head";
 import { useRef, useState } from "react";
 import Link from "next/link";
 import AutoComplete from "../components/Autocomplete";
-import { Steps } from "antd";
+import { InputNumber, Steps } from "antd";
 import { Form, Input, Button, Checkbox, Row, Col } from "antd";
 
 export default function RegisterCompany() {
@@ -60,32 +60,26 @@ export default function RegisterCompany() {
               onFinishFailed={onFinishFailed}
             >
               <Form.Item
-                label="Username"
-                name="username"
+                label="Company name"
+                name="name"
                 rules={[
-                  { required: true, message: "Please input your username!" },
+                  { required: true, message: "Please enter your company name" },
                 ]}
               >
                 <Input />
               </Form.Item>
 
               <Form.Item
-                label="Password"
-                name="password"
+                label="Company location"
+                name="location"
                 rules={[
-                  { required: true, message: "Please input your password!" },
+                  { required: true, message: "Please enter your location" },
                 ]}
               >
-                <Input.Password />
+                <Input />
               </Form.Item>
 
-              <Form.Item
-                name="remember"
-                valuePropName="checked"
-                wrapperCol={{ offset: 6, span: 16 }}
-              >
-                <Checkbox>Remember me</Checkbox>
-              </Form.Item>
+              
 
               <Form.Item wrapperCol={{ offset: 6, span: 16 }}>
                 <Button type="primary" htmlType="submit">
