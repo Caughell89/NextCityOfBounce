@@ -7,55 +7,95 @@ import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import { Form, Input, Button, Checkbox } from "antd";
 import { UserOutlined, LockOutlined, MailOutlined } from "@ant-design/icons";
 import { supabase, updateUserSignUp } from "../utils/supabaseClient";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
+const passwordReqsVars = {
+  hidden: {
+    opacity: 0,
+    scale: 0.2,
+    y: 0,
+    transition: {
+      type: "spring",
+      mass: 0.2,
+    },
+  },
+  visible: {
+    opacity: 1,
+    y: -64,
+    scale: 1,
+    transition: {
+      type: "spring",
+      mass: 0.5,
+    },
+  },
+};
 
 async function facebookSignUp() {
-  const { user, session, error } = await supabase.auth.signIn({
-    provider: 'facebook'
-  }, {
-    scopes: 'email public_profile'
-  })
-
+  const { user, session, error } = await supabase.auth.signIn(
+    {
+      provider: "facebook",
+    },
+    {
+      scopes: "email public_profile",
+    }
+  );
 }
 
 async function googleSignUp() {
-  const { user, session, error } = await supabase.auth.signIn({
-    provider: 'google'
-  }, {
-    scopes: 'email profile'
-  })
-
+  const { user, session, error } = await supabase.auth.signIn(
+    {
+      provider: "google",
+    },
+    {
+      scopes: "email profile",
+    }
+  );
 }
 
 const Signup = ({ showLogin }) => {
   const [socialSignup, setSocialSignup] = useState(true);
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState({ type: '', content: '' });
+  const [message, setMessage] = useState({ type: "", content: "" });
+  const [showPasswordReqs, setShowPasswordReqs] = useState(false);
+  const [passwordCap, setPasswordCap] = useState(false);
+  const [passwordLength, setPasswordLength] = useState(false);
+  const [passwordSymbol, setPasswordSymbol] = useState(false);
+  const [passwordLower, setPasswordLower] = useState(false);
+  const [passwordNumber, setPasswordNumber] = useState(false);
+
+  const handlePassword = () => {
+    setShowPasswordReqs(true);
+  };
+
+  const hidePasswordReqs = () => {
+    setShowPasswordReqs(false);
+  };
 
   const handleSignup = async (e) => {
     setLoading(true);
     setMessage({});
-    const { error, user } = await supabase.auth.signUp({ email: e.email,
-      password: e.password, });
+    const { error, user } = await supabase.auth.signUp({
+      email: e.email,
+      password: e.password,
+    });
     if (error) {
-      setMessage({ type: 'error', content: error.message });
+      setMessage({ type: "error", content: error.message });
     } else {
       if (user) {
         await updateUserSignUp(user, e.name);
         setUser(user);
       } else {
         setMessage({
-          type: 'note',
-          content: 'Check your email for the confirmation link.'
+          type: "note",
+          content: "Check your email for the confirmation link.",
         });
       }
     }
     setLoading(false);
   };
   const onFinish = (values) => {
-    handleSignup(values)
+    handleSignup(values);
     // signUp(values)
     console.log(values);
   };
@@ -64,8 +104,7 @@ const Signup = ({ showLogin }) => {
       <div className={styles.modalContent}>
         {socialSignup && (
           <>
-            <motion.div
-                  whileTap={{ scale: 0.9 }}>
+            <motion.div whileTap={{ scale: 0.9 }}>
               <a
                 className={`${styles.modalFullBtn} ${styles.googleBtn}`}
                 onClick={googleSignUp}
@@ -80,8 +119,7 @@ const Signup = ({ showLogin }) => {
                 <div className={styles.holder}></div>
               </a>
             </motion.div>
-            <motion.div
-                  whileTap={{ scale: 0.9 }}>
+            <motion.div whileTap={{ scale: 0.9 }}>
               <a
                 className={`${styles.modalFullBtn} ${styles.fbBtn}`}
                 onClick={facebookSignUp}
@@ -96,7 +134,7 @@ const Signup = ({ showLogin }) => {
             </div>
 
             <motion.div
-                  whileTap={{ scale: 0.9 }}
+              whileTap={{ scale: 0.9 }}
               onClick={() => setSocialSignup(false)}
               className={`${styles.modalFullBtn} ${styles.bounceColor}`}
             >
@@ -133,38 +171,96 @@ const Signup = ({ showLogin }) => {
               }}
               onFinish={onFinish}
             >
-             
-              <Form.Item
-                name="name"
-                
-              >
+              <Form.Item name="name">
                 <Input
                   size="large"
                   prefix={<UserOutlined className="site-form-item-icon" />}
                   placeholder="Full Name"
                 />
               </Form.Item>
-              <Form.Item
-                name="email"
-                
-              >
+              <Form.Item name="email">
                 <Input
                   size="large"
                   prefix={<MailOutlined className="site-form-item-icon" />}
                   placeholder="Email"
-                  
-
                 />
               </Form.Item>
-              <Form.Item
-                name="password"
-               
-              >
+              <div className={styles.relative}>
+                <AnimatePresence exitBeforeEnter>
+                  {showPasswordReqs && (
+                    <motion.div
+                      variants={passwordReqsVars}
+                      initial="hidden"
+                      exit="hidden"
+                      animate="visible"
+                      id={styles.passwordRequirements}
+                    >
+                      <div>Create a password with these requirements:</div>
+                      <div className="requirments-list">
+                        <span
+                          id="uppercase-req"
+                          className={
+                            passwordCap
+                              ? `${styles.valid} ${styles.req}`
+                              : `${styles.invalid} ${styles.req}`
+                          }
+                        >
+                          ABC
+                        </span>
+                        <span
+                          id="lowercase-req"
+                          className={
+                            passwordLower
+                              ? `${styles.valid} ${styles.req}`
+                              : `${styles.invalid} ${styles.req}`
+                          }
+                        >
+                          abc
+                        </span>
+
+                        <span
+                          id="number-req"
+                          className={
+                            passwordNumber
+                              ? `${styles.valid} ${styles.req}`
+                              : `${styles.invalid} ${styles.req}`
+                          }
+                        >
+                          123
+                        </span>
+                        <span
+                          id="symbol-req"
+                          className={
+                            passwordSymbol
+                              ? `${styles.valid} ${styles.req}`
+                              : `${styles.invalid} ${styles.req}`
+                          }
+                        >
+                          !@%
+                        </span>
+                        <span
+                          id="character-req"
+                          className={
+                            passwordLength
+                              ? `${styles.valid} ${styles.req}`
+                              : `${styles.invalid} ${styles.req}`
+                          }
+                        >
+                          8 Characters
+                        </span>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+              <Form.Item name="password">
                 <Input
                   size="large"
                   prefix={<LockOutlined className="site-form-item-icon" />}
                   type="password"
                   placeholder="Password"
+                  onFocus={handlePassword}
+                  onBlur={hidePasswordReqs}
                 />
               </Form.Item>
               <Form.Item>
@@ -176,18 +272,18 @@ const Signup = ({ showLogin }) => {
                 </span>
               </Form.Item>
               <Form.Item>
-              <motion.div
-                  whileTap={{ scale: 0.9 }}>
-                 
-                <button className={styles.bounceButton} htmltype="submit">
-                  Sign Up
-                </button>
+                <motion.div whileTap={{ scale: 0.9 }}>
+                  <button className={styles.bounceButton} htmltype="submit">
+                    Sign Up
+                  </button>
                 </motion.div>
               </Form.Item>
 
               <Form.Item>
                 <span>Already have an account</span>
-                <Button onClick={showLogin} className={styles.pushRight}>Log in</Button>
+                <Button onClick={showLogin} className={styles.pushRight}>
+                  Log in
+                </Button>
               </Form.Item>
             </Form>
           </>
