@@ -63,6 +63,7 @@ const Signup = ({ showLogin }) => {
   const [passwordSymbol, setPasswordSymbol] = useState(false);
   const [passwordLower, setPasswordLower] = useState(false);
   const [passwordNumber, setPasswordNumber] = useState(false);
+  const [password, setPassword] = useState("");
 
   const handlePassword = () => {
     setShowPasswordReqs(true);
@@ -70,6 +71,48 @@ const Signup = ({ showLogin }) => {
 
   const hidePasswordReqs = () => {
     setShowPasswordReqs(false);
+  };
+
+  const handlePasswordChange = (event) => {
+    const { name, value } = event.target;
+    setPassword(value);
+    const lowerCaseLetters = /[a-z]/g;
+    if (value.match(lowerCaseLetters)) {
+      setPasswordLower(true);
+    } else {
+      setPasswordLower(false);
+    }
+
+    // Validate symbols
+    const symbols = /[!@#$%^&*)(+=._-]/g;
+    if (value.match(symbols)) {
+      setPasswordSymbol(true);
+    } else {
+      setPasswordSymbol(false);
+    }
+
+    // Validate capital letters
+    const upperCaseLetters = /[A-Z]/g;
+    if (value.match(upperCaseLetters)) {
+      setPasswordCap(true);
+    } else {
+      setPasswordCap(false);
+    }
+
+    // Validate numbers
+    const numbers = /[0-9]/g;
+    if (value.match(numbers)) {
+      setPasswordNumber(true);
+    } else {
+      setPasswordNumber(false);
+    }
+
+    //Validate length
+    if (value.length >= 8) {
+      setPasswordLength(true);
+    } else {
+      setPasswordLength(false);
+    }
   };
 
   const handleSignup = async (e) => {
@@ -259,6 +302,7 @@ const Signup = ({ showLogin }) => {
                   prefix={<LockOutlined className="site-form-item-icon" />}
                   type="password"
                   placeholder="Password"
+                  onChange={handlePasswordChange}
                   onFocus={handlePassword}
                   onBlur={hidePasswordReqs}
                 />
@@ -277,6 +321,13 @@ const Signup = ({ showLogin }) => {
                     Sign Up
                   </button>
                 </motion.div>
+                <div>
+                  <button
+                    className={`${styles.bounceButton} ${styles.disabled}`}
+                  >
+                    Sign Up
+                  </button>
+                </div>
               </Form.Item>
 
               <Form.Item>

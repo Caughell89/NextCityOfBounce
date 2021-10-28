@@ -188,9 +188,19 @@
 .invalid {
   color: white;
   font-weight: bolder;
-  border-bottom: 2px #cccccc solid;
+  border-bottom: 2px rgb(252, 82, 82) solid;
 }
 
 .smallText {
   font-size: 1.1rem;
+}
+
+.disabled {
+  cursor: not-allowed;
+  background-image: linear-gradient(
+    to right,
+    #ddf6f8 0%,
+    rgb(120, 194, 209) 50%,
+    rgb(94, 190, 209) 100%
+  );
 }
