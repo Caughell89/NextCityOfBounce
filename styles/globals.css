@@ -115,6 +115,40 @@ a:hover {
   white-space: nowrap;
 }
 
+.iBtn {
+  cursor: pointer;
+  display: inline-block;
+  margin-top: 0px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  width: auto;
+  font-size: 14px;
+  line-height: 18px;
+  font-weight: 600;
+  border-radius: 0.5rem;
+  outline-color: initial;
+  outline-style: none;
+  outline-width: initial;
+  padding-top: 14px;
+  padding-bottom: 14px;
+  padding-left: 24px;
+  padding-right: 24px;
+  transition-duration: 0.2s, 0.1s, 0.1s, 0.1s;
+  transition-timing-function: ease, ease, ease, ease;
+  transition-delay: initial, initial, initial, initial;
+  transition-property: box-shadow, -ms-transform, transform, transform;
+  background-color: antiquewhite;
+  border: solid 1px #5e5e5e;
+  background-position-y: initial;
+  background-size: initial;
+  background-attachment: initial;
+  background-origin: initial;
+  background-clip: initial;
+  background-color: initial;
+  color: #5e5e5e;
+  white-space: nowrap;
+}
 @media (min-width: 319px) {
   .content {
     background-color: white;

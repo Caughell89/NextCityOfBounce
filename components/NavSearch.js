@@ -33,6 +33,7 @@ const searchVars = {
 
 const NavSearch = ({ navSearch, close }) => {
   const { setParty } = useContext(UserContext);
+  const [step, setStep] = useState(1);
   const [loc, setLoc] = useState("");
   const [date, setDate] = useState(null);
   function disabledDate(current) {
@@ -44,8 +45,9 @@ const NavSearch = ({ navSearch, close }) => {
     setLoc(res);
   };
 
-  const saveLoc = () =>
-    loc === "" ? console.log(loc) : console.log(loc + " this is bs");
+  const saveLoc = () => setStep(2);
+
+  const back = () => setStep(1);
 
   const isTabletOrMobile = useMediaQuery({ maxWidth: 641 });
 
@@ -62,39 +64,54 @@ const NavSearch = ({ navSearch, close }) => {
             <div className={styles.fullScreen}>
               <div>
                 <div className={styles.mobileSearchNav}>
-                  <LeftOutlined onClick={() => close(false)} />
+                  {step === 1 && <LeftOutlined onClick={() => close(false)} />}
+                  {step === 2 && <LeftOutlined onClick={back} />}
                 </div>
                 <div className={styles.mobileSearch}>
-                  <div className={styles.location}>
-                    <span>Location</span>
-                    <Autocomplete
-                      look="nav"
-                      name="location"
-                      placeholder="Where's your party?"
-                      noneFound="Unfortunately there are no companies serving this area"
-                      onUpdate={onUpdate}
-                    />
-                  </div>
+                  {step === 1 && (
+                    <div className={styles.location}>
+                      <span>Location</span>
+                      <Autocomplete
+                        look="nav"
+                        name="location"
+                        placeholder="Where's your party?"
+                        noneFound="Unfortunately there are no companies serving this area"
+                        onUpdate={onUpdate}
+                      />
+                    </div>
+                  )}
+                  {step === 2 && (
+                    <div className={styles.location}>
+                      <span>Event date</span>
 
-                  <div className={styles.location}>
-                    <span>Event date</span>
-
-                    <DatePicker
-                      className={styles.datePicker}
-                      format={"M/D/YYYY"}
-                      disabledDate={disabledDate}
-                      bordered={false}
-                      onChange={(date, dateString) => setDate(date)}
-                    />
-                  </div>
+                      <DatePicker
+                        className={styles.datePicker}
+                        format={"M/D/YYYY"}
+                        disabledDate={disabledDate}
+                        bordered={false}
+                        onChange={(date, dateString) => setDate(date)}
+                      />
+                    </div>
+                  )}
                 </div>
                 <div className={styles.mobileSearchFooter}>
-                  <div className={styles.locationFooter}>
-                    <div onClick={saveLoc} className="bounceButton">
-                      Save
+                  {step === 1 && (
+                    <div className={styles.locationFooter}>
+                      <div onClick={saveLoc} className="bounceButton">
+                        Save
+                      </div>
                     </div>
-                  </div>
-                  <div></div>
+                  )}
+                  {step === 2 && (
+                    <div className={styles.dateFooter}>
+                      <div onClick={back} className="iBtn">
+                        Back
+                      </div>
+                      <div onClick={saveLoc} className="bounceButton">
+                        Search
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>

@@ -1,145 +1,140 @@
 @media (min-width: 319px) {
-    
-      
-      .suggestions {
-        position: absolute;
-        border: 1px solid #d4d4d4;
-        border-top: none;
-        list-style: none;
-        margin-top: 0;
-        max-height: 23rem;
-        overflow-y: auto;
-        padding-left: 0;
-        z-index: 1000;
-        background-color: white;
-      }
-      
-      .suggestions li,
-      .noSuggestions li {
-        display: flex;
-        align-items: center;
-        padding: 0.8rem;
-      }
-      
-      .suggestionActive,
-      .suggestions li:hover {
-        background-color: #d9d9d9;
-        color: #484848;
-        cursor: pointer;
-        font-weight: 700;
-      }
-      
-      .suggestionActive,
-      .suggestions li:focus {
-        background-color: #d9d9d9;
-        color: #484848;
-        cursor: pointer;
-        font-weight: 700;
-        outline: none;
-      }
-      
-      .suggestions li:not(:last-of-type) {
-        border-bottom: 1px solid #d4d4d4;
-      }
-      
-    .suggestions, .noSuggestions {
-        position: absolute;
-        width: 100%;
-        z-index: 4;
-        background-color: white;
+  .suggestions {
+    position: absolute;
+    border: 1px solid #d4d4d4;
+    border-top: none;
+    list-style: none;
+    margin-top: 0;
+    max-height: 23rem;
+    overflow-y: auto;
+    padding-left: 0;
+    z-index: 1000;
+    background-color: white;
+  }
 
-    }
+  .suggestions li,
+  .noSuggestions li {
+    display: flex;
+    align-items: center;
+    padding: 0.8rem;
+  }
 
-    .noSuggestions svg, .suggestions svg  {
-        width: 1.8rem;
-        margin-right: 2rem;
-    }
+  .suggestionActive,
+  .suggestions li:hover {
+    background-color: #d9d9d9;
+    color: #484848;
+    cursor: pointer;
+    font-weight: 700;
+  }
 
-    .suggestions-home,
-    .no-suggestions-home {
-      margin: 0.2rem 0rem;
-      border-radius: 0;
-      width: 100%;
-    }
-  
-    .loadingSuggestionLine {
-      display: flex;
-      align-items: center;
-      border-bottom: 1px solid #d4d4d4;
-      padding: 0.8rem;
-    }
-  
-    .loadingLine {
-      width: 100%;
-      height: 2.1rem;
-      background: linear-gradient(130deg, gray, #ffffff, #bcecf5);
-      background-size: 200% 200%;
-  
-      -webkit-animation: Animation 3s ease infinite;
-      -moz-animation: Animation 3s ease infinite;
-      animation: Animation 3s ease infinite;
-    }
-  
-    @-webkit-keyframes Animation {
-      0% {
-        background-position: 10% 0%;
-      }
-      50% {
-        background-position: 91% 100%;
-      }
-      100% {
-        background-position: 10% 0%;
-      }
-    }
-    @-moz-keyframes Animation {
-      0% {
-        background-position: 10% 0%;
-      }
-      50% {
-        background-position: 91% 100%;
-      }
-      100% {
-        background-position: 10% 0%;
-      }
-    }
-    @keyframes Animation {
-      0% {
-        background-position: 10% 0%;
-      }
-      50% {
-        background-position: 91% 100%;
-      }
-      100% {
-        background-position: 10% 0%;
-      }
-    }
+  .suggestionActive,
+  .suggestions li:focus {
+    background-color: #d9d9d9;
+    color: #484848;
+    cursor: pointer;
+    font-weight: 700;
+    outline: none;
+  }
 
-    .clearBackdrop {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0);
-        z-index: 3;
-      }
+  .suggestions li:not(:last-of-type) {
+    border-bottom: 1px solid #d4d4d4;
+  }
+
+  .suggestions,
+  .noSuggestions {
+    position: absolute;
+    width: 100%;
+    z-index: 4;
+    background-color: white;
+  }
+
+  .noSuggestions svg,
+  .suggestions svg {
+    width: 1.8rem;
+    margin-right: 2rem;
+  }
+
+  .suggestions-home,
+  .no-suggestions-home {
+    margin: 0.2rem 0rem;
+    border-radius: 0;
+    width: 100%;
+  }
+
+  .loadingSuggestionLine {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #d4d4d4;
+    padding: 0.8rem;
+    height: 4.2rem;
+  }
+
+  .loadingLine {
+    width: 100%;
+    height: 2.2rem;
+    background: linear-gradient(130deg, gray, #ffffff, #bcecf5);
+    background-size: 200% 200%;
+    -webkit-animation: Animation 3s ease infinite;
+    -moz-animation: Animation 3s ease infinite;
+    animation: Animation 3s ease infinite;
+  }
+
+  @-webkit-keyframes Animation {
+    0% {
+      background-position: 10% 0%;
+    }
+    50% {
+      background-position: 91% 100%;
+    }
+    100% {
+      background-position: 10% 0%;
+    }
+  }
+  @-moz-keyframes Animation {
+    0% {
+      background-position: 10% 0%;
+    }
+    50% {
+      background-position: 91% 100%;
+    }
+    100% {
+      background-position: 10% 0%;
+    }
+  }
+  @keyframes Animation {
+    0% {
+      background-position: 10% 0%;
+    }
+    50% {
+      background-position: 91% 100%;
+    }
+    100% {
+      background-position: 10% 0%;
+    }
+  }
+
+  .clearBackdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0);
+    z-index: 3;
+  }
 }
 
 @media (min-width: 641px) {
-
-    .noSuggestions, .suggestions {
-        position: absolute;
-        border: 1px solid #d4d4d4;
-        border-top: none;
-        list-style: none;
-        margin-top: 0;
-        max-height: 23rem;
-        padding-left: 0;
-        z-index: 4;
-        background-color: white;
-      }
-
-      .navSearchBar .noSuggestions {
-        width: 80%;
-      }
+  .noSuggestions,
+  .suggestions {
+    position: absolute;
+    border: 1px solid #d4d4d4;
+    border-top: none;
+    list-style: none;
+    margin-top: 0;
+    max-height: 23rem;
+    padding-left: 0;
+    z-index: 4;
+    background-color: white;
+  }
 }

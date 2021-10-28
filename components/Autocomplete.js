@@ -1,15 +1,14 @@
 import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
 import Backdrop from "./Backdrop";
-import { Input } from 'antd';
+import { Input } from "antd";
 import styles from "../styles/Autocomplete.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faMapMarkerAlt,
   faExclamationTriangle,
-} from "@fortawesome/free-solid-svg-icons"; 
+} from "@fortawesome/free-solid-svg-icons";
 import { supabase } from "../utils/supabaseClient";
-
 
 class Autocomplete extends Component {
   static propTypes = {
@@ -80,18 +79,18 @@ class Autocomplete extends Component {
     }
   };
 
-   getLocationsByCity = async userInput => {
-    const loc = userInput.split(',');
-    const city = loc[0]
-    let state = "%"
-    if(loc.length > 1) {
-      state = loc[1].trim()
+  getLocationsByCity = async (userInput) => {
+    const loc = userInput.split(",");
+    const city = loc[0];
+    let state = "%";
+    if (loc.length > 1) {
+      state = loc[1].trim();
     }
     const { data, error } = await supabase
-    .from('locations')
-    .select()
-    .ilike('city', city+'%')
-    .ilike('state_id', state+'%');
+      .from("locations")
+      .select()
+      .ilike("city", city + "%")
+      .ilike("state_id", state + "%");
     this.setState({
       activeSuggestion: 0,
       filteredSuggestions: data,
@@ -100,7 +99,7 @@ class Autocomplete extends Component {
     });
     console.log(data);
     console.log(error);
-  }
+  };
 
   // Event fired when the input value is changed
   onChange = (e) => {
@@ -110,7 +109,7 @@ class Autocomplete extends Component {
       if (this.state.filteredSuggestions.length === 0) {
         this.setState({ loadingLocations: true });
       }
-     this.getLocationsByCity(userInput)
+      this.getLocationsByCity(userInput);
       // getLocationsByCity(userInput)
       //   .then((response) => {
       //     this.setState({
@@ -238,24 +237,24 @@ class Autocomplete extends Component {
 
     if (filteredSuggestions.length < 1 && loadingLocations) {
       suggestionsListComponent = (
-        <div className={styles.noSuggestions}>
-          <div className={styles.loadingSuggestionLine}>
+        <ul className={styles.noSuggestions}>
+          <li className={styles.loadingSuggestionLine}>
             <FontAwesomeIcon icon={faMapMarkerAlt} />
             <div className={styles.loadingLine}></div>
-          </div>
-          <div className={styles.loadingSuggestionLine}>
+          </li>
+          <li className={styles.loadingSuggestionLine}>
             <FontAwesomeIcon icon={faMapMarkerAlt} />
             <div className={styles.loadingLine}></div>
-          </div>
-          <div className={styles.loadingSuggestionLine}>
+          </li>
+          <li className={styles.loadingSuggestionLine}>
             <FontAwesomeIcon icon={faMapMarkerAlt} />
             <div className={styles.loadingLine}></div>
-          </div>
-          <div className={styles.loadingSuggestionLine}>
+          </li>
+          <li className={styles.loadingSuggestionLine}>
             <FontAwesomeIcon icon={faMapMarkerAlt} />
             <div className={styles.loadingLine}></div>
-          </div>
-        </div>
+          </li>
+        </ul>
       );
     }
     if (showSuggestions && userInput) {
@@ -312,7 +311,8 @@ class Autocomplete extends Component {
     return (
       <>
         <div>
-        <Input  size={style === "nav" ? "" : "large"}
+          <Input
+            size={style === "nav" ? "" : "large"}
             bordered={style === "nav" ? false : true}
             placeholder={this.props.placeholder}
             name={this.props.name}
@@ -323,7 +323,8 @@ class Autocomplete extends Component {
             type="text"
             onChange={onChange}
             onKeyDown={onKeyDown}
-            value={userInput} />
+            value={userInput}
+          />
           {suggestionsListComponent}
         </div>
         {backdrop}
