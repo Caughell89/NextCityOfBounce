@@ -43,9 +43,24 @@ export default function Home() {
 
         <link rel="icon" href="/favicon.ico" />
         <link rel="icon" href="/facicon-128.icpng" />
-        <link rel="apple-touch-icon" type="image/png" sizes="32x32" href="/favicon-apple-touch-32.png" />
-        <link rel="apple-touch-icon" type="image/png" sizes="114x114" href="/favicon-apple-touch-114.png" />
-        <link rel="apple-touch-icon" type="image/png" sizes="144x144" href="/favicon-apple-touch-122.png" />
+        <link
+          rel="apple-touch-icon"
+          type="image/png"
+          sizes="32x32"
+          href="/favicon-apple-touch-32.png"
+        />
+        <link
+          rel="apple-touch-icon"
+          type="image/png"
+          sizes="114x114"
+          href="/favicon-apple-touch-114.png"
+        />
+        <link
+          rel="apple-touch-icon"
+          type="image/png"
+          sizes="144x144"
+          href="/favicon-apple-touch-122.png"
+        />
         <link rel="icon" href="/logo192.png" />
         <link rel="icon" href="/logo512.png" />
         <link rel="icon" href="/favicon.ico" />
@@ -135,7 +150,7 @@ export default function Home() {
           <h2 className={styles.articlesHeader}>Party Planning Ideas</h2>
           <div className={styles.articles}>
             <div className="">
-              <Link href="Article/Party-Ideas/Unique-Night-Events">
+              <Link href="party_ideas/Unique-Night-Events">
                 <div className={styles.articleHolder}>
                   <img
                     src="https://archzine.com/wp-content/uploads/2019/06/outdoor-movie-night-teen-birthday-party-ideas-throw-pillows-fairy-lights.jpg"
@@ -146,7 +161,7 @@ export default function Home() {
                   </div>
                 </div>
               </Link>
-              <Link href="Article/Party-Ideas/Simple-Touches">
+              <Link href="party_ideas/Simple-Touches">
                 <div className={styles.articleHolder}>
                   <img
                     src="http://www.weddingtentsale.com/wp-content/uploads/2017/02/shelter-party-tent-luxury-wedding-tent-social-event-tent-sports-cover-dome-geodisic-22.jpg"
@@ -157,7 +172,7 @@ export default function Home() {
                   </div>
                 </div>
               </Link>
-              <Link href="Article/Party-Ideas/Lighting-Ideas">
+              <Link href="party_ideas/Lighting-Ideas">
                 <div className={styles.articleHolder}>
                   <img
                     src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXm0ZrSYCZq4kLQDttaDZhf-J6w0EhLkd15U580prIauPa2XBDmA&s"
@@ -168,7 +183,7 @@ export default function Home() {
                   </div>
                 </div>
               </Link>
-              <Link href="Article/Party-Ideas/Safety-&-Monitoring">
+              <Link href="party_ideas/Safety-&-Monitoring">
                 <div className={styles.articleHolder}>
                   <img
                     src="https://tooelecity.org/wp-content/uploads/2015/03/Bounce-House-2.jpg"
