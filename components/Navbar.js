@@ -206,7 +206,6 @@ const Navbar = (...pageProps) => {
                     color: "rgb(28, 172, 200)",
                     borderBottom: "2px solid rgb(28, 172, 200)",
                   }}
-                
                   className={styles.navItem}
                 >
                   <span className={styles.navItemText}>Register Company</span>
@@ -361,7 +360,7 @@ const Navbar = (...pageProps) => {
             <div className={styles.sideMenuU}>
               <div>
                 <Link onClick={() => setSideMenu(false)} href="/u/account">
-                  <a>
+                  <a onClick={() => setSideMenu(false)}>
                     {userDetails.data == undefined ? (
                       <>
                         <span className={styles.sideMenuImg}>
@@ -400,7 +399,10 @@ const Navbar = (...pageProps) => {
                 </Link>
                 <Link onClick={() => setSideMenu(false)} href="/u/events">
                   <a>
-                    <div className="mb1 pointer">
+                    <div
+                      onClick={() => setSideMenu(false)}
+                      className="mb1 pointer"
+                    >
                       <CalendarOutlined className="mr1" />
                       Events
                     </div>
