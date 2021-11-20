@@ -219,6 +219,12 @@ const Signup = ({ showLogin }) => {
                   size="large"
                   prefix={<UserOutlined className="site-form-item-icon" />}
                   placeholder="Full Name"
+                  rules={[
+                    {
+                      required: true,
+                      message: "Please input your name",
+                    },
+                  ]}
                 />
               </Form.Item>
               <Form.Item name="email">
@@ -316,11 +322,17 @@ const Signup = ({ showLogin }) => {
                 </span>
               </Form.Item>
               <Form.Item>
-                <motion.div whileTap={{ scale: 0.9 }}>
-                  <button className={styles.bounceButton} htmltype="submit">
-                    Sign Up
-                  </button>
-                </motion.div>
+                {passwordCap &&
+                  passwordLength &&
+                  passwordSymbol &&
+                  passwordLower &&
+                  passwordNumber && (
+                    <motion.div whileTap={{ scale: 0.9 }}>
+                      <button className={styles.bounceButton} htmltype="submit">
+                        Sign Up
+                      </button>
+                    </motion.div>
+                  )}
                 <div>
                   <button
                     className={`${styles.bounceButton} ${styles.disabled}`}

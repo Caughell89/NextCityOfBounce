@@ -1,10 +1,9 @@
 import React, { Component } from "react";
 import { Avatar, Image, Tooltip } from "antd";
-import Footer from "../Footer.js";
-import articles from "../../content/articles";
+import articles from "../pages/api/articles";
 import * as moment from "moment";
-
-import "./article.css";
+import styles from "../styles/Article.module.css";
+import { useRouter } from "next/router";
 
 class Article extends Component {
   constructor(props) {
@@ -14,17 +13,7 @@ class Article extends Component {
     };
   }
 
-  componentDidMount() {
-    window.scrollTo(0, 0);
-    console.log(articles);
-    let currentA = articles.filter((article) => {
-      return article.title === this.props.match.params.title.replace(/-/g, " ");
-    });
-    this.setState({ article: currentA[0] });
-  }
-
   render() {
-    console.log(this.state.article);
     let backgroundImg = "url(" + this.state.article.img + ")";
     let content = this.state.article.content.map((p) => {
       return <div className="article-p">{p}</div>;
@@ -34,10 +23,10 @@ class Article extends Component {
         <div className="content">
           <div className="article-content">
             <h1 className="bold mt-4">
-              {this.props.match.params.title.replace(/-/g, " ")}
+              {/* {this.props.match.params.title.replace(/-/g, " ")} */}
             </h1>
             <div className="mid-gray f-14 mt-2 mb-4">
-              {this.props.match.params.type.replace(/-/g, " ")}
+              {/* {this.props.match.params.type.replace(/-/g, " ")} */}
             </div>
 
             <div className="line"></div>
@@ -69,7 +58,6 @@ class Article extends Component {
             </div>
           </div>
         </div>
-        <Footer />
       </>
     );
   }

@@ -7,8 +7,17 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styles from "../../styles/Search.module.css";
 import { urlLocToString } from "../../utils/FormTools";
 import { productSearch, productSearchFiltered } from "../../utils/API";
-import { Menu, Dropdown, Slider, InputNumber, Checkbox } from "antd";
-import { DownOutlined } from "@ant-design/icons";
+import {
+  Menu,
+  Dropdown,
+  Slider,
+  InputNumber,
+  Checkbox,
+  Drawer,
+  Tag,
+  Switch,
+} from "antd";
+import { DownOutlined, ControlOutlined } from "@ant-design/icons";
 
 import moment from "moment";
 
@@ -17,8 +26,43 @@ export default function Search() {
   const [loading, setLoading] = useState(true);
   const [products, setProducts] = useState([]);
   const [maxPrice, setMaxPrice] = useState(10000);
+  const [filteredMax, setFilteredMax] = useState(maxPrice);
+  const [filteredMin, setFilteredMin] = useState(0);
   const [sort, setSort] = useState("");
   const [priceRange, setPriceRange] = useState([0, 1000]);
+  const [visible, setVisible] = useState(false);
+  const [typeVisible, setTypeVisible] = useState(false);
+  const [filters, setFilters] = useState([]);
+  const [tent, setTent] = useState(true);
+  const [table, setTable] = useState(true);
+  const [bh, setBh] = useState(true);
+  const [chair, setChair] = useState(true);
+  const [inflatable, setInflatable] = useState(true);
+  const [pp, setPp] = useState(true);
+  const [instantBook, setInstantBook] = useState(false);
+
+  const onClick = () => {
+    setFilters(["Filter1", "Filter2"]);
+    setTypeVisible(false);
+  };
+  const closeFilter = () => {
+    setTypeVisible(false);
+  };
+  const handleVisibleChange = (flag) => {
+    setTypeVisible(flag);
+  };
+
+  const showDrawer = () => {
+    setVisible(true);
+  };
+
+  const onClose = () => {
+    setVisible(false);
+  };
+
+  const savePrices = () => {
+    console.log("saving prices");
+  };
 
   const loadProducts = () => {
     setLoading(true);
@@ -85,65 +129,141 @@ export default function Search() {
   );
 
   const priceMenu = (
-    <div className={styles.filterMenu}>
-      <Slider
-        range
-        marks={marks}
-        min={0}
-        step={10}
-        max={maxPrice}
-        defaultValue={[0, maxPrice]}
-        disabled={false}
-        onChange={(value) =>
-          this.setState({
-            filteredMin: value[0],
-            filteredMax: value[1],
-          })
-        }
-      />
-
-      <InputNumber
-        min={1}
-        max={20}
-        value={priceRange[0]}
-        onChange={(e) => console.log(e)}
-      />
-    </div>
+    <Menu className={styles.filterBackdrop} onClick={onClick}>
+      <div className={styles.filterMenu}>
+        <h4 className="bold mb2">Rental Price</h4>
+        <Slider
+          range
+          marks={marks}
+          min={0}
+          step={10}
+          max={maxPrice}
+          defaultValue={[0, maxPrice]}
+          disabled={false}
+          onChange={(value) => (
+            setFilteredMin(value[0]), setFilteredMax(value[1])
+          )}
+        />
+        <div className="flex pt2">
+          <InputNumber
+            min={0}
+            max={maxPrice}
+            value={filteredMin}
+            formatter={(value) =>
+              `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+            }
+            parser={(value) => value.replace(/\$\s?|(,*)/g, "")}
+            onChange={(e) => setFilteredMin(e)}
+          />
+          <InputNumber
+            min={0}
+            max={maxPrice}
+            value={filteredMax}
+            formatter={(value) =>
+              `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+            }
+            parser={(value) => value.replace(/\$\s?|(,*)/g, "")}
+            onChange={(e) => setFilteredMax(e)}
+          />
+        </div>
+        <div className="flex mt2">
+          <div className="cancelButtonSm" onClick={closeFilter}>
+            Cancel
+          </div>
+          <div className="bounceButtonSm" onClick={savePrices}>
+            Save
+          </div>
+        </div>
+      </div>
+    </Menu>
   );
 
   const typeMenu = (
-    <div className={styles.filterMenu}>
-      <div>
-        <Checkbox onChange={(e) => console.log(e.checked)}>
-          Bounce House
-        </Checkbox>
+    <Menu className={styles.filterBackdrop} onClick={onClick}>
+      <div className={styles.filterMenu}>
+        <h4 className="bold">Rental Type</h4>
+        <div>
+          <Checkbox checked={bh} onChange={(e) => setBh(!bh)}>
+            Bounce House
+          </Checkbox>
+        </div>
+        <div>
+          <Checkbox checked={tent} onChange={(e) => setTent(!tent)}>
+            Tent
+          </Checkbox>
+        </div>
+        <div>
+          {" "}
+          <Checkbox checked={table} onChange={(e) => setTable(!table)}>
+            Table
+          </Checkbox>
+        </div>
+        <div>
+          {" "}
+          <Checkbox checked={chair} onChange={(e) => setChair(!chair)}>
+            Chair
+          </Checkbox>
+        </div>
+        <div>
+          {" "}
+          <Checkbox
+            checked={inflatable}
+            onChange={(e) => setInflatable(!inflatable)}
+          >
+            Inflatable
+          </Checkbox>
+        </div>
+        <div>
+          {" "}
+          <Checkbox checked={pp} onChange={(e) => setPp(!pp)}>
+            Party Package
+          </Checkbox>
+        </div>
+
+        <div className="flex mt2">
+          <div className="cancelButtonSm" onClick={closeFilter}>
+            Cancel
+          </div>
+          <div className="bounceButtonSm" onClick={onClick}>
+            Save
+          </div>
+        </div>
       </div>
-      <div>
-        <Checkbox onChange={(e) => console.log(e.checked)}>Tent</Checkbox>
+    </Menu>
+  );
+
+  const handleIB = (e) => {
+    console.log(e);
+    e
+      ? filters.push("Instant Book")
+      : setFilters(filters.filter((f) => f !== "Instant Book"));
+  };
+  const instantBookMenu = (
+    <Menu className={styles.filterBackdrop} onClick={onClick}>
+      <div className={styles.filterMenu}>
+        <h4 className="bold">Instant Book</h4>
+        <div className="f12 mb1">
+          Listings you can book without waiting for company approval
+        </div>
+        <Switch
+          checked={instantBook}
+          onChange={() => setInstantBook(!instantBook)}
+          onClick={handleIB}
+        />
       </div>
-      <div>
-        {" "}
-        <Checkbox onChange={(e) => console.log(e.checked)}>Table</Checkbox>
-      </div>
-      <div>
-        {" "}
-        <Checkbox onChange={(e) => console.log(e.checked)}>Chair</Checkbox>
-      </div>
-      <div>
-        {" "}
-        <Checkbox onChange={(e) => console.log(e.checked)}>Inflatable</Checkbox>
-      </div>
-      <div>
-        {" "}
-        <Checkbox onChange={(e) => console.log(e.checked)}>
-          Party Package
-        </Checkbox>
-      </div>
-    </div>
+    </Menu>
   );
 
   const productTiles = products.map((product) => {
     return <ProductTile product={product} />;
+  });
+
+  const filterTags = filters.map((filter) => {
+    return (
+      <Tag closable={true} color="#1cacc8" onClose={() => filters.pop(filter)}>
+        Test {filter}
+      </Tag>
+    );
   });
 
   return (
@@ -184,6 +304,8 @@ export default function Search() {
               trigger={["click"]}
               className={styles.option}
               overlay={typeMenu}
+              onVisibleChange={handleVisibleChange}
+              visible={typeVisible}
             >
               <div>
                 TYPE
@@ -193,16 +315,13 @@ export default function Search() {
             <Dropdown
               trigger={["click"]}
               className={styles.option}
-              overlay={"dfakjdoiajadoai"}
+              overlay={instantBookMenu}
             >
               <div>
                 INSTANT BOOK
                 <DownOutlined />
               </div>
             </Dropdown>
-            <div className={styles.option}>
-              INSTANT BOOK <DownOutlined />
-            </div>
           </div>
           <div>
             <Dropdown
@@ -216,7 +335,21 @@ export default function Search() {
               </div>
             </Dropdown>
           </div>
+          <div className={styles.filterOptionsMobile}>
+            <div className={styles.optionMobile} onClick={showDrawer}>
+              <ControlOutlined
+                rotate={90}
+                style={{
+                  fontSize: "20px",
+                  color: "#1cacc8",
+                  marginRight: ".6rem",
+                }}
+              />
+              Filter / Sort
+            </div>
+          </div>
         </div>
+        <div className={styles.filterTags}>{filterTags}</div>
         <div className={styles.searchResults}>{productTiles}</div>
         {products.length === 0 && !loading && (
           <div>
@@ -225,6 +358,17 @@ export default function Search() {
           </div>
         )}
       </div>
+
+      <Drawer
+        title="Filter & Sort"
+        placement="bottom"
+        onClose={onClose}
+        visible={visible}
+      >
+        <div>Sort By: {sort}</div>
+        <p>Some contents...</p>
+        <p>Some contents...</p>
+      </Drawer>
     </div>
   );
 }

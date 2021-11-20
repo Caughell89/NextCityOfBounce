@@ -30,6 +30,10 @@ a:hover {
   cursor: pointer;
 }
 
+.f12 {
+  font-size: 1.2rem;
+}
+
 .mr1 {
   margin-right: 1rem;
 }
@@ -47,6 +51,17 @@ a:hover {
 
 .mb4 {
   margin-bottom: 4rem;
+}
+
+.mt1 {
+  margin-top: 1rem;
+}
+.mt2 {
+  margin-top: 2rem;
+}
+
+.pt2 {
+  padding-top: 2rem;
 }
 
 .box {
@@ -115,6 +130,114 @@ a:hover {
   white-space: nowrap;
 }
 
+.bounceButtonSm {
+  cursor: pointer;
+  display: inline-block;
+  margin-top: 0px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  width: auto;
+  font-size: 10px;
+  line-height: 18px;
+  font-weight: 400;
+  border-radius: 0.5rem;
+  outline-color: initial;
+  outline-style: none;
+  outline-width: initial;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 14px;
+  padding-right: 14px;
+  transition-duration: 0.2s, 0.1s, 0.1s, 0.1s;
+  transition-timing-function: ease, ease, ease, ease;
+  transition-delay: initial, initial, initial, initial;
+  transition-property: box-shadow, -ms-transform, transform, transform;
+  border-top-width: initial;
+  border-right-width: initial;
+  border-bottom-width: initial;
+  border-left-width: initial;
+  border-top-style: none;
+  border-right-style: none;
+  border-bottom-style: none;
+  border-left-style: none;
+  border-top-color: initial;
+  border-right-color: initial;
+  border-bottom-color: initial;
+  border-left-color: initial;
+  border-image-source: initial;
+  border-image-slice: initial;
+  border-image-width: initial;
+  border-image-outset: initial;
+  border-image-repeat: initial;
+  background-image: linear-gradient(
+    to right,
+    rgb(28, 172, 200) 0%,
+    rgb(25, 153, 179) 50%,
+    rgb(22, 136, 156) 100%
+  );
+  background-position-x: initial;
+  background-position-y: initial;
+  background-size: initial;
+  background-attachment: initial;
+  background-origin: initial;
+  background-clip: initial;
+  background-color: initial;
+  color: rgb(255, 255, 255);
+  white-space: nowrap;
+}
+
+.cancelButtonSm {
+  cursor: pointer;
+  display: inline-block;
+  margin-top: 0px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  width: auto;
+  font-size: 10px;
+  line-height: 18px;
+  font-weight: 400;
+  border-radius: 0.5rem;
+  outline-color: initial;
+  outline-style: none;
+  outline-width: initial;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 14px;
+  padding-right: 14px;
+  transition-duration: 0.2s, 0.1s, 0.1s, 0.1s;
+  transition-timing-function: ease, ease, ease, ease;
+  transition-delay: initial, initial, initial, initial;
+  transition-property: box-shadow, -ms-transform, transform, transform;
+  border-top-width: initial;
+  border-right-width: initial;
+  border-bottom-width: initial;
+  border-left-width: initial;
+  border-top-style: none;
+  border-right-style: none;
+  border-bottom-style: none;
+  border-left-style: none;
+  border-top-color: initial;
+  border-right-color: initial;
+  border-bottom-color: initial;
+  border-left-color: initial;
+  border-image-source: initial;
+  border-image-slice: initial;
+  border-image-width: initial;
+  border-image-outset: initial;
+  border-image-repeat: initial;
+  background-color: #5e5e5e;
+  background-position-x: initial;
+  background-position-y: initial;
+  background-size: initial;
+  background-attachment: initial;
+  background-origin: initial;
+  background-clip: initial;
+  color: rgb(255, 255, 255);
+  white-space: nowrap;
+}
+
 .iBtn {
   cursor: pointer;
   display: inline-block;
@@ -148,6 +271,16 @@ a:hover {
   background-color: initial;
   color: #5e5e5e;
   white-space: nowrap;
+}
+
+.flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ant-slider-marker {
+  font-size: 1rem;
 }
 @media (min-width: 319px) {
   .content {

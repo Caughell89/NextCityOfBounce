@@ -1,46 +1,88 @@
-.searchResults {
+@media (min-width: 319px) {
+  .filterOptions,
+  .option {
+    display: none;
+  }
+
+  .filterOptionsMobile {
     display: flex;
-    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  .optionMobile {
+    display: flex;
+    align-items: center;
+    padding: 0.8rem 0.8rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border: solid 0.1rem white;
+    margin-right: 1rem;
+    cursor: pointer;
+  }
+  .optionMobile:hover {
+    border: solid 0.1rem #727272;
+  }
+}
+
+@media (min-width: 641px) {
+  .filterOptions {
+    display: flex;
+  }
+  .filterOptionsMobile {
+    display: none;
+  }
+}
+
+.searchResults {
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .searchMenu {
-    display: flex;
-    justify-content: space-between;
-    padding: .4rem 0;   
-    border-top: solid 1px lightgray; 
-    border-bottom: solid 1px lightgray; 
-    margin-bottom: 2rem;
-
-}
-
-.filterOptions {
-    display: flex;
+  display: flex;
+  justify-content: space-between;
+  padding: 0.4rem 0;
+  border-top: solid 1px lightgray;
+  border-bottom: solid 1px lightgray;
 }
 
 .option {
-    background-color: white;
-    padding: .8rem .8rem;
-    font-size: 1.2rem;
-    font-weight: bold ;
-    border: solid .1rem white;
-    margin-right: 1rem;
-    cursor: pointer;
+  display: inline-block;
+  background-color: white;
+  padding: 0.8rem 0.8rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+  border: solid 0.1rem white;
+  margin-right: 1rem;
+  cursor: pointer;
 }
 
 .option:hover {
-    border: solid .1rem #727272;
+  border: solid 0.1rem #727272;
 }
 
 .option span {
-    margin-left: .3rem;
+  margin-left: 0.3rem;
 }
 
 .filterMenu {
-    width: 26rem;
-    padding: 1rem 2rem;
-    background-color: white;
-    z-index: 3;
-    border-radius: .8rem;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,.2),0 6px 20px 0 rgba(0,0,0,.19);
+  width: 26rem;
+  padding: 2rem;
+  background-color: white;
+  z-index: 3;
+  border-radius: 0.8rem;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
 
+.filterBackdrop {
+  background-color: transparent;
+  box-shadow: none;
+}
+
+.filterTags {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  height: 2.4rem;
+  margin-top: 0.5rem;
+  margin-bottom: 2rem;
 }
