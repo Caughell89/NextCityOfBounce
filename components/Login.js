@@ -2,7 +2,7 @@ import styles from "../styles/Login.module.css";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useContext, useState } from "react";
-import { Input, Form, Button, Checkbox } from "antd";
+import { Input, Form, Button, Checkbox, notification } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { motion } from "framer-motion";
 import { supabase } from "../utils/supabaseClient";
@@ -20,32 +20,46 @@ async function googleSignIn() {
   console.log(session);
 }
 
-
+const openNotificationWithIcon = (e) => {
+  notification["error"]({
+    message: "Login Failed",
+    description: e,
+  });
+};
 
 const Login = ({ close, showSignup }) => {
   const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState({ type: '', content: '' });
-  
+  const [message, setMessage] = useState({ type: "", content: "" });
+
   const handleSignin = async (values) => {
     console.log(values);
     setLoading(true);
     setMessage({});
-  
-    const { error } = await supabase.auth.signIn({ email: values.email, password: values.password });
-    if (error) {
-      setMessage({ type: 'error', content: error.message });
-    }
-    if (!password) {
-      setMessage({
-        type: 'note',
-        content: 'Check your email for the magic link.'
+
+    const { error } = await supabase.auth
+      .signIn({
+        email: values.email,
+        password: values.password,
+      })
+      .then((response) => {
+        response.error
+          ? openNotificationWithIcon(response.error.message)
+          : console.log(response);
+      })
+
+      .catch((error) => {
+        console.log(error);
+        setMessage({ type: "error", content: error.message });
       });
-    }
     setLoading(false);
   };
   const onFinish = (values) => {
     console.log(values);
-    handleSignin(values);
+    handleSignin(values)
+      .then((response) => console.log(response))
+      .catch((error) => {
+        console.log(error);
+      });
   };
   return (
     <>
@@ -85,7 +99,12 @@ const Login = ({ close, showSignup }) => {
         >
           <Form.Item
             name="email"
-           
+            rules={[
+              {
+                required: true,
+                message: "Please input your Email!",
+              },
+            ]}
           >
             <Input
               size="large"
@@ -102,7 +121,7 @@ const Login = ({ close, showSignup }) => {
               },
             ]}
           >
-            <Input
+            <Input.Password
               size="large"
               prefix={<LockOutlined className="site-form-item-icon" />}
               type="password"

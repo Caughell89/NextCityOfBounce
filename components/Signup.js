@@ -64,6 +64,7 @@ const Signup = ({ showLogin }) => {
   const [passwordLower, setPasswordLower] = useState(false);
   const [passwordNumber, setPasswordNumber] = useState(false);
   const [password, setPassword] = useState("");
+  const [validPass, setValidPass] = useState(false);
 
   const handlePassword = () => {
     setShowPasswordReqs(true);
@@ -113,6 +114,13 @@ const Signup = ({ showLogin }) => {
     } else {
       setPasswordLength(false);
     }
+    passwordCap &&
+    passwordLower &&
+    passwordSymbol &&
+    passwordLength &&
+    passwordNumber
+      ? setValidPass(true)
+      : setValidPass(false);
   };
 
   const handleSignup = async (e) => {
@@ -142,6 +150,7 @@ const Signup = ({ showLogin }) => {
     // signUp(values)
     console.log(values);
   };
+
   return (
     <>
       <div className={styles.modalContent}>
@@ -214,20 +223,38 @@ const Signup = ({ showLogin }) => {
               }}
               onFinish={onFinish}
             >
-              <Form.Item name="name">
+              <Form.Item
+                name="name"
+                rules={[
+                  {
+                    required: true,
+                    message: "Please input your name!",
+                    min: 1,
+                  },
+                ]}
+                hasFeedback
+              >
                 <Input
                   size="large"
                   prefix={<UserOutlined className="site-form-item-icon" />}
                   placeholder="Full Name"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Please input your name",
-                    },
-                  ]}
                 />
               </Form.Item>
-              <Form.Item name="email">
+              <Form.Item
+                name="email"
+                rules={[
+                  {
+                    required: true,
+                    message: "Please input your email!",
+                  },
+                  {
+                    pattern:
+                      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                    message: "Please enter a valid email",
+                  },
+                ]}
+                hasFeedback
+              >
                 <Input
                   size="large"
                   prefix={<MailOutlined className="site-form-item-icon" />}
@@ -302,8 +329,24 @@ const Signup = ({ showLogin }) => {
                   )}
                 </AnimatePresence>
               </div>
-              <Form.Item name="password">
-                <Input
+              <Form.Item
+                name="password"
+                rules={[
+                  ({ getFieldValue }) => ({
+                    validator(_, value) {
+                      if (validPass) {
+                        return Promise.resolve();
+                      }
+
+                      return Promise.reject(
+                        new Error("The password does not meet requirements!")
+                      );
+                    },
+                  }),
+                ]}
+                hasFeedback
+              >
+                <Input.Password
                   size="large"
                   prefix={<LockOutlined className="site-form-item-icon" />}
                   type="password"
@@ -313,6 +356,39 @@ const Signup = ({ showLogin }) => {
                   onBlur={hidePasswordReqs}
                 />
               </Form.Item>
+              <Form.Item
+                name="confirmPassword"
+                dependencies={["password"]}
+                hasFeedback
+                rules={[
+                  {
+                    required: true,
+                    message: "Please confirm your password!",
+                  },
+                  ({ getFieldValue }) => ({
+                    validator(_, value) {
+                      if (!value || getFieldValue("password") === value) {
+                        return Promise.resolve();
+                      }
+
+                      return Promise.reject(
+                        new Error(
+                          "The two passwords that you entered do not match!"
+                        )
+                      );
+                    },
+                  }),
+                ]}
+              >
+                <Input.Password
+                  size="large"
+                  prefix={<LockOutlined className="site-form-item-icon" />}
+                  type="password"
+                  placeholder="Confirm Password"
+                  onChange={handlePasswordChange}
+                />
+              </Form.Item>
+
               <Form.Item>
                 <Form.Item name="remember" valuePropName="checked" noStyle>
                   <Checkbox>Remember me</Checkbox>
@@ -322,28 +398,15 @@ const Signup = ({ showLogin }) => {
                 </span>
               </Form.Item>
               <Form.Item>
-                {passwordCap &&
-                  passwordLength &&
-                  passwordSymbol &&
-                  passwordLower &&
-                  passwordNumber && (
-                    <motion.div whileTap={{ scale: 0.9 }}>
-                      <button className={styles.bounceButton} htmltype="submit">
-                        Sign Up
-                      </button>
-                    </motion.div>
-                  )}
-                <div>
-                  <button
-                    className={`${styles.bounceButton} ${styles.disabled}`}
-                  >
+                <motion.div whileTap={{ scale: 0.9 }}>
+                  <button className={styles.bounceButton} htmltype="submit">
                     Sign Up
                   </button>
-                </div>
+                </motion.div>
               </Form.Item>
 
               <Form.Item>
-                <span>Already have an account</span>
+                <span>Already have an account?</span>
                 <Button onClick={showLogin} className={styles.pushRight}>
                   Log in
                 </Button>

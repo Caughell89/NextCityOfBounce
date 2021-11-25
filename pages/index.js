@@ -103,7 +103,9 @@ export default function Home() {
 
             <div id={styles.partyInputForm}>
               <div className={styles.partyInput}>
-                <label htmlFor="location">WHERE</label>
+                <label className="bold" htmlFor="location">
+                  WHERE
+                </label>
                 <AutoComplete
                   ref={locationInput}
                   name="location"

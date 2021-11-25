@@ -144,3 +144,10 @@
   width: 100%;
   justify-content: space-between;
 }
+
+@media (min-width: 641px) {
+  .datePicker {
+    padding: 1rem 0;
+    display: inline;
+  }
+}
