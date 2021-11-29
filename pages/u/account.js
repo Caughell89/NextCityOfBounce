@@ -33,7 +33,7 @@ export default function Account() {
                 <div>{user.user_metadata.full_name}</div>
                 <div>{user.email}</div>
                 <div>{user.phone}</div>
-                <Button onClick={() => setEditForm(true)}>Edit</Button>
+                <Button onClick={setEditForm(true)}>Edit</Button>
               </div>
             ) : (
               <Form
@@ -74,7 +74,7 @@ export default function Account() {
                   <Button type="primary">Submit</Button>
                 </Form.Item>
                 <Form.Item>
-                  <Button onClick={() => setEditForm(false)}>Cancel</Button>
+                  <Button onClick={setEditForm(false)}>Cancel</Button>
                 </Form.Item>
               </Form>
             )}
