@@ -33,7 +33,7 @@ export default function Account() {
                 <div>{user.user_metadata.full_name}</div>
                 <div>{user.email}</div>
                 <div>{user.phone}</div>
-                <div onClick={() => setEditForm(true)}>Edit</div>
+                <Button onClick={() => setEditForm(true)}>Edit</Button>
               </div>
             ) : (
               <Form form={form} layout="vertical">
@@ -48,7 +48,6 @@ export default function Account() {
                   label="Email"
                   tooltip={{
                     title: "Tooltip with customize icon",
-                    icon: <InfoCircleOutlined />,
                   }}
                 >
                   <Input placeholder="Email" />
@@ -57,7 +56,6 @@ export default function Account() {
                   label="Phone"
                   tooltip={{
                     title: "Tooltip with customize icon",
-                    icon: <InfoCircleOutlined />,
                   }}
                 >
                   <Input placeholder="Phone" />
