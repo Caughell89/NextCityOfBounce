@@ -33,18 +33,10 @@ export default function Account() {
                 <div>{user.user_metadata.full_name}</div>
                 <div>{user.email}</div>
                 <div>{user.phone}</div>
-                <div onClick={(e) => setEditForm(true)}>Edit</div>
+                <div onClick={() => setEditForm(true)}>Edit</div>
               </div>
             ) : (
-              <Form
-                form={form}
-                layout="vertical"
-                initialValues={{
-                  requiredMarkValue: requiredMark,
-                }}
-                onValuesChange={onRequiredTypeChange}
-                requiredMark={requiredMark}
-              >
+              <Form form={form} layout="vertical">
                 <Form.Item
                   label="Full Name"
                   required
@@ -74,7 +66,7 @@ export default function Account() {
                   <Button type="primary">Submit</Button>
                 </Form.Item>
                 <Form.Item>
-                  {/* <div onClick={(e) => setEditForm(false)}>Cancel</div> */}
+                  <div onClick={(e) => setEditForm(false)}>Cancel</div>
                 </Form.Item>
               </Form>
             )}
