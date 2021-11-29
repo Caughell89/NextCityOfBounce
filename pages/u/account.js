@@ -22,7 +22,7 @@ export default function Account() {
 
       <div className="content">
         <h1>Your Account</h1>
-        {userLoaded && <div>userDetails.data</div>}
+        {userLoaded && <div>{user.email}</div>}
       </div>
     </div>
   );
