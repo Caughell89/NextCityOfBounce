@@ -1,14 +1,13 @@
 import Head from "next/head";
-import { useRef, useState } from "react";
 import { useUser } from "./../../utils/useUser";
 import moment from "moment";
+import React, { useState } from "react";
+import { Form, Input, Button, Radio } from "antd";
 
 export default function Account() {
+  const [editForm, setEditForm] = useState(false);
   const { userLoaded, user, session, userDetails, signOut } = useUser();
-  console.log(userLoaded);
-  console.log(user);
-  console.log(userDetails);
-  console.log(session);
+  const [form] = Form.useForm();
   return (
     <div>
       <Head>
@@ -29,9 +28,56 @@ export default function Account() {
               <img src={user.user_metadata.avatar_url} alt="user profile pic" />
               <div>{moment(user.created_at).format("LL")}</div>
             </div>
-            <div>{user.user_metadata.full_name}</div>
-            <div>{user.email}</div>
-            <div>{user.phone}</div>
+            {!editForm ? (
+              <div>
+                <div>{user.user_metadata.full_name}</div>
+                <div>{user.email}</div>
+                <div>{user.phone}</div>
+                <Button onClick={() => setEditForm(true)}>Edit</Button>
+              </div>
+            ) : (
+              <Form
+                form={form}
+                layout="vertical"
+                initialValues={{
+                  requiredMarkValue: requiredMark,
+                }}
+                onValuesChange={onRequiredTypeChange}
+                requiredMark={requiredMark}
+              >
+                <Form.Item
+                  label="Full Name"
+                  required
+                  tooltip="This is a required field"
+                >
+                  <Input placeholder="Full Name" />
+                </Form.Item>
+                <Form.Item
+                  label="Email"
+                  tooltip={{
+                    title: "Tooltip with customize icon",
+                    icon: <InfoCircleOutlined />,
+                  }}
+                >
+                  <Input placeholder="Email" />
+                </Form.Item>
+                <Form.Item
+                  label="Phone"
+                  tooltip={{
+                    title: "Tooltip with customize icon",
+                    icon: <InfoCircleOutlined />,
+                  }}
+                >
+                  <Input placeholder="Phone" />
+                </Form.Item>
+                <Form.Item>
+                  <Button type="primary">Submit</Button>
+                </Form.Item>
+                <Form.Item>
+                  <Button onClick={() => setEditForm(false)}>Cancel</Button>
+                </Form.Item>
+              </Form>
+            )}
           </div>
         )}
       </div>
