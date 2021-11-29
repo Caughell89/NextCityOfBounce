@@ -74,7 +74,7 @@ export default function Account() {
                   <Button type="primary">Submit</Button>
                 </Form.Item>
                 <Form.Item>
-                  <div onClick={(e) => setEditForm(false)}>Cancel</div>
+                  {/* <div onClick={(e) => setEditForm(false)}>Cancel</div> */}
                 </Form.Item>
               </Form>
             )}
