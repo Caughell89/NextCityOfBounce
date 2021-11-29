@@ -33,7 +33,7 @@ export default function Account() {
                 <div>{user.user_metadata.full_name}</div>
                 <div>{user.email}</div>
                 <div>{user.phone}</div>
-                <Button onClick={(e) => setEditForm(true)}>Edit</Button>
+                <div onClick={(e) => setEditForm(true)}>Edit</div>
               </div>
             ) : (
               <Form
