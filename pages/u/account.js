@@ -1,13 +1,13 @@
-import Head from 'next/head'
-import { useRef, useState } from 'react'
+import Head from "next/head";
+import { useRef, useState } from "react";
 import { useUser } from "./../../utils/useUser";
 
-
-
-
 export default function Account() {
-  const { userLoaded, userDetails } = useUser();
-
+  const { userLoaded, user, session, userDetails, signOut } = useUser();
+  console.log(userLoaded);
+  console.log(user);
+  console.log(userDetails);
+  console.log(session);
   return (
     <div>
       <Head>
@@ -21,10 +21,9 @@ export default function Account() {
       </Head>
 
       <div className="content">
-          <h1>Your Account</h1>
-          {/* {userDetails.data == undefined?<div>Name</div>:<div>{userDetails.data.full_name} </div>} */}
-
-        </div>
+        <h1>Your Account</h1>
+        {userLoaded && <div>userDetails.data</div>}
+      </div>
     </div>
-  )
+  );
 }

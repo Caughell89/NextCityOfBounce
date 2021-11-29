@@ -360,6 +360,7 @@ export default function Search() {
       </div>
 
       <Drawer
+        height={"70vh"}
         title="Filter & Sort"
         placement="bottom"
         onClose={onClose}
@@ -368,6 +369,25 @@ export default function Search() {
         <div>Sort By: {sort}</div>
         <p>Some contents...</p>
         <p>Some contents...</p>
+        <div>
+          <h4 className="bold">Instant Book</h4>
+          <div className="f12 mb1">
+            Listings you can book without waiting for company approval
+          </div>
+          <Switch
+            checked={instantBook}
+            onChange={() => setInstantBook(!instantBook)}
+            onClick={handleIB}
+          />
+        </div>
+        <div className="flex mt2">
+          <div className="cancelButtonSm" onClick={closeFilter}>
+            Cancel
+          </div>
+          <div className="bounceButtonSm" onClick={onClick}>
+            Save
+          </div>
+        </div>
       </Drawer>
     </div>
   );

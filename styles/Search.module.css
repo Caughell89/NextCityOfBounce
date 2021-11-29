@@ -30,6 +30,24 @@
   .filterOptionsMobile {
     display: none;
   }
+  .option {
+    display: inline-block;
+    background-color: white;
+    padding: 0.8rem 0.8rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border: solid 0.1rem white;
+    margin-right: 1rem;
+    cursor: pointer;
+  }
+
+  .option:hover {
+    border: solid 0.1rem #727272;
+  }
+
+  .option span {
+    margin-left: 0.3rem;
+  }
 }
 
 .searchResults {
@@ -43,25 +61,6 @@
   padding: 0.4rem 0;
   border-top: solid 1px lightgray;
   border-bottom: solid 1px lightgray;
-}
-
-.option {
-  display: inline-block;
-  background-color: white;
-  padding: 0.8rem 0.8rem;
-  font-size: 1.2rem;
-  font-weight: bold;
-  border: solid 0.1rem white;
-  margin-right: 1rem;
-  cursor: pointer;
-}
-
-.option:hover {
-  border: solid 0.1rem #727272;
-}
-
-.option span {
-  margin-left: 0.3rem;
 }
 
 .filterMenu {
