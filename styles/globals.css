@@ -279,6 +279,10 @@ a:hover {
   align-items: center;
 }
 
+.mMax {
+  max-width: 30rem;
+}
+
 .ant-slider-marker {
   font-size: 1rem;
 }

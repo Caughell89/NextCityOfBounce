@@ -26,7 +26,7 @@ export default function Account() {
           <div>
             <div>
               <img src={user.user_metadata.avatar_url} alt="user profile pic" />
-              <div>{moment(user.created_at).format("LL")}</div>
+              <div>Member Since {moment(user.created_at).format("LL")}</div>
             </div>
             {!editForm ? (
               <div>
@@ -36,7 +36,7 @@ export default function Account() {
                 <Button onClick={() => setEditForm(true)}>Edit</Button>
               </div>
             ) : (
-              <Form form={form} layout="vertical">
+              <Form className="mMax" form={form} layout="vertical">
                 <Form.Item
                   label="Full Name"
                   required
