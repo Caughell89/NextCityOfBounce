@@ -123,10 +123,10 @@ const Navbar = (...pageProps) => {
         <Link href="/admin">Admin</Link>
       </Menu.Item>
       <Menu.Item key="help">
-        <div>Help</div>
+        <Link href="/help">Help</Link>
       </Menu.Item>
       <Menu.Item key="logout" onClick={() => signOut()}>
-        <div>Logout</div>
+        <a>Logout</a>
       </Menu.Item>
     </Menu>
   );
@@ -423,8 +423,12 @@ const Navbar = (...pageProps) => {
               </div>
               <div className={styles.sideMenuFooter}>
                 <div className="mb1">
-                  <QuestionCircleOutlined className="mr1" />
-                  Help
+                  <Link href="/help">
+                    <a onClick={() => setSideMenu(false)}>
+                      <QuestionCircleOutlined className="mr1" />
+                      Help
+                    </a>
+                  </Link>
                 </div>
                 <div onClick={() => signOut()}>
                   <LogoutOutlined className="mr1" />
@@ -456,8 +460,12 @@ const Navbar = (...pageProps) => {
               </div>
               <div className={styles.sideMenuFooter}>
                 <div className="mb1">
-                  <QuestionCircleOutlined className="mr1" />
-                  Help
+                  <Link href="/help">
+                    <a onClick={() => setSideMenu(false)}>
+                      <QuestionCircleOutlined className="mr1" />
+                      Help
+                    </a>
+                  </Link>
                 </div>
               </div>
             </div>
