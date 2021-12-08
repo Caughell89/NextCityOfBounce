@@ -6,11 +6,7 @@ import Backdrop from "./Backdrop";
 import Signup from "./Signup";
 import NavSearch from "./NavSearch";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faShoppingCart,
-  faSearch,
-  faBars,
-} from "@fortawesome/free-solid-svg-icons";
+import { faShoppingCart, faBars } from "@fortawesome/free-solid-svg-icons";
 import styles from "../styles/Navbar.module.css";
 import { useState, useContext } from "react";
 import { UserContext } from "./../context/UserContext";
@@ -22,11 +18,12 @@ import {
   FormOutlined,
   QuestionCircleOutlined,
   LogoutOutlined,
-  MailOutlined,
+  CommentOutlined,
   CalendarOutlined,
   DesktopOutlined,
   SolutionOutlined,
   SearchOutlined,
+  UserOutlined,
 } from "@ant-design/icons";
 
 import { motion } from "framer-motion";
@@ -108,25 +105,43 @@ const Navbar = (...pageProps) => {
   const menu = (
     <Menu>
       <Menu.Item key="messages">
-        <Link href="/u/messages">Messages</Link>
+        <Link href="/u/messages">
+          <CommentOutlined className="mr1" />
+          Messages
+        </Link>
       </Menu.Item>
       <Menu.Item key="events">
-        <Link href="/u/events">Events</Link>
+        <Link href="/u/events">
+          <CalendarOutlined className="mr1" />
+          Events
+        </Link>
       </Menu.Item>
       <Menu.Item key="account">
-        <Link href="/u/account">Account</Link>
+        <Link href="/u/account">
+          <UserOutlined className="mr1" />
+          Account
+        </Link>
       </Menu.Item>
       <Menu.Item key="company">
         <Link href="/company_manager">Manage Company</Link>
       </Menu.Item>
       <Menu.Item key="admin">
-        <Link href="/admin">Admin</Link>
+        <Link href="/admin">
+          <SolutionOutlined className="mr1" />
+          Admin
+        </Link>
       </Menu.Item>
       <Menu.Item key="help">
-        <Link href="/help">Help</Link>
+        <Link href="/help">
+          <QuestionCircleOutlined className="mr1" />
+          Help
+        </Link>
       </Menu.Item>
       <Menu.Item key="logout" onClick={() => signOut()}>
-        <a>Logout</a>
+        <a>
+          <LogoutOutlined className="mr1" />
+          Logout
+        </a>
       </Menu.Item>
     </Menu>
   );
@@ -386,13 +401,24 @@ const Navbar = (...pageProps) => {
                     )}
                   </a>
                 </Link>
+                <Link onClick={() => setSideMenu(false)} href="/u/account">
+                  <a>
+                    <div
+                      className="mb1 pointer"
+                      onClick={() => setSideMenu(false)}
+                    >
+                      <UserOutlined className="mr1" />
+                      Account
+                    </div>
+                  </a>
+                </Link>
                 <Link onClick={() => setSideMenu(false)} href="/u/messages">
                   <a>
                     <div
                       className="mb1 pointer"
                       onClick={() => setSideMenu(false)}
                     >
-                      <MailOutlined className="mr1" />
+                      <CommentOutlined className="mr1" />
                       Messages
                     </div>
                   </a>
