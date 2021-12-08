@@ -104,47 +104,30 @@ const Navbar = (...pageProps) => {
 
   const menu = (
     <Menu>
-      <Menu.Item key="messages">
-        <Link href="/u/messages">
-          <CommentOutlined className="mr1" />
-          Messages
-        </Link>
+      <Menu.Item key="messages" icon={<CommentOutlined />}>
+        <Link href="/u/messages">Messages</Link>
       </Menu.Item>
-      <Menu.Item key="events">
-        <Link href="/u/events">
-          <CalendarOutlined className="mr1" />
-          Events
-        </Link>
+      <Menu.Item key="events" icon={<CalendarOutlined />}>
+        <Link href="/u/events">Events</Link>
       </Menu.Item>
-      <Menu.Item key="account">
-        <Link href="/u/account">
-          <UserOutlined className="mr1" />
-          Account
-        </Link>
+      <Menu.Item key="account" icon={<UserOutlined />}>
+        <Link href="/u/account">Account</Link>
       </Menu.Item>
-      <Menu.Item key="company">
-        <Link href="/company_manager">
-          <DesktopOutlined className="mr1" />
-          Manage Company
-        </Link>
+      <Menu.Item key="company" icon={<DesktopOutlined />}>
+        <Link href="/company_manager">Manage Company</Link>
       </Menu.Item>
-      <Menu.Item key="admin">
-        <Link href="/admin">
-          <SolutionOutlined className="mr1" />
-          Admin
-        </Link>
+      <Menu.Item key="admin" icon={<SolutionOutlined />}>
+        <Link href="/admin">Admin</Link>
       </Menu.Item>
-      <Menu.Item key="help">
-        <Link href="/help">
-          <QuestionCircleOutlined className="mr1" />
-          Help
-        </Link>
+      <Menu.Item key="help" icon={<QuestionCircleOutlined />}>
+        <Link href="/help">Help</Link>
       </Menu.Item>
-      <Menu.Item key="logout" onClick={() => signOut()}>
-        <a>
-          <LogoutOutlined className="mr1" />
-          Logout
-        </a>
+      <Menu.Item
+        key="logout"
+        onClick={() => signOut()}
+        icon={<LogoutOutlined />}
+      >
+        <a>Logout</a>
       </Menu.Item>
     </Menu>
   );
