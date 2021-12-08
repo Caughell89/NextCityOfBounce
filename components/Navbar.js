@@ -123,7 +123,10 @@ const Navbar = (...pageProps) => {
         </Link>
       </Menu.Item>
       <Menu.Item key="company">
-        <Link href="/company_manager">Manage Company</Link>
+        <Link href="/company_manager">
+          <DesktopOutlined className="mr1" />
+          Manage Company
+        </Link>
       </Menu.Item>
       <Menu.Item key="admin">
         <Link href="/admin">
