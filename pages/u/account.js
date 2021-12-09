@@ -24,17 +24,17 @@ export default function Account() {
         <h1>Your Account</h1>
         {userLoaded && (
           <div>
-            <div>
+            <div className="mb1">
               <img src={user.user_metadata.avatar_url} alt="user profile pic" />
               <div>Member Since {moment(user.created_at).format("LL")}</div>
             </div>
             {!editForm ? (
               <div>
-                <div className="mt1">Name</div>
+                <div className="mt1 f12">Name</div>
                 <div>{user.user_metadata.full_name}</div>
-                <div className="mt1">Email</div>
+                <div className="mt1 f12">Email</div>
                 <div>{user.email}</div>
-                <div className="mt1">Phone</div>
+                <div className="mt1 f12">Phone</div>
                 <div>{user.phone ? user.phone : "Not Provided"}</div>
                 <Button onClick={() => setEditForm(true)}>Edit</Button>
               </div>

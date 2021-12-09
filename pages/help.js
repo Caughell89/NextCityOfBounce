@@ -2,8 +2,10 @@ import Head from "next/head";
 import { useRef, useState } from "react";
 import { useUser } from "../utils/useUser";
 import { Layout, Input, Menu } from "antd";
+import { useMediaQuery } from "react-responsive";
 
 export default function Help() {
+  const isTabletOrMobile = useMediaQuery({ maxWidth: 641 });
   const { userLoaded, userDetails } = useUser();
   const { SubMenu } = Menu;
   const { Sider } = Layout;
@@ -45,7 +47,7 @@ export default function Help() {
           className="site-layout-background"
           style={{ padding: "4px 0", margin: "8px 0" }}
         >
-          <Sider width={280}>
+          <Sider width={isTabletOrMobile ? "100%" : 280}>
             <Menu
               mode="inline"
               openKeys={openKeys}
