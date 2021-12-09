@@ -1,8 +1,9 @@
 import Head from "next/head";
 import { useRef, useState } from "react";
 import { useUser } from "../utils/useUser";
-import { Layout, Input, Menu } from "antd";
+import { Layout, Input, Menu, Row, Col } from "antd";
 import { useMediaQuery } from "react-responsive";
+import styles from "../styles/Help.module.css";
 
 export default function Help() {
   const isTabletOrMobile = useMediaQuery({ maxWidth: 641 });
@@ -10,6 +11,7 @@ export default function Help() {
   const { SubMenu } = Menu;
   const { Sider } = Layout;
   const { Search } = Input;
+  const style = { background: "#0092ff", padding: "8px 0" };
 
   // submenu keys of first level
   const rootSubmenuKeys = ["sub1", "sub2", "sub3", "sub4"];
@@ -42,11 +44,7 @@ export default function Help() {
           placeholder="Try something like 'How do I view my upcoming events?''"
           size="large"
         />
-
-        <Layout
-          className="site-layout-background"
-          style={{ padding: "4px 0", margin: "8px 0" }}
-        >
+        <div className={styles.block}>
           <Sider width={isTabletOrMobile ? "100%" : 280}>
             <Menu
               mode="inline"
@@ -80,7 +78,24 @@ export default function Help() {
               </SubMenu>
             </Menu>
           </Sider>
-        </Layout>
+          <div className={styles.content}>
+            <div class={styles.row}>
+              <div className={styles.helpButton}>Reset or Forgot Password</div>
+              <div className={styles.helpButton}>
+                Update account information
+              </div>
+              <div className={styles.helpButton}>Register my company</div>
+              <div className={styles.helpButton}>Manage my company</div>
+              <div className={styles.helpButton}>My upcoming events</div>
+              <div className={styles.helpButton}>My past events</div>
+              <div className={styles.helpButton}>Using messages</div>
+              <div className={styles.helpButton}>
+                Find products and services
+              </div>
+              <div className={styles.helpButton}>Refunds and disputes</div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

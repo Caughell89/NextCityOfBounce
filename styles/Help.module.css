@@ -1,0 +1,73 @@
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.block {
+  display: flex;
+  flex-wrap: wrap;
+  overflow: hidden;
+  padding: 1rem 0rem;
+}
+.content {
+  padding: 1rem 2rem;
+  flex: 1 1;
+}
+
+.helpButton {
+  cursor: pointer;
+  display: inline-block;
+  margin: 1rem 2rem;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  width: 20rem;
+  font-size: 12px;
+  line-height: 18px;
+  font-weight: 600;
+  border-radius: 0.5rem;
+  outline-color: initial;
+  outline-style: none;
+  outline-width: initial;
+  padding-top: 14px;
+  padding-bottom: 14px;
+  padding-left: 24px;
+  padding-right: 24px;
+  transition-duration: 0.2s, 0.1s, 0.1s, 0.1s;
+  transition-timing-function: ease, ease, ease, ease;
+  transition-delay: initial, initial, initial, initial;
+  transition-property: box-shadow, -ms-transform, transform, transform;
+  border-top-width: initial;
+  border-right-width: initial;
+  border-bottom-width: initial;
+  border-left-width: initial;
+  border-top-style: none;
+  border-right-style: none;
+  border-bottom-style: none;
+  border-left-style: none;
+  border-top-color: initial;
+  border-right-color: initial;
+  border-bottom-color: initial;
+  border-left-color: initial;
+  border-image-source: initial;
+  border-image-slice: initial;
+  border-image-width: initial;
+  border-image-outset: initial;
+  border-image-repeat: initial;
+  background-image: linear-gradient(
+    to right,
+    rgb(28, 172, 200) 0%,
+    rgb(25, 153, 179) 50%,
+    rgb(22, 136, 156) 100%
+  );
+  background-position-x: initial;
+  background-position-y: initial;
+  background-size: initial;
+  background-attachment: initial;
+  background-origin: initial;
+  background-clip: initial;
+  background-color: initial;
+  color: rgb(255, 255, 255);
+  white-space: nowrap;
+}
