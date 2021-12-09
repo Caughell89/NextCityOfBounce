@@ -450,7 +450,7 @@ const Navbar = (...pageProps) => {
             </div>
           ) : (
             <div className={styles.sideMenuU}>
-              <div>
+              <div className="mt2">
                 <div
                   className={styles.sideMenuItem}
                   onClick={() => {

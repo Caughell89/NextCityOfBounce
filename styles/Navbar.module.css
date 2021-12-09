@@ -24,12 +24,10 @@
   .navLinks {
     display: flex;
     align-items: center;
-  
   }
 
   .menuToggler {
     display: inline;
-
   }
   .menuToggler svg {
     height: 1.6rem !important;
@@ -39,21 +37,28 @@
     height: 1.6rem;
   }
 
-  .navItem {display: none;}
+  .navItem {
+    display: none;
+  }
 
-  .userDrop {display: none;}
+  .userDrop {
+    display: none;
+  }
 
   .sideMenu {
     height: 100%;
   }
+  .sideMenu a {
+    color: rgba(0, 0, 0, 0.85);
+  }
 
-  .sideMenuName  {
+  .sideMenuName {
     color: #484848;
     font-size: 1.3rem;
     margin-bottom: 1rem;
   }
 
-  .sideMenuName:hover  {
+  .sideMenuName:hover {
     color: #484848 !important;
   }
 
@@ -76,28 +81,25 @@
 }
 
 @media (min-width: 374px) {
-
-
-  .navUserBtnMobile, .sideMenuImg {
+  .navUserBtnMobile,
+  .sideMenuImg {
     cursor: pointer;
-    display:inline-block;
-    border-radius: 50%;;
+    display: inline-block;
+    border-radius: 50%;
   }
   .navUserBtnMobile:hover {
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,.2),0 6px 20px 0 rgba(0,0,0,.19);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   }
 
-  .navUserBtnMobile img, .sideMenuImg img{
+  .navUserBtnMobile img,
+  .sideMenuImg img {
     height: 4.2rem;
     width: 4.2rem;
-    border-radius: 100%;;
+    border-radius: 100%;
   }
-
-  
 }
 
 @media (min-width: 641px) {
-
   .nav {
     padding: 0.6rem 2rem;
   }
@@ -110,19 +112,20 @@
     display: none;
   }
 
-
   .navUserBtnMobile {
     display: none;
   }
 
-  .userDrop {display: inline-block;}
-
-  
+  .userDrop {
+    display: inline-block;
+  }
 }
 
-@media (min-width: 920px) { 
-  .navItem {display: block;}
-  .menuToggler{
+@media (min-width: 920px) {
+  .navItem {
+    display: block;
+  }
+  .menuToggler {
     display: none;
   }
 }
@@ -136,8 +139,6 @@
   background-color: white;
 }
 
-
-
 .nav img,
 .nav svg {
   cursor: pointer;
@@ -149,8 +150,6 @@
   color: rgb(72, 72, 72);
 }
 
-
-
 .navItem {
   font-size: 1.3rem;
   margin-left: 1rem;
@@ -159,7 +158,6 @@
   border-bottom: 2px solid transparent;
   border-top: 2px solid transparent;
 }
-
 
 .navItem:hover {
   cursor: pointer;
@@ -260,12 +258,8 @@
   margin-left: 0 !important;
 }
 
-
-
 .flexCenter {
   display: flex;
   justify-content: center;
   align-items: center;
 }
-
-
