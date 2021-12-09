@@ -30,19 +30,22 @@ export default function Account() {
             </div>
             {!editForm ? (
               <div>
+                <div className="mt1">Name</div>
                 <div>{user.user_metadata.full_name}</div>
+                <div className="mt1">Email</div>
                 <div>{user.email}</div>
-                <div>{user.phone}</div>
+                <div className="mt1">Phone</div>
+                <div>{user.phone ? user.phone : "Not Provided"}</div>
                 <Button onClick={() => setEditForm(true)}>Edit</Button>
               </div>
             ) : (
-              <Form className="mMax" form={form} layout="vertical">
+              <Form form={form} layout="vertical">
                 <Form.Item
                   label="Full Name"
                   required
                   tooltip="This is a required field"
                 >
-                  <Input placeholder="Full Name" />
+                  <Input size="large" placeholder="Full Name" />
                 </Form.Item>
                 <Form.Item
                   label="Email"
@@ -50,7 +53,7 @@ export default function Account() {
                     title: "Tooltip with customize icon",
                   }}
                 >
-                  <Input placeholder="Email" />
+                  <Input size="large" placeholder="Email" />
                 </Form.Item>
                 <Form.Item
                   label="Phone"
@@ -58,7 +61,7 @@ export default function Account() {
                     title: "Tooltip with customize icon",
                   }}
                 >
-                  <Input placeholder="Phone" />
+                  <Input size="large" placeholder="Phone" />
                 </Form.Item>
                 <Form.Item>
                   <Button type="primary">Submit</Button>
