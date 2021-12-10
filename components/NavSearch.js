@@ -61,57 +61,68 @@ const NavSearch = ({ navSearch, close }) => {
           animate="visible"
         >
           {isTabletOrMobile ? (
-            <div className={styles.fullScreen}>
-              <div>
-                <div className={styles.mobileSearchNav}>
-                  {step === 1 && <LeftOutlined onClick={() => close(false)} />}
-                  {step === 2 && <LeftOutlined onClick={back} />}
-                </div>
-                <div className={styles.mobileSearch}>
-                  {step === 1 && (
-                    <div className={styles.location}>
-                      <span>Location</span>
-                      <Autocomplete
-                        look="nav"
-                        name="location"
-                        placeholder="Where's your party?"
-                        noneFound="Unfortunately there are no companies serving this area"
-                        onUpdate={onUpdate}
-                      />
-                    </div>
-                  )}
-                  {step === 2 && (
-                    <div className={styles.location}>
-                      <span>Event date</span>
+            <div className={styles.fullWrap}>
+              <div className={styles.fullScreen}>
+                <div>
+                  <div className={styles.mobileSearchNav}>
+                    {step === 1 && (
+                      <LeftOutlined onClick={() => close(false)} />
+                    )}
+                    {step === 2 && <LeftOutlined onClick={back} />}
+                  </div>
+                  <div className={styles.mobileSearch}>
+                    {step === 1 && (
+                      <div className={styles.location}>
+                        <span>Location</span>
+                        <Autocomplete
+                          look="nav"
+                          name="location"
+                          placeholder="Where's your party?"
+                          noneFound="Unfortunately there are no companies serving this area"
+                          onUpdate={onUpdate}
+                        />
+                      </div>
+                    )}
+                    {step === 2 && (
+                      <div className={styles.location}>
+                        <span>Event date</span>
 
-                      <DatePicker
-                        className={styles.datePicker}
-                        format={"M/D/YYYY"}
-                        disabledDate={disabledDate}
-                        bordered={false}
-                        onChange={(date, dateString) => setDate(date)}
-                      />
-                    </div>
-                  )}
-                </div>
-                <div className={styles.mobileSearchFooter}>
-                  {step === 1 && (
-                    <div className={styles.locationFooter}>
-                      <div onClick={saveLoc} className="bounceButton">
-                        Save
+                        <DatePicker
+                          className={styles.datePicker}
+                          format={"M/D/YYYY"}
+                          disabledDate={disabledDate}
+                          bordered={false}
+                          onChange={(date, dateString) => setDate(date)}
+                        />
                       </div>
-                    </div>
-                  )}
-                  {step === 2 && (
-                    <div className={styles.dateFooter}>
-                      <div onClick={back} className="iBtn">
-                        Back
+                    )}
+                  </div>
+                  <div className={styles.mobileSearchFooter}>
+                    {step === 1 && (
+                      <div className={styles.locationFooter}>
+                        <motion.div
+                          whileTap={{ scale: 0.95 }}
+                          onClick={saveLoc}
+                          className={styles.bounceButton}
+                        >
+                          Save
+                        </motion.div>
                       </div>
-                      <div onClick={saveLoc} className="bounceButton">
-                        Search
+                    )}
+                    {step === 2 && (
+                      <div className={styles.dateFooter}>
+                        <motion.div
+                          whileTap={{ scale: 0.95 }}
+                          onClick={() => {
+                            setParty(loc, date), close(false), setStep(1);
+                          }}
+                          className={styles.bounceButton}
+                        >
+                          Search
+                        </motion.div>
                       </div>
-                    </div>
-                  )}
+                    )}
+                  </div>
                 </div>
               </div>
             </div>
