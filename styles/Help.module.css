@@ -37,7 +37,7 @@
   transition-duration: 0.2s, 0.1s, 0.1s, 0.1s;
   transition-timing-function: ease, ease, ease, ease;
   transition-delay: initial, initial, initial, initial;
-  transition-property: box-shadow, -ms-transform, transform, transform;
+  transition: box-shadow, -ms-transform, transform, transform;
   border-top-width: initial;
   border-right-width: initial;
   border-bottom-width: initial;
