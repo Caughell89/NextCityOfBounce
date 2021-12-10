@@ -201,6 +201,7 @@
     height: 100vh;
     background-repeat: no-repeat;
     padding: 8rem 6rem;
+    background-image: url(../public/HomePage1.png);
   }
   .inputCard {
     color: #484848;

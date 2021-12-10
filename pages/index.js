@@ -67,13 +67,7 @@ export default function Home() {
       </Head>
 
       <div id={styles.content}>
-        <div
-          style={{
-            backgroundImage:
-              "url(https://res.cloudinary.com/city-of-bounce/image/upload/v1601314977/HomePage1_mftm4x.jpg",
-          }}
-          className={styles.background}
-        >
+        <div className={styles.background}>
           <div className={styles.inputCard}>
             <div className={styles.welcome}>
               <motion.div
