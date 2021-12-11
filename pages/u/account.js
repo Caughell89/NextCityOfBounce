@@ -7,11 +7,6 @@ import { Form, Input, Button, Radio, Modal } from "antd";
 export default function Account() {
   const { userLoaded, user, session, userDetails, signOut } = useUser();
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [editFullName, setEditFullName] = useState(
-    user.user_metadata.full_name
-  );
-  const [editEmail, setEditEmail] = useState(user.email);
-  const [editPhone, setEditPhone] = useState(user.phone);
 
   const showModal = () => {
     setIsModalVisible(true);
