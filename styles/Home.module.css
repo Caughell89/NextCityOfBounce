@@ -6,16 +6,17 @@
   }
   .background {
     height: 29.2rem;
-    background-repeat: no-repeat;
     padding: 8rem 2rem;
-    background-position: center;
-    background-size: cover;
     position: relative;
+  }
+  .bgImage {
+    z-index: -1;
   }
   .inputCard {
     padding-top: 16rem;
     width: auto;
     background-color: transparent;
+    z-index: 1;
   }
   .welcome {
     color: white;
@@ -199,7 +200,6 @@
 @media (min-width: 641px) {
   .background {
     height: 100vh;
-    background-repeat: no-repeat;
     padding: 8rem 6rem;
   }
   .inputCard {
@@ -217,6 +217,7 @@
   .welcome {
     color: #484848;
     margin-bottom: 1.5rem;
+    z-index: 3;
   }
   .welcomeHeader {
     font-size: 3.2rem;
@@ -258,4 +259,5 @@
   background-color: white;
   color: #484848;
   min-height: calc(100vh - 17rem);
+  z-index: -1;
 }

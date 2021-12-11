@@ -72,6 +72,7 @@ export default function Home() {
             objectFit="cover"
             quality={70}
             priority
+            className={styles.bgImage}
           />
           <div className={styles.inputCard}>
             <div className={styles.welcome}>
