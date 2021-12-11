@@ -72,36 +72,27 @@ export default function Account() {
                   label="Full Name"
                   required
                   tooltip="This is a required field"
+                  initialValues={user.user_metadata.full_name}
                 >
-                  <Input
-                    initialValues={user.user_metadata.full_name}
-                    size="large"
-                    placeholder="Full Name"
-                  />
+                  <Input size="large" placeholder="Full Name" />
                 </Form.Item>
                 <Form.Item
                   label="Email"
                   tooltip={{
                     title: "Tooltip with customize icon",
                   }}
+                  initialValues={user.email}
                 >
-                  <Input
-                    initialValues={user.email}
-                    size="large"
-                    placeholder="Email"
-                  />
+                  <Input size="large" placeholder="Email" />
                 </Form.Item>
                 <Form.Item
                   label="Phone"
                   tooltip={{
                     title: "Tooltip with customize icon",
                   }}
+                  initialValues={user.phone}
                 >
-                  <Input
-                    initialValues={user.phone}
-                    size="large"
-                    placeholder="Phone"
-                  />
+                  <Input size="large" placeholder="Phone" />
                 </Form.Item>
               </Form>
             </Modal>
