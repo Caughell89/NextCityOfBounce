@@ -66,11 +66,12 @@ export default function Home() {
       <div id={styles.content}>
         <div className={styles.background}>
           <Image
-            alt="Mountains"
+            alt="Event setup perfectly with no guests yet to arrive "
             src="/HomePage1.png"
             layout="fill"
             objectFit="cover"
             quality={70}
+            priority
           />
           <div className={styles.inputCard}>
             <div className={styles.welcome}>
