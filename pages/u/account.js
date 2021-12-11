@@ -67,7 +67,7 @@ export default function Account() {
                   label="Full Name"
                   required
                   tooltip="This is a required field"
-                  initialValues={user ? user.user_metadata.full_name : ""}
+                  initialValues={user.user_metadata.full_name}
                 >
                   <Input size="large" placeholder="Full Name" />
                 </Form.Item>
@@ -76,7 +76,7 @@ export default function Account() {
                   tooltip={{
                     title: "Tooltip with customize icon",
                   }}
-                  initialValues={user ? user.email : ""}
+                  initialValues={user.email}
                 >
                   <Input size="large" placeholder="Email" />
                 </Form.Item>
@@ -85,7 +85,7 @@ export default function Account() {
                   tooltip={{
                     title: "Tooltip with customize icon",
                   }}
-                  initialValues={user ? user.phone : ""}
+                  initialValues={user.phone}
                 >
                   <Input size="large" placeholder="Phone" />
                 </Form.Item>
