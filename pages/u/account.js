@@ -7,6 +7,11 @@ import { Form, Input, Button, Radio, Modal } from "antd";
 export default function Account() {
   const { userLoaded, user, session, userDetails, signOut } = useUser();
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [editFullName, setEditFullName] = useState(
+    user.user_metadata.full_name
+  );
+  const [editEmail, setEditEmail] = useState(user.email);
+  const [editPhone, setEditPhone] = useState(user.phone);
 
   const showModal = () => {
     setIsModalVisible(true);
@@ -18,6 +23,10 @@ export default function Account() {
 
   const handleCancel = () => {
     setIsModalVisible(false);
+  };
+
+  const handleChange = (e) => {
+    log(e);
   };
 
   const [form] = Form.useForm();
@@ -48,7 +57,9 @@ export default function Account() {
               <div>{user.email}</div>
               <div className="mt1 f12">Phone</div>
               <div>{user.phone ? user.phone : "Not Provided"}</div>
-              <Button onClick={showModal}>Edit</Button>
+              <Button className="mt1 mb1" onClick={showModal}>
+                Edit
+              </Button>
             </div>
             <Modal
               title="Edit Profile"
@@ -62,7 +73,11 @@ export default function Account() {
                   required
                   tooltip="This is a required field"
                 >
-                  <Input size="large" placeholder="Full Name" />
+                  <Input
+                    initialValues={user.user_metadata.full_name}
+                    size="large"
+                    placeholder="Full Name"
+                  />
                 </Form.Item>
                 <Form.Item
                   label="Email"
@@ -70,7 +85,11 @@ export default function Account() {
                     title: "Tooltip with customize icon",
                   }}
                 >
-                  <Input size="large" placeholder="Email" />
+                  <Input
+                    initialValues={user.email}
+                    size="large"
+                    placeholder="Email"
+                  />
                 </Form.Item>
                 <Form.Item
                   label="Phone"
@@ -78,7 +97,11 @@ export default function Account() {
                     title: "Tooltip with customize icon",
                   }}
                 >
-                  <Input size="large" placeholder="Phone" />
+                  <Input
+                    initialValues={user.phone}
+                    size="large"
+                    placeholder="Phone"
+                  />
                 </Form.Item>
               </Form>
             </Modal>
