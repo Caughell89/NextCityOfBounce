@@ -80,12 +80,6 @@ export default function Account() {
                 >
                   <Input size="large" placeholder="Phone" />
                 </Form.Item>
-                <Form.Item>
-                  <Button type="primary">Submit</Button>
-                </Form.Item>
-                <Form.Item>
-                  <div onClick={(e) => setEditForm(false)}>Cancel</div>
-                </Form.Item>
               </Form>
             </Modal>
           </div>
