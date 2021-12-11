@@ -1,17 +1,14 @@
 import Head from "next/head";
 import { useRef, useState, useContext } from "react";
-import Image from "next/image";
 import Link from "next/link";
+import Image from "next/image";
 import { DatePicker } from "antd";
-
 import styles from "../styles/Home.module.css";
 import { UserContext } from "./../context/UserContext";
 import AutoComplete from "../components/Autocomplete";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
-
 import { motion } from "framer-motion";
-
 import moment from "moment";
 
 export default function Home() {
@@ -68,6 +65,13 @@ export default function Home() {
 
       <div id={styles.content}>
         <div className={styles.background}>
+          <Image
+            alt="Mountains"
+            src="/HomePage1.png"
+            layout="fill"
+            objectFit="cover"
+            quality={70}
+          />
           <div className={styles.inputCard}>
             <div className={styles.welcome}>
               <motion.div
