@@ -168,6 +168,7 @@ const Navbar = (...pageProps) => {
                     height="45"
                     width="24"
                     alt="City of bounce logo"
+                    priority
                   />
                 </div>
               </a>
