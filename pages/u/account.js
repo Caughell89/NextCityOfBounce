@@ -7,7 +7,8 @@ import { Form, Input, Button, Radio, Modal } from "antd";
 export default function Account() {
   const { userLoaded, user, session, userDetails, signOut } = useUser();
   const [isModalVisible, setIsModalVisible] = useState(false);
-
+  console.log(userLoaded);
+  console.log(user);
   const showModal = () => {
     setIsModalVisible(true);
   };
@@ -62,10 +63,19 @@ export default function Account() {
               onOk={handleOk}
               onCancel={handleCancel}
             >
-              <Form form={form} layout="vertical">
+              <Form
+                form={form}
+                layout="vertical"
+                initialValues={{
+                  fullName: user.user_metadata.full_name,
+                  email: user.email,
+                  phone: user.phone,
+                }}
+              >
                 <Form.Item
                   label="Full Name"
                   required
+                  name="fullName"
                   tooltip="This is a required field"
                   initialValues={user.user_metadata.full_name}
                 >
@@ -73,6 +83,7 @@ export default function Account() {
                 </Form.Item>
                 <Form.Item
                   label="Email"
+                  name="email"
                   tooltip={{
                     title: "Tooltip with customize icon",
                   }}
@@ -82,6 +93,7 @@ export default function Account() {
                 </Form.Item>
                 <Form.Item
                   label="Phone"
+                  name="phone"
                   tooltip={{
                     title: "Tooltip with customize icon",
                   }}
