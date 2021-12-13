@@ -62,6 +62,7 @@ export default function Account() {
               visible={isModalVisible}
               onOk={handleOk}
               onCancel={handleCancel}
+              footer={null}
             >
               <Form
                 form={form}
@@ -84,10 +85,19 @@ export default function Account() {
                 <Form.Item
                   label="Email"
                   name="email"
-                  tooltip={{
-                    title: "Tooltip with customize icon",
-                  }}
                   initialValues={user.email}
+                  rules={[
+                    {
+                      required: true,
+                      message: "Please input your email!",
+                    },
+                    {
+                      pattern:
+                        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                      message: "Please enter a valid email",
+                    },
+                  ]}
+                  hasFeedback
                 >
                   <Input size="large" placeholder="Email" />
                 </Form.Item>
@@ -95,12 +105,35 @@ export default function Account() {
                   label="Phone"
                   name="phone"
                   tooltip={{
-                    title: "Tooltip with customize icon",
+                    title:
+                      "Enter your phone number without any formatting like ########## or 5555555555",
                   }}
                   initialValues={user.phone}
+                  rules={[
+                    {
+                      required: false,
+                      message: "Please enter your email!",
+                    },
+                    {
+                      len: 10,
+                      message: "Please enter a valid phone number",
+                    },
+                  ]}
+                  hasFeedback
                 >
-                  <Input size="large" placeholder="Phone" />
+                  <Input addonBefore="+1" size="large" placeholder="Phone" />
                 </Form.Item>
+                <Button type="primary" htmlType="submit">
+                  Save
+                </Button>
+                <Button
+                  style={{
+                    margin: "0 8px",
+                  }}
+                  onClick={handleCancel}
+                >
+                  Clear
+                </Button>
               </Form>
             </Modal>
           </div>
