@@ -3,12 +3,16 @@ import { useUser } from "./../../utils/useUser";
 import moment from "moment";
 import React, { useState } from "react";
 import { Form, Input, Button, Radio, Modal } from "antd";
+import { supabase } from "../../utils/supabaseClient";
+import { Alert } from "antd";
 
 export default function Account() {
-  const { userLoaded, user, session, userDetails, signOut } = useUser();
+  const { userLoaded, user, session, userDetails } = useUser();
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [error, setError] = useState();
   console.log(userLoaded);
   console.log(user);
+  console.log(error);
   const showModal = () => {
     setIsModalVisible(true);
   };
@@ -24,6 +28,18 @@ export default function Account() {
   const handleChange = (e) => {
     log(e);
   };
+
+  async function onFinish(values) {
+    console.log(values);
+
+    const { user, error } = await supabase.auth.update({
+      data: { full_name: values.full_name, phone: values.phone },
+      email: values.email,
+    });
+    console.log(user);
+    console.log(error);
+    error ? setError(error.message) : (setError(), setIsModalVisible(false));
+  }
 
   const [form] = Form.useForm();
   return (
@@ -52,7 +68,11 @@ export default function Account() {
               <div className="mt1 f12">Email</div>
               <div>{user.email}</div>
               <div className="mt1 f12">Phone</div>
-              <div>{user.phone ? user.phone : "Not Provided"}</div>
+              <div>
+                {user.user_metadata.phone
+                  ? user.user_metadata.phone
+                  : "Not Provided"}
+              </div>
               <Button className="mt1 mb1" onClick={showModal}>
                 Edit
               </Button>
@@ -63,33 +83,48 @@ export default function Account() {
               onOk={handleOk}
               onCancel={handleCancel}
               footer={null}
+              destroyOnClose={true}
             >
+              {error != undefined && (
+                <Alert
+                  message="Update failed"
+                  description={error}
+                  type="error"
+                  showIcon
+                />
+              )}
               <Form
                 form={form}
                 layout="vertical"
                 initialValues={{
-                  fullName: user.user_metadata.full_name,
+                  full_name: user.user_metadata.full_name,
                   email: user.email,
-                  phone: user.phone,
+                  phone: user.user_metadata.phone,
                 }}
+                onFinish={onFinish}
+                className="mt1"
               >
                 <Form.Item
                   label="Full Name"
-                  required
-                  name="fullName"
+                  rules={[
+                    {
+                      required: true,
+                      message: "Please enter your name",
+                    },
+                  ]}
+                  name="full_name"
                   tooltip="This is a required field"
-                  initialValues={user.user_metadata.full_name}
+                  hasFeedback
                 >
                   <Input size="large" placeholder="Full Name" />
                 </Form.Item>
                 <Form.Item
                   label="Email"
                   name="email"
-                  initialValues={user.email}
                   rules={[
                     {
                       required: true,
-                      message: "Please input your email!",
+                      message: "Please enter your email",
                     },
                     {
                       pattern:
@@ -108,11 +143,10 @@ export default function Account() {
                     title:
                       "Enter your phone number without any formatting like ########## or 5555555555",
                   }}
-                  initialValues={user.phone}
                   rules={[
                     {
                       required: false,
-                      message: "Please enter your email!",
+                      message: "Please enter your phone number",
                     },
                     {
                       len: 10,
@@ -121,7 +155,13 @@ export default function Account() {
                   ]}
                   hasFeedback
                 >
-                  <Input addonBefore="+1" size="large" placeholder="Phone" />
+                  <Input
+                    type="number"
+                    pattern="\d*"
+                    addonBefore="+1"
+                    size="large"
+                    placeholder="Phone"
+                  />
                 </Form.Item>
                 <Button type="primary" htmlType="submit">
                   Save
