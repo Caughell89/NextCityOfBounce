@@ -6,6 +6,9 @@
     flex-direction: column;
     justify-content: center;
   }
+  .mobileSearch .datePicker input {
+    padding: 0.4rem 0;
+  }
 }
 
 .searchBarHolder {

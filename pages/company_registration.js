@@ -44,7 +44,7 @@ export default function RegisterCompany() {
         </Steps>
         {step === 0 && (
           <div>
-            <Row>
+            <Row className="mb2 mt2">
               <Col span={12} offset={6}>
                 Provide your company name and primary location. This will allow
                 users to search for you and your services as well as generate
@@ -78,8 +78,6 @@ export default function RegisterCompany() {
               >
                 <Input />
               </Form.Item>
-
-              
 
               <Form.Item wrapperCol={{ offset: 6, span: 16 }}>
                 <Button type="primary" htmlType="submit">

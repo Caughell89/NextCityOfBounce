@@ -92,6 +92,7 @@ const NavSearch = ({ navSearch, close }) => {
                           format={"M/D/YYYY"}
                           disabledDate={disabledDate}
                           bordered={false}
+                          inputReadOnly={true}
                           onChange={(date, dateString) => setDate(date)}
                         />
                       </div>
@@ -147,6 +148,7 @@ const NavSearch = ({ navSearch, close }) => {
                     format={"M/D/YYYY"}
                     disabledDate={disabledDate}
                     bordered={false}
+                    inputReadOnly={true}
                     onChange={(date, dateString) => setDate(date)}
                   />
                 </div>

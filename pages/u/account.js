@@ -2,17 +2,46 @@ import Head from "next/head";
 import { useUser } from "./../../utils/useUser";
 import moment from "moment";
 import React, { useState } from "react";
-import { Form, Input, Button, Radio, Modal } from "antd";
+import { Form, Input, Button, Skeleton, Modal } from "antd";
 import { supabase } from "../../utils/supabaseClient";
 import { Alert } from "antd";
+import { CameraOutlined } from "@ant-design/icons";
+import { Upload } from "antd";
+import ImgCrop from "antd-img-crop";
 
 export default function Account() {
   const { userLoaded, user, session, userDetails } = useUser();
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [editPhoto, setEditPhoto] = useState(false);
   const [error, setError] = useState();
-  console.log(userLoaded);
-  console.log(user);
-  console.log(error);
+  const [fileList, setFileList] = useState([
+    {
+      uid: "-1",
+      name: "image.png",
+      status: "done",
+      url: user ? user.user_metadata.avatar_url : "",
+    },
+  ]);
+
+  const onChange = ({ fileList: newFileList }) => {
+    setFileList(newFileList);
+  };
+
+  const onPreview = async (file) => {
+    let src = file.url;
+    if (!src) {
+      src = await new Promise((resolve) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file.originFileObj);
+        reader.onload = () => resolve(reader.result);
+      });
+    }
+    const image = new Image();
+    image.src = src;
+    const imgWindow = window.open(src);
+    imgWindow.document.write(image.outerHTML);
+  };
+
   const showModal = () => {
     setIsModalVisible(true);
   };
@@ -28,6 +57,15 @@ export default function Account() {
   const handleChange = (e) => {
     log(e);
   };
+  const handleEditPhoto = () => {
+    setEditPhoto(true);
+  };
+  const savePhoto = (e) => {
+    console.log("Save photo");
+  };
+  const cancelPhoto = () => {
+    setEditPhoto(false);
+  };
 
   async function onFinish(values) {
     console.log(values);
@@ -40,6 +78,7 @@ export default function Account() {
     console.log(error);
     error ? setError(error.message) : (setError(), setIsModalVisible(false));
   }
+  const uploadPhoto = () => {};
 
   const [form] = Form.useForm();
   return (
@@ -60,7 +99,27 @@ export default function Account() {
           <div>
             <div className="mb1">
               <img src={user.user_metadata.avatar_url} alt="user profile pic" />
-              <div>Member Since {moment(user.created_at).format("LL")}</div>
+              <div>
+                <ImgCrop rotate>
+                  <Upload
+                    action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                    listType="picture-card"
+                    fileList={fileList}
+                    onChange={onChange}
+                    onPreview={onPreview}
+                    maxCount={1}
+                  >
+                    {
+                      <>
+                        <CameraOutlined /> <span className="ml1"> Edit</span>
+                      </>
+                    }
+                  </Upload>
+                </ImgCrop>
+              </div>
+              <div className="f12">
+                Member Since {moment(user.created_at).format("LL")}
+              </div>
             </div>
             <div>
               <div className="mt1 f12">Name</div>
@@ -70,7 +129,12 @@ export default function Account() {
               <div className="mt1 f12">Phone</div>
               <div>
                 {user.user_metadata.phone
-                  ? user.user_metadata.phone
+                  ? "(" +
+                    user.user_metadata.phone.substr(0, 3) +
+                    ") " +
+                    user.user_metadata.phone.substr(3, 3) +
+                    "-" +
+                    user.user_metadata.phone.substr(6, 10)
                   : "Not Provided"}
               </div>
               <Button className="mt1 mb1" onClick={showModal}>
