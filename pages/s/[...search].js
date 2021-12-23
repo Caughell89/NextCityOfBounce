@@ -281,6 +281,9 @@ export default function Search() {
       <div className="content">
         <div>
           {products.length} {products.length !== 1 ? "items" : "item"} available{" "}
+          {router.query.date === "Invalid date"
+            ? ""
+            : "for " + moment(router.query.date).format("ddd ll")}
         </div>
         <h3 className="bold">
           Party Essentials in{" "}
