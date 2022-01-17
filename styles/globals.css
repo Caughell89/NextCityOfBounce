@@ -288,6 +288,10 @@ a:hover {
 .ant-slider-marker {
   font-size: 1rem;
 }
+.row {
+  display: flex;
+  align-items: center;
+}
 @media (min-width: 319px) {
   .content {
     background-color: white;

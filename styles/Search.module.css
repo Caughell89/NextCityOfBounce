@@ -21,6 +21,13 @@
   .optionMobile:hover {
     border: solid 0.1rem #727272;
   }
+  .searchMenu {
+    display: flex;
+    justify-content: flex-start;
+    padding: 0.4rem 0;
+    border-top: solid 1px lightgray;
+    border-bottom: solid 1px lightgray;
+  }
 }
 
 @media (min-width: 641px) {
@@ -48,19 +55,15 @@
   .option span {
     margin-left: 0.3rem;
   }
+
+  .searchMenu {
+    justify-content: space-between;
+  }
 }
 
 .searchResults {
   display: flex;
   flex-wrap: wrap;
-}
-
-.searchMenu {
-  display: flex;
-  justify-content: space-between;
-  padding: 0.4rem 0;
-  border-top: solid 1px lightgray;
-  border-bottom: solid 1px lightgray;
 }
 
 .filterMenu {

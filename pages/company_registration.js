@@ -1,18 +1,74 @@
 import Head from "next/head";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
-import AutoComplete from "../components/Autocomplete";
-import { InputNumber, Steps } from "antd";
-import { Form, Input, Button, Checkbox, Row, Col } from "antd";
+import { Steps, Form, Input, Button, AutoComplete, Row, Col } from "antd";
+import { LeftOutlined } from "@ant-design/icons";
+
+import { supabase } from "../utils/supabaseClient";
 
 export default function RegisterCompany() {
   const { Step } = Steps;
-  const [step, setStep] = useState(0);
-  const onFinish = () => {
-    alert("Finished");
+  const { Option } = AutoComplete;
+  const [step, setStep] = useState(1);
+
+  const [options, setOptions] = useState([]);
+
+  const handleBack = () => {
+    setStep(step - 1);
   };
-  const onFinishFailed = () => {
-    alert("Finish Failed!");
+  const getOptions = async (value) => {
+    if (value.length > 2) {
+      const loc = value.split(",");
+      const city = loc[0];
+      let state = "%";
+      if (loc.length > 1) {
+        state = loc[1].trim();
+      }
+      const { data, error } = await supabase
+        .from("locations")
+        .select()
+        .ilike("city", city + "%")
+        .ilike("state_id", state + "%");
+      setOptions(data);
+      console.log(data);
+      console.log(error);
+    } else {
+      setOptions([]);
+      console.log("Too short");
+    }
+  };
+
+  const onFinish = (data) => {
+    console.log(data);
+    console.log("Push a head");
+    setStep(1);
+  };
+
+  function beforeUpload(file) {
+    const isJpgOrPng = file.type === "image/jpeg" || file.type === "image/png";
+    if (!isJpgOrPng) {
+      message.error("You can only upload JPG/PNG file!");
+    }
+    const isLt2M = file.size / 1024 / 1024 < 2;
+    if (!isLt2M) {
+      message.error("Image must smaller than 2MB!");
+    }
+    return isJpgOrPng && isLt2M;
+  }
+  const handleChange = (info) => {
+    if (info.file.status === "uploading") {
+      this.setState({ loading: true });
+      return;
+    }
+    if (info.file.status === "done") {
+      // Get this url from response in real world.
+      getBase64(info.file.originFileObj, (imageUrl) =>
+        this.setState({
+          imageUrl,
+          loading: false,
+        })
+      );
+    }
   };
   return (
     <div>
@@ -44,8 +100,8 @@ export default function RegisterCompany() {
         </Steps>
         {step === 0 && (
           <div>
-            <Row className="mb2 mt2">
-              <Col span={12} offset={6}>
+            <Row justify="center" className="mb2 mt2">
+              <Col md={20} xs={24}>
                 Provide your company name and primary location. This will allow
                 users to search for you and your services as well as generate
                 your own website url to share with your customers.
@@ -57,7 +113,6 @@ export default function RegisterCompany() {
               wrapperCol={{ span: 12 }}
               initialValues={{ remember: true }}
               onFinish={onFinish}
-              onFinishFailed={onFinishFailed}
             >
               <Form.Item
                 label="Company name"
@@ -66,7 +121,7 @@ export default function RegisterCompany() {
                   { required: true, message: "Please enter your company name" },
                 ]}
               >
-                <Input />
+                <Input size="large" />
               </Form.Item>
 
               <Form.Item
@@ -76,7 +131,13 @@ export default function RegisterCompany() {
                   { required: true, message: "Please enter your location" },
                 ]}
               >
-                <Input />
+                <AutoComplete size="large" onSearch={getOptions}>
+                  {options.map((loc) => (
+                    <Option key={loc.id} value={loc.city + ", " + loc.state_id}>
+                      {loc.city + ", " + loc.state_id}
+                    </Option>
+                  ))}
+                </AutoComplete>
               </Form.Item>
 
               <Form.Item wrapperCol={{ offset: 6, span: 16 }}>
@@ -85,6 +146,21 @@ export default function RegisterCompany() {
                 </Button>
               </Form.Item>
             </Form>
+          </div>
+        )}
+        {step === 1 && (
+          <div>
+            <Row onClick={handleBack} className="mb2 mt2 row">
+              <LeftOutlined />
+              Back
+            </Row>
+            <Row justify="center" className="mb2 mt2">
+              <Col md={20} xs={24}>
+                Add a little bit of branding to help you standout. Upload a logo
+                image and a background image if you like to show a bit of your
+                company's personality.
+              </Col>
+            </Row>
           </div>
         )}
       </div>

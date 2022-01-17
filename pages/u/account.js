@@ -12,35 +12,51 @@ import ImgCrop from "antd-img-crop";
 export default function Account() {
   const { userLoaded, user, session, userDetails } = useUser();
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [editPhoto, setEditPhoto] = useState(false);
+  const [editPhoto, setEditPhoto] = useState("");
   const [error, setError] = useState();
   const [fileList, setFileList] = useState([
     {
       uid: "-1",
       name: "image.png",
       status: "done",
-      url: user ? user.user_metadata.avatar_url : "",
+      url: "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
+      thumbUrl: "",
     },
   ]);
 
-  const onChange = ({ fileList: newFileList }) => {
+  const getSrcFromFile = (file) => {
+    alert("test");
+    return new Promise((resolve) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file.originFileObj);
+      reader.onload = () => resolve(reader.result);
+    });
+  };
+
+  const handleCrop = (e) => {
+    console.log(e);
+  };
+
+  const onChange = async ({ fileList: newFileList }) => {
+    var x = JSON.parse(JSON.stringify(newFileList));
+    console.log(x);
+    const formData = new FormData();
     setFileList(newFileList);
   };
 
-  const onPreview = async (file) => {
-    let src = file.url;
-    if (!src) {
-      src = await new Promise((resolve) => {
-        const reader = new FileReader();
-        reader.readAsDataURL(file.originFileObj);
-        reader.onload = () => resolve(reader.result);
-      });
-    }
-    const image = new Image();
-    image.src = src;
-    const imgWindow = window.open(src);
-    imgWindow.document.write(image.outerHTML);
-  };
+  // const onPreview = async (file) => {
+  //   const src = file.url || (await getSrcFromFile(file));
+  //   const imgWindow = window.open(src);
+
+  //   if (imgWindow) {
+  //     const image = new Image();
+  //     image.src = src;
+  //     imgWindow.document.write(image.outerHTML);
+  //   } else {
+  //     window.location.href = src;
+  //   }
+  //   setEditPhoto(src);
+  // };
 
   const showModal = () => {
     setIsModalVisible(true);
@@ -100,13 +116,12 @@ export default function Account() {
             <div className="mb1">
               <img src={user.user_metadata.avatar_url} alt="user profile pic" />
               <div>
-                <ImgCrop rotate>
+                <ImgCrop onModalOk={handleCrop} rotate>
                   <Upload
-                    action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
                     listType="picture-card"
                     fileList={fileList}
                     onChange={onChange}
-                    onPreview={onPreview}
+                    // onPreview={onPreview}
                     maxCount={1}
                   >
                     {
@@ -236,7 +251,7 @@ export default function Account() {
                   }}
                   onClick={handleCancel}
                 >
-                  Clear
+                  Cancel
                 </Button>
               </Form>
             </Modal>

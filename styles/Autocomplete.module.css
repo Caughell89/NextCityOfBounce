@@ -45,6 +45,8 @@
     position: absolute;
     width: 100%;
     z-index: 4;
+    padding-left: 0;
+    border: 1px solid #d4d4d4;
     background-color: white;
   }
 
