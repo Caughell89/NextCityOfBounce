@@ -93,7 +93,7 @@ const NavSearch = ({ navSearch, close }) => {
                           disabledDate={disabledDate}
                           bordered={false}
                           inputReadOnly={true}
-                          onChange={(date, dateString) => setDate(date)}
+                          onChange={(date, dateString) => setDate(dateString)}
                         />
                       </div>
                     )}
@@ -149,7 +149,7 @@ const NavSearch = ({ navSearch, close }) => {
                     disabledDate={disabledDate}
                     bordered={false}
                     inputReadOnly={true}
-                    onChange={(date, dateString) => setDate(date)}
+                    onChange={(date, dateString) => setDate(dateString)}
                   />
                 </div>
                 <div className={styles.btnHolder}>

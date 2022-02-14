@@ -288,7 +288,6 @@ export default function Search() {
       </Tag>
     );
   });
-
   return (
     <div>
       <Head>
@@ -306,7 +305,8 @@ export default function Search() {
           {products.length} {products.length !== 1 ? "items" : "item"} available{" "}
           {router.query.date === "Invalid date"
             ? ""
-            : "for " + moment(router.query.date).format("ddd ll")}
+            : "for " +
+              moment(router.query.date, "YYYY-M-D").format("MMMM Do YYYY")}
         </div>
         <h3 className="bold">
           Party Essentials in{" "}
