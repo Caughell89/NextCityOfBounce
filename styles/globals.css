@@ -149,8 +149,17 @@ a:hover {
   background-color: initial;
   color: rgb(255, 255, 255);
   white-space: nowrap;
+  transition: all 0.4s ease;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1), 0 2px 7px 0 rgba(0, 0, 0, 0.2);
+  opacity: 1;
 }
-
+.bounceButton:hover {
+  opacity: 0.8;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+}
+.bounceButton:active {
+  opacity: 1;
+}
 .cancelButton {
   cursor: pointer;
   display: inline-block;
@@ -200,8 +209,17 @@ a:hover {
   background-clip: initial;
   color: rgb(255, 255, 255);
   white-space: nowrap;
+  transition: all 0.4s ease;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1), 0 2px 7px 0 rgba(0, 0, 0, 0.2);
+  opacity: 1;
 }
-
+.canceButton:hover {
+  opacity: 0.8;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+}
+.canceButton:active {
+  opacity: 1;
+}
 .bounceButtonSm {
   cursor: pointer;
   display: inline-block;
@@ -219,8 +237,8 @@ a:hover {
   outline-width: initial;
   padding-top: 10px;
   padding-bottom: 10px;
-  padding-left: 16px;
-  padding-right: 16px;
+  padding-left: 20px;
+  padding-right: 20px;
   transition-duration: 0.2s, 0.1s, 0.1s, 0.1s;
   transition-timing-function: ease, ease, ease, ease;
   transition-delay: initial, initial, initial, initial;
@@ -257,8 +275,18 @@ a:hover {
   background-color: initial;
   color: rgb(255, 255, 255);
   white-space: nowrap;
+  transition: all 0.4s ease;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1), 0 2px 7px 0 rgba(0, 0, 0, 0.2);
+  opacity: 1;
+}
+.bounceButtonSm:hover {
+  opacity: 0.8;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
 }
 
+.bounceButtonSm:active {
+  opacity: 1;
+}
 .cancelButtonSm {
   cursor: pointer;
   display: inline-block;
@@ -276,8 +304,8 @@ a:hover {
   outline-width: initial;
   padding-top: 10px;
   padding-bottom: 10px;
-  padding-left: 16px;
-  padding-right: 16px;
+  padding-left: 20px;
+  padding-right: 20px;
   transition-duration: 0.2s, 0.1s, 0.1s, 0.1s;
   transition-timing-function: ease, ease, ease, ease;
   transition-delay: initial, initial, initial, initial;
@@ -308,8 +336,17 @@ a:hover {
   background-clip: initial;
   color: rgb(255, 255, 255);
   white-space: nowrap;
+  transition: all 0.4s ease;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1), 0 2px 7px 0 rgba(0, 0, 0, 0.2);
+  opacity: 1;
 }
-
+.cancelButtonSm:hover {
+  opacity: 0.8;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+}
+.cancelButtonSm:active {
+  opacity: 1;
+}
 .iBtn {
   cursor: pointer;
   display: inline-block;

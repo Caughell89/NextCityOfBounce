@@ -123,6 +123,7 @@ export default function RegisterCompany() {
               wrapperCol={{ span: 12 }}
               initialValues={{ remember: true }}
               onFinish={onFinish}
+              size="large"
             >
               <Form.Item
                 label="Company location"
@@ -132,7 +133,6 @@ export default function RegisterCompany() {
                 ]}
               >
                 <AutoComplete
-                  size="large"
                   onSearch={getOptions}
                   onSelect={(e) => {
                     setCompanyLocation(e);
@@ -157,14 +157,13 @@ export default function RegisterCompany() {
                   onChange={(e) => {
                     setCompanyName(e.target.value);
                   }}
-                  size="large"
                 />
               </Form.Item>
 
               <Form.Item wrapperCol={{ offset: 6, span: 16 }}>
-                <Button type="primary" htmlType="submit">
+                <div className="bounceButton" htmlType="submit">
                   Submit
-                </Button>
+                </div>
               </Form.Item>
             </Form>
           </div>
