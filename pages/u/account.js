@@ -1,7 +1,7 @@
 import Head from "next/head";
 import { useUser } from "./../../utils/useUser";
 import moment from "moment";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Form, Input, Button, Skeleton, Modal } from "antd";
 import { supabase } from "../../utils/supabaseClient";
 import { Alert } from "antd";
@@ -14,15 +14,7 @@ export default function Account() {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [editPhoto, setEditPhoto] = useState("");
   const [error, setError] = useState();
-  const [fileList, setFileList] = useState([
-    {
-      uid: "-1",
-      name: "image.png",
-      status: "done",
-      url: "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
-      thumbUrl: "",
-    },
-  ]);
+  const [fileList, setFileList] = useState([]);
 
   const getSrcFromFile = (file) => {
     alert("test");
@@ -37,26 +29,51 @@ export default function Account() {
     console.log(e);
   };
 
-  const onChange = async ({ fileList: newFileList }) => {
-    var x = JSON.parse(JSON.stringify(newFileList));
-    console.log(x);
-    const formData = new FormData();
-    setFileList(newFileList);
+  const onChange = async (info) => {
+    let fileList = [...info.fileList];
+
+    // 1. Limit the number of uploaded files
+    // Only to show two recent uploaded files, and old ones will be replaced by the new
+    fileList = fileList.slice(-2);
+
+    // 2. Read from response and show file link
+    fileList = fileList.map((file) => {
+      if (file.response) {
+        // Component will show file.url as link
+        file.url = file.response.url;
+      }
+      console.log(file);
+      if (file.status === "done") {
+        console.log(file.thumbUrl);
+      }
+      return file;
+    });
+
+    setFileList(fileList);
   };
 
-  // const onPreview = async (file) => {
-  //   const src = file.url || (await getSrcFromFile(file));
-  //   const imgWindow = window.open(src);
+  // useEffect(() => {
+  //   uploadPhoto();
+  // }, [fileList]);
 
-  //   if (imgWindow) {
-  //     const image = new Image();
-  //     image.src = src;
-  //     imgWindow.document.write(image.outerHTML);
-  //   } else {
-  //     window.location.href = src;
-  //   }
-  //   setEditPhoto(src);
-  // };
+  const uploadPhoto = async () => {
+    if (fileList.length > 0) {
+      const formData = new FormData();
+      console.log(fileList[0]);
+      formData.append("file", new File(fileList[0]));
+
+      formData.append("upload_preset", "open_upload");
+      const data = await fetch(
+        "https://api.cloudinary.com/v1_1/" +
+          process.env.NEXT_PUBLIC_CLOUDINARY_CLOUDNAME +
+          "/image/upload",
+        {
+          method: "POST",
+          body: formData,
+        }
+      ).then((r) => r.json());
+    }
+  };
 
   const showModal = () => {
     setIsModalVisible(true);
@@ -94,7 +111,41 @@ export default function Account() {
     console.log(error);
     error ? setError(error.message) : (setError(), setIsModalVisible(false));
   }
-  const uploadPhoto = () => {};
+
+  const [progress, setProgress] = useState(0);
+
+  const uploadImage = async (options) => {
+    const { onSuccess, onError, file, onProgress } = options;
+    console.log(file);
+
+    const fmData = new FormData();
+    const config = {
+      headers: { "content-type": "multipart/form-data" },
+      onUploadProgress: (event) => {
+        const percent = Math.floor((event.loaded / event.total) * 100);
+        setProgress(percent);
+        if (percent === 100) {
+          setTimeout(() => setProgress(0), 1000);
+        }
+        onProgress({ percent: (event.loaded / event.total) * 100 });
+      },
+    };
+    fmData.append("image", file);
+    try {
+      const res = await axios.post(
+        "https://jsonplaceholder.typicode.com/posts",
+        fmData,
+        config
+      );
+
+      onSuccess("Ok");
+      console.log("server res: ", res);
+    } catch (err) {
+      console.log("Eroor: ", err);
+      const error = new Error("Some error");
+      onError({ err });
+    }
+  };
 
   const [form] = Form.useForm();
   return (
@@ -118,10 +169,11 @@ export default function Account() {
               <div>
                 <ImgCrop onModalOk={handleCrop} rotate>
                   <Upload
+                    accept="image/*"
+                    customRequest={uploadImage}
                     listType="picture-card"
                     fileList={fileList}
                     onChange={onChange}
-                    // onPreview={onPreview}
                     maxCount={1}
                   >
                     {
@@ -132,7 +184,7 @@ export default function Account() {
                   </Upload>
                 </ImgCrop>
               </div>
-              <div className="f12">
+              <div onClick={logImg} className="f12">
                 Member Since {moment(user.created_at).format("LL")}
               </div>
             </div>

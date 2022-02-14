@@ -41,9 +41,32 @@ export default function Search() {
   const [pp, setPp] = useState(true);
   const [instantBook, setInstantBook] = useState(false);
 
+  const { CheckableTag } = Tag;
+
+  const tagsData = [
+    "Newest",
+    "Price: High to Low",
+    "Price: Low to High",
+    "Avg. Customer Review",
+    "Top Sellers",
+  ];
+
+  const tagsCatsData = [
+    "Tents",
+    "Tables",
+    "Chairs",
+    "Inflatables",
+    "Bounce Houses",
+    "Party Packages",
+  ];
+
   const onClick = () => {
     setFilters(["Filter1", "Filter2"]);
     setTypeVisible(false);
+  };
+
+  const saveFilter = () => {
+    setVisible(false);
   };
   const closeFilter = () => {
     setTypeVisible(false);
@@ -369,26 +392,91 @@ export default function Search() {
         onClose={onClose}
         visible={visible}
       >
-        <div>Sort By: {sort}</div>
-        <p>Some contents...</p>
-        <p>Some contents...</p>
-        <div>
-          <h4 className="bold">Instant Book</h4>
-          <div className="f12 mb1">
-            Listings you can book without waiting for company approval
+        <div className={styles.mobileFilterPanel}>
+          <div>
+            <div className="bold">Sort By</div>
+            <div className={styles.flexScroll}>
+              {tagsData.map((tag) => (
+                <CheckableTag
+                  key={tag}
+                  checked={sort == tag.toUpperCase()}
+                  color={sort === tag ? "#2db7f5" : ""}
+                  onChange={(checked) => setSort(tag.toUpperCase())}
+                >
+                  {tag}
+                </CheckableTag>
+              ))}
+            </div>
+            <div className="mt2 bold">Product Type</div>
+            <div className={styles.flexScroll}>
+              {tagsCatsData.map((tag) => (
+                <CheckableTag
+                  key={tag}
+                  checked={sort == tag.toUpperCase()}
+                  color={sort === tag ? "#2db7f5" : ""}
+                  onChange={(checked) => setSort(tag.toUpperCase())}
+                >
+                  {tag}
+                </CheckableTag>
+              ))}
+            </div>
+            <div className="mt2 bold">Price</div>
+            <Slider
+              range
+              marks={marks}
+              min={0}
+              step={10}
+              max={maxPrice}
+              defaultValue={[0, maxPrice]}
+              disabled={false}
+              onChange={(value) => (
+                setFilteredMin(value[0]), setFilteredMax(value[1])
+              )}
+            />
+            <div className="flex pt2">
+              <InputNumber
+                size="large"
+                min={0}
+                max={maxPrice}
+                value={filteredMin}
+                formatter={(value) =>
+                  `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                }
+                parser={(value) => value.replace(/\$\s?|(,*)/g, "")}
+                onChange={(e) => setFilteredMin(e)}
+              />
+              <InputNumber
+                size="large"
+                min={0}
+                max={maxPrice}
+                value={filteredMax}
+                formatter={(value) =>
+                  `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                }
+                parser={(value) => value.replace(/\$\s?|(,*)/g, "")}
+                onChange={(e) => setFilteredMax(e)}
+              />
+            </div>
+
+            <div>
+              <h4 className="bold mt2">Instant Book</h4>
+              <div className="f12 mb1">
+                Listings you can book without waiting for company approval
+              </div>
+              <Switch
+                checked={instantBook}
+                onChange={() => setInstantBook(!instantBook)}
+                onClick={handleIB}
+              />
+            </div>
           </div>
-          <Switch
-            checked={instantBook}
-            onChange={() => setInstantBook(!instantBook)}
-            onClick={handleIB}
-          />
-        </div>
-        <div className="flex mt2">
-          <div className="cancelButtonSm" onClick={closeFilter}>
-            Cancel
-          </div>
-          <div className="bounceButtonSm" onClick={onClick}>
-            Save
+          <div className={styles.flexBottom}>
+            <div className="cancelButton" onClick={saveFilter}>
+              Cancel
+            </div>
+            <div className="bounceButton" onClick={saveFilter}>
+              Save
+            </div>
           </div>
         </div>
       </Drawer>

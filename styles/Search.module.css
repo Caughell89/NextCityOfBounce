@@ -28,6 +28,21 @@
     border-top: solid 1px lightgray;
     border-bottom: solid 1px lightgray;
   }
+  .flexScroll {
+    margin: 0.4rem 0;
+    display: flex;
+    flex-flow: row nowrap;
+  }
+  .mobileFilterPanel {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+  }
+  .flexBottom {
+    display: flex;
+    justify-content: space-between;
+  }
 }
 
 @media (min-width: 641px) {

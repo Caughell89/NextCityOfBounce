@@ -9,9 +9,11 @@ import { supabase } from "../utils/supabaseClient";
 export default function RegisterCompany() {
   const { Step } = Steps;
   const { Option } = AutoComplete;
-  const [step, setStep] = useState(1);
-
+  const [step, setStep] = useState(0);
+  const [companyName, setCompanyName] = useState("");
+  const [companyLocation, setCompanyLocation] = useState("");
   const [options, setOptions] = useState([]);
+  const [existingCompany, setExistingCompany] = useState([]);
 
   const handleBack = () => {
     setStep(step - 1);
@@ -38,38 +40,38 @@ export default function RegisterCompany() {
     }
   };
 
-  const onFinish = (data) => {
+  const onFinish = async (data) => {
+    const { res, error } = await supabase
+      .from("companies")
+      .select()
+      .ilike("name", companyName)
+      .ilike("location", companyLocation);
+    setExistingCompany(res);
+
+    console.log(error);
     console.log(data);
+    if (existingCompany.length === 0) {
+      const { data, error } = await supabase
+        .from("companies")
+        .insert([
+          {
+            name: companyName,
+            location: companyLocation,
+            url:
+              "cityofbounce.com/" +
+              companyLocation.replace(/, | /g, "_") +
+              "/" +
+              companyName.replace(/, | /g, "_") +
+              "/shop",
+          },
+        ]);
+    } else {
+      console.log("name taken");
+    }
     console.log("Push a head");
-    setStep(1);
+    // setStep(1);
   };
 
-  function beforeUpload(file) {
-    const isJpgOrPng = file.type === "image/jpeg" || file.type === "image/png";
-    if (!isJpgOrPng) {
-      message.error("You can only upload JPG/PNG file!");
-    }
-    const isLt2M = file.size / 1024 / 1024 < 2;
-    if (!isLt2M) {
-      message.error("Image must smaller than 2MB!");
-    }
-    return isJpgOrPng && isLt2M;
-  }
-  const handleChange = (info) => {
-    if (info.file.status === "uploading") {
-      this.setState({ loading: true });
-      return;
-    }
-    if (info.file.status === "done") {
-      // Get this url from response in real world.
-      getBase64(info.file.originFileObj, (imageUrl) =>
-        this.setState({
-          imageUrl,
-          loading: false,
-        })
-      );
-    }
-  };
   return (
     <div>
       <Head>
@@ -107,6 +109,19 @@ export default function RegisterCompany() {
                 your own website url to share with your customers.
               </Col>
             </Row>
+            <Row justify="center" className="mb2 mt2">
+              <Col md={20} xs={24}>
+                Below is what your web address will be based on your input, as
+                long as it is not already taken.
+              </Col>
+            </Row>
+            <Row justify="center" className="mb2 mt2">
+              <Col md={20} xs={24}>
+                Web Address: cityofbounce.com/
+                {companyLocation.replace(/, | /g, "_")}/
+                {companyName.replace(/, | /g, "_")}/shop
+              </Col>
+            </Row>
             <Form
               name="basic"
               labelCol={{ span: 6 }}
@@ -115,29 +130,40 @@ export default function RegisterCompany() {
               onFinish={onFinish}
             >
               <Form.Item
-                label="Company name"
-                name="name"
-                rules={[
-                  { required: true, message: "Please enter your company name" },
-                ]}
-              >
-                <Input size="large" />
-              </Form.Item>
-
-              <Form.Item
                 label="Company location"
                 name="location"
                 rules={[
                   { required: true, message: "Please enter your location" },
                 ]}
               >
-                <AutoComplete size="large" onSearch={getOptions}>
+                <AutoComplete
+                  size="large"
+                  onSearch={getOptions}
+                  onSelect={(e) => {
+                    setCompanyLocation(e);
+                  }}
+                >
                   {options.map((loc) => (
                     <Option key={loc.id} value={loc.city + ", " + loc.state_id}>
                       {loc.city + ", " + loc.state_id}
                     </Option>
                   ))}
                 </AutoComplete>
+              </Form.Item>
+              <Form.Item
+                label="Company name"
+                name="name"
+                rules={[
+                  { required: true, message: "Please enter your company name" },
+                ]}
+              >
+                <Input
+                  name="companyName"
+                  onChange={(e) => {
+                    setCompanyName(e.target.value);
+                  }}
+                  size="large"
+                />
               </Form.Item>
 
               <Form.Item wrapperCol={{ offset: 6, span: 16 }}>
