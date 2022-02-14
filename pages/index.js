@@ -131,7 +131,7 @@ export default function Home() {
                   inputReadOnly={true}
                   className={styles.date}
                   disabledDate={disabledDate}
-                  onChange={(date, dateString) => setDate(date)}
+                  onChange={(date, dateString) => setDate(dateString)}
                 />
               </div>
               <motion.div className={styles.flex} whileTap={{ scale: 0.9 }}>

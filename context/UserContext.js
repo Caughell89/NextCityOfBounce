@@ -2,9 +2,8 @@ import { useState, createContext, useEffect } from "react";
 import { getCurrentUser, loginUser } from "../utils/API";
 import { ACCESS_TOKEN } from "../utils/constants";
 import { useRouter } from "next/router";
-import {stringLocToUrl} from '../utils/FormTools'
+import { stringLocToUrl } from "../utils/FormTools";
 import moment from "moment";
-
 
 export const UserContext = createContext();
 
@@ -61,13 +60,14 @@ const UserProvider = ({ children }) => {
     let dateUrl = "any";
     if (loc !== "") {
       setLocation(loc);
-      d === null ? setDate("") : setDate(moment(d).format('M/D/YYYY'));
-      if(d !== null || d !== "") {
-        dateUrl = moment(d).format('YYYY-M-D');
+      d === null ? setDate("") : setDate(moment(d).format("M/D/YYYY"));
+      if (d !== null || d !== "") {
+        dateUrl = moment(d).format("YYYY-M-D");
       }
-      close(false);
-      router.push({ pathname: '/s/search', query: {location: stringLocToUrl(loc), date: dateUrl } });
-
+      router.push({
+        pathname: "/s/search",
+        query: { location: stringLocToUrl(loc), date: dateUrl },
+      });
     }
   };
 
