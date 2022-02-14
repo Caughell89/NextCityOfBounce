@@ -30,6 +30,7 @@ export default function Search() {
   const [filteredMin, setFilteredMin] = useState(0);
   const [sort, setSort] = useState("");
   const [priceRange, setPriceRange] = useState([0, 1000]);
+  const [instantBookVisible, setInstantBookVisible] = useState(false);
   const [visible, setVisible] = useState(false);
   const [typeVisible, setTypeVisible] = useState(false);
   const [filters, setFilters] = useState([]);
@@ -70,11 +71,15 @@ export default function Search() {
   };
   const closeFilter = () => {
     setTypeVisible(false);
+    setInstantBookVisible(false);
   };
   const handleVisibleChange = (flag) => {
     setTypeVisible(flag);
   };
 
+  const handleInstantBookVisibleChange = () => {
+    setInstantBookVisible(true);
+  };
   const showDrawer = () => {
     setVisible(true);
   };
@@ -273,6 +278,14 @@ export default function Search() {
           onChange={() => setInstantBook(!instantBook)}
           onClick={handleIB}
         />
+        <div className="flex mt3">
+          <div className="cancelButtonSm" onClick={closeFilter}>
+            Cancel
+          </div>
+          <div className="bounceButtonSm" onClick={closeFilter}>
+            Save
+          </div>
+        </div>
       </div>
     </Menu>
   );
@@ -342,6 +355,8 @@ export default function Search() {
               trigger={["click"]}
               className={styles.option}
               overlay={instantBookMenu}
+              visible={instantBookVisible}
+              onVisibleChange={handleInstantBookVisibleChange}
             >
               <div>
                 INSTANT BOOK

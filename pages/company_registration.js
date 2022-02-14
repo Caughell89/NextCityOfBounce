@@ -51,20 +51,18 @@ export default function RegisterCompany() {
     console.log(error);
     console.log(data);
     if (existingCompany.length === 0) {
-      const { data, error } = await supabase
-        .from("companies")
-        .insert([
-          {
-            name: companyName,
-            location: companyLocation,
-            url:
-              "cityofbounce.com/" +
-              companyLocation.replace(/, | /g, "_") +
-              "/" +
-              companyName.replace(/, | /g, "_") +
-              "/shop",
-          },
-        ]);
+      const { data, error } = await supabase.from("companies").insert([
+        {
+          name: companyName,
+          location: companyLocation,
+          url:
+            "cityofbounce.com/" +
+            companyLocation.replace(/, | /g, "_") +
+            "/" +
+            companyName.replace(/, | /g, "_") +
+            "/shop",
+        },
+      ]);
     } else {
       console.log("name taken");
     }
@@ -103,24 +101,21 @@ export default function RegisterCompany() {
         {step === 0 && (
           <div>
             <Row justify="center" className="mb2 mt2">
-              <Col md={20} xs={24}>
-                Provide your company name and primary location. This will allow
-                users to search for you and your services as well as generate
-                your own website url to share with your customers.
-              </Col>
+              Provide your company name and primary location. This will allow
+              users to search for you and your services as well as generate your
+              own website url to share with your customers.
             </Row>
             <Row justify="center" className="mb2 mt2">
-              <Col md={20} xs={24}>
-                Below is what your web address will be based on your input, as
-                long as it is not already taken.
-              </Col>
+              Below is what your web address will be based on your input, as
+              long as it is not already taken.
             </Row>
             <Row justify="center" className="mb2 mt2">
-              <Col md={20} xs={24}>
-                Web Address: cityofbounce.com/
+              Web Address:
+              <span className="ml1 bold bounceBlue underline">
+                cityofbounce.com/
                 {companyLocation.replace(/, | /g, "_")}/
                 {companyName.replace(/, | /g, "_")}/shop
-              </Col>
+              </span>
             </Row>
             <Form
               name="basic"
