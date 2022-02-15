@@ -8,6 +8,7 @@ import { Alert } from "antd";
 import { CameraOutlined } from "@ant-design/icons";
 import { Upload } from "antd";
 import ImgCrop from "antd-img-crop";
+import styles from "../../styles/Account.module.css";
 
 export default function Account() {
   const { userLoaded, user, session, userDetails } = useUser();
@@ -16,20 +17,30 @@ export default function Account() {
   const [error, setError] = useState();
   const [fileList, setFileList] = useState([]);
 
-  const getSrcFromFile = (file) => {
-    alert("test");
-    return new Promise((resolve) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file.originFileObj);
-      reader.onload = () => resolve(reader.result);
-    });
+  const onChange = ({ fileList: newFileList }) => {
+    setFileList(newFileList);
+  };
+
+  const onPreview = async (file) => {
+    let src = file.url;
+    if (!src) {
+      src = await new Promise((resolve) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file.originFileObj);
+        reader.onload = () => resolve(reader.result);
+      });
+    }
+    const image = new Image();
+    image.src = src;
+    const imgWindow = window.open(src);
+    imgWindow.document.write(image.outerHTML);
   };
 
   const handleCrop = (e) => {
     console.log(e);
   };
 
-  const onChange = async (info) => {
+  const onChange1 = async (info) => {
     let fileList = [...info.fileList];
 
     // 1. Limit the number of uploaded files
@@ -51,10 +62,6 @@ export default function Account() {
 
     setFileList(fileList);
   };
-
-  // useEffect(() => {
-  //   uploadPhoto();
-  // }, [fileList]);
 
   const uploadPhoto = async () => {
     if (fileList.length > 0) {
@@ -114,39 +121,6 @@ export default function Account() {
 
   const [progress, setProgress] = useState(0);
 
-  const uploadImage = async (options) => {
-    const { onSuccess, onError, file, onProgress } = options;
-    console.log(file);
-
-    const fmData = new FormData();
-    const config = {
-      headers: { "content-type": "multipart/form-data" },
-      onUploadProgress: (event) => {
-        const percent = Math.floor((event.loaded / event.total) * 100);
-        setProgress(percent);
-        if (percent === 100) {
-          setTimeout(() => setProgress(0), 1000);
-        }
-        onProgress({ percent: (event.loaded / event.total) * 100 });
-      },
-    };
-    fmData.append("image", file);
-    try {
-      const res = await axios.post(
-        "https://jsonplaceholder.typicode.com/posts",
-        fmData,
-        config
-      );
-
-      onSuccess("Ok");
-      console.log("server res: ", res);
-    } catch (err) {
-      console.log("Eroor: ", err);
-      const error = new Error("Some error");
-      onError({ err });
-    }
-  };
-
   const [form] = Form.useForm();
   return (
     <div>
@@ -164,28 +138,30 @@ export default function Account() {
         <h1>Your Account</h1>
         {userLoaded && (
           <div>
-            <div className="mb1">
+            <div className={styles.accountImageWrapper}>
               <img src={user.user_metadata.avatar_url} alt="user profile pic" />
-              <div>
+
+              <div className="f12">
+                Member Since {moment(user.created_at).format("LL")}
+              </div>
+              <div className="mt1 mb1">
                 <ImgCrop onModalOk={handleCrop} rotate>
                   <Upload
                     accept="image/*"
-                    customRequest={uploadImage}
+                    faction="https://www.mocky.io/v2/5cc8019d300000980a055e76"
                     listType="picture-card"
                     fileList={fileList}
                     onChange={onChange}
+                    onPreview={onPreview}
                     maxCount={1}
                   >
                     {
-                      <>
+                      <div className="bounceButtonSm">
                         <CameraOutlined /> <span className="ml1"> Edit</span>
-                      </>
+                      </div>
                     }
                   </Upload>
                 </ImgCrop>
-              </div>
-              <div onClick={logImg} className="f12">
-                Member Since {moment(user.created_at).format("LL")}
               </div>
             </div>
             <div>
@@ -204,9 +180,11 @@ export default function Account() {
                     user.user_metadata.phone.substr(6, 10)
                   : "Not Provided"}
               </div>
-              <Button className="mt1 mb1" onClick={showModal}>
-                Edit
-              </Button>
+              <div className="mt1 mb1">
+                <div className=" bounceButtonSm" onClick={showModal}>
+                  Edit
+                </div>
+              </div>
             </div>
             <Modal
               title="Edit Profile"
@@ -294,17 +272,16 @@ export default function Account() {
                     placeholder="Phone"
                   />
                 </Form.Item>
-                <Button type="primary" htmlType="submit">
-                  Save
-                </Button>
-                <Button
-                  style={{
-                    margin: "0 8px",
-                  }}
-                  onClick={handleCancel}
+                <button
+                  type="primary"
+                  htmlType="submit"
+                  className="bounceButtonSm mr1"
                 >
+                  Save
+                </button>
+                <div onClick={handleCancel} className="cancelButtonSm">
                   Cancel
-                </Button>
+                </div>
               </Form>
             </Modal>
           </div>

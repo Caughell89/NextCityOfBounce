@@ -160,6 +160,7 @@ a:hover {
 .bounceButton:active {
   opacity: 1;
 }
+
 .cancelButton {
   cursor: pointer;
   display: inline-block;
@@ -405,6 +406,13 @@ a:hover {
   display: flex;
   align-items: center;
 }
+.ant-upload-select-picture-card,
+.ant-upload-list-picture-card-container {
+  height: 14rem !important;
+  width: 14rem !important;
+  border-radius: 0.8rem !important;
+}
+
 @media (min-width: 319px) {
   .content {
     background-color: white;

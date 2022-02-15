@@ -79,6 +79,13 @@
     margin-bottom: 1rem;
     cursor: pointer;
   }
+
+  .navUserBtnMobile img,
+  .sideMenuImg img {
+    height: 3.2rem;
+    width: 3.2rem;
+    border-radius: 100%;
+  }
 }
 
 @media (min-width: 374px) {

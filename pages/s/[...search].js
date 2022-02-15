@@ -30,6 +30,7 @@ export default function Search() {
   const [filteredMin, setFilteredMin] = useState(0);
   const [sort, setSort] = useState("");
   const [priceRange, setPriceRange] = useState([0, 1000]);
+  const [priceVisible, setPriceVisible] = useState(false);
   const [instantBookVisible, setInstantBookVisible] = useState(false);
   const [visible, setVisible] = useState(false);
   const [typeVisible, setTypeVisible] = useState(false);
@@ -64,6 +65,8 @@ export default function Search() {
   const onClick = () => {
     setFilters(["Filter1", "Filter2"]);
     setTypeVisible(false);
+    setInstantBookVisible(false);
+    setPriceVisible(false);
   };
 
   const saveFilter = () => {
@@ -72,13 +75,18 @@ export default function Search() {
   const closeFilter = () => {
     setTypeVisible(false);
     setInstantBookVisible(false);
+    setPriceVisible(false);
   };
   const handleVisibleChange = (flag) => {
     setTypeVisible(flag);
   };
 
-  const handleInstantBookVisibleChange = () => {
-    setInstantBookVisible(true);
+  const handleInstantBookVisibleChange = (flag) => {
+    setInstantBookVisible(flag);
+  };
+
+  const handlePriceVisibleChange = (flag) => {
+    setPriceVisible(flag);
   };
   const showDrawer = () => {
     setVisible(true);
@@ -158,7 +166,7 @@ export default function Search() {
 
   const priceMenu = (
     <Menu className={styles.filterBackdrop} onClick={onClick}>
-      <div className={styles.filterMenu}>
+      <div className={styles.filterMenuWide}>
         <h4 className="bold mb2">Rental Price</h4>
         <Slider
           range
@@ -333,6 +341,8 @@ export default function Search() {
               trigger={["click"]}
               className={styles.option}
               overlay={priceMenu}
+              onVisibleChange={handlePriceVisibleChange}
+              visible={priceVisible}
             >
               <div>
                 PRICE
