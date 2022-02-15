@@ -3,7 +3,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { Steps, Form, Input, Button, AutoComplete, Row, Col } from "antd";
 import { LeftOutlined } from "@ant-design/icons";
-
+import { useMediaQuery } from "react-responsive";
 import { supabase } from "../utils/supabaseClient";
 
 export default function RegisterCompany() {
@@ -69,6 +69,7 @@ export default function RegisterCompany() {
     console.log("Push a head");
     // setStep(1);
   };
+  const isTabletOrMobile = useMediaQuery({ maxWidth: 641 });
 
   return (
     <div>
@@ -84,20 +85,28 @@ export default function RegisterCompany() {
 
       <div className="content">
         <h1>Company Registration</h1>
-        <Steps current={step}>
-          <Step
-            title="The Basics"
-            description="What's your company name and location"
-          />
-          <Step
-            title="Branding"
-            description="Upload a logo and background image"
-          />
-          <Step
-            title="Locations"
-            description="List locations you provide services"
-          />
-        </Steps>
+        {isTabletOrMobile ? (
+          <Steps size="small" current={step}>
+            <Step title="The Basics" />
+            <Step title="Branding" />
+            <Step title="Locations" />
+          </Steps>
+        ) : (
+          <Steps current={step}>
+            <Step
+              title="The Basics"
+              description="What's your company name and location"
+            />
+            <Step
+              title="Branding"
+              description="Upload a logo and background image"
+            />
+            <Step
+              title="Locations"
+              description="List locations you provide services"
+            />
+          </Steps>
+        )}
         {step === 0 && (
           <div>
             <Row justify="center" className="mb2 mt2">
