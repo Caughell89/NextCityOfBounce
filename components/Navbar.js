@@ -33,6 +33,9 @@ const Navbar = (...pageProps) => {
   console.log(userLoaded);
   console.log(user);
   console.log(userDetails);
+  userLoaded
+    ? console.log(userDetails.data.hasCompany)
+    : console.log("loading");
   console.log(session);
   const [loginModalOpen, showLogin] = useState(false);
   const [signupModalOpen, showSignup] = useState(false);
@@ -113,9 +116,15 @@ const Navbar = (...pageProps) => {
       <Menu.Item key="account" icon={<UserOutlined />}>
         <Link href="/u/account">Account</Link>
       </Menu.Item>
-      <Menu.Item key="company" icon={<DesktopOutlined />}>
-        <Link href="/company_manager">Manage Company</Link>
-      </Menu.Item>
+      {userLoaded && (
+        <Menu.Item key="company" icon={<DesktopOutlined />}>
+          {userDetails.data.hasCompany ? (
+            <Link href="/company_manager">Manage Company</Link>
+          ) : (
+            <Link href="/company_registration">Register Company</Link>
+          )}
+        </Menu.Item>
+      )}
       <Menu.Item key="admin" icon={<SolutionOutlined />}>
         <Link href="/admin">Admin</Link>
       </Menu.Item>
@@ -422,12 +431,21 @@ const Navbar = (...pageProps) => {
                   </a>
                 </Link>
                 <div className="mb1 pointer">
-                  <Link href="/cart">
-                    <a onClick={() => setSideMenu(false)}>
-                      <DesktopOutlined className="mr1" />
-                      Manage Company
-                    </a>
-                  </Link>
+                  {userDetails.data.hasCompany ? (
+                    <Link href="/cart">
+                      <a onClick={() => setSideMenu(false)}>
+                        <DesktopOutlined className="mr1" />
+                        Manage Company
+                      </a>
+                    </Link>
+                  ) : (
+                    <Link href="/company_registration">
+                      <a onClick={() => setSideMenu(false)}>
+                        <DesktopOutlined className="mr1" />
+                        Register Company
+                      </a>
+                    </Link>
+                  )}
                 </div>
                 <div className="mb1">
                   <SolutionOutlined className="mr1" />

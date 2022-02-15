@@ -15,7 +15,7 @@
   border-radius: 0.8rem;
 }
 
-.accountImageWrapper .picture-card {
+.accountImageWrapper .ant-upload-select-picture-card {
   height: 14rem;
   width: 14rem;
   border-radius: 0.8rem;
