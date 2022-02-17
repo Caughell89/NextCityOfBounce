@@ -41,6 +41,8 @@ const Navbar = (...pageProps) => {
   const [signupModalOpen, showSignup] = useState(false);
   const [navSearch, setNavSearch] = useState(false);
   const [sideMenu, setSideMenu] = useState(false);
+  const [loc, setLoc] = useState("");
+  const [name, setName] = useState("");
 
   const handleOk = () => {
     alert("Ok Clicked");

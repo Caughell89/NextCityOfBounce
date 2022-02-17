@@ -1,19 +1,38 @@
 import Head from "next/head";
 import { useState } from "react";
 import Link from "next/link";
-import { Steps, Form, Input, Button, AutoComplete, Row, Col } from "antd";
-import { LeftOutlined } from "@ant-design/icons";
+import {
+  Steps,
+  Form,
+  Input,
+  Alert,
+  AutoComplete,
+  Row,
+  Col,
+  Tooltip,
+} from "antd";
+import {
+  LeftOutlined,
+  LoadingOutlined,
+  InfoCircleOutlined,
+} from "@ant-design/icons";
+import { useUser } from "../utils/useUser";
 import { useMediaQuery } from "react-responsive";
 import { supabase } from "../utils/supabaseClient";
 
 export default function RegisterCompany() {
+  const { user } = useUser();
+  console.log(user);
+
   const { Step } = Steps;
   const { Option } = AutoComplete;
+  const [loading, setLoading] = useState(false);
   const [step, setStep] = useState(0);
   const [companyName, setCompanyName] = useState("");
   const [companyLocation, setCompanyLocation] = useState("");
   const [options, setOptions] = useState([]);
-  const [existingCompany, setExistingCompany] = useState([]);
+  const [registrationError, setRegistrationError] = useState(false);
+  const [savedCompany, setSavedCompany] = useState();
 
   const handleBack = () => {
     setStep(step - 1);
@@ -40,34 +59,32 @@ export default function RegisterCompany() {
     }
   };
 
-  const onFinish = async (data) => {
-    const { res, error } = await supabase
-      .from("companies")
-      .select()
-      .ilike("name", companyName)
-      .ilike("location", companyLocation);
-    setExistingCompany(res);
-
-    console.log(error);
+  const onFinish = async (formData) => {
+    console.log(formData);
+    setLoading(true);
+    setRegistrationError(false);
+    const { data, error } = await supabase.from("companies").insert({
+      name: formData.name,
+      location: formData.location,
+      url:
+        "cityofbounce.com/shop/" +
+        formData.location.replace(/, | /g, "_").toLowerCase() +
+        "/" +
+        formData.name.replace(/, | /g, "_").toLowerCase(),
+    });
     console.log(data);
-    if (existingCompany.length === 0) {
-      const { data, error } = await supabase.from("companies").insert([
-        {
-          name: companyName,
-          location: companyLocation,
-          url:
-            "cityofbounce.com/" +
-            companyLocation.replace(/, | /g, "_") +
-            "/" +
-            companyName.replace(/, | /g, "_") +
-            "/shop",
-        },
-      ]);
-    } else {
-      console.log("name taken");
+
+    setStep(1);
+
+    if (error) {
+      console.log(error);
+
+      console.log("name already taken ");
+      setRegistrationError(true);
+      setCompanyLocation(formData.location.replace(/, | /g, "_").toLowerCase());
+      setCompanyName(formData.name.replace(/, | /g, "_").toLowerCase());
     }
-    console.log("Push a head");
-    // setStep(1);
+    setLoading(false);
   };
   const isTabletOrMobile = useMediaQuery({ maxWidth: 641 });
 
@@ -116,14 +133,38 @@ export default function RegisterCompany() {
             </Row>
             <Row justify="center" className="mb2 mt2">
               Below is what your web address will be based on your input, as
-              long as it is not already taken.
+              long as it is not already taken.{" "}
+              <Tooltip
+                title="User input is converted to lower case to build the web address"
+                color="#1cacc8"
+              >
+                <InfoCircleOutlined className="ml1" />
+              </Tooltip>
             </Row>
+            {registrationError && (
+              <>
+                <Alert
+                  message="Error"
+                  description="This company has already been registered"
+                  type="error"
+                  showIcon
+                />
+                <div className="flex-column">
+                  <div className="mt1 mb1">
+                    <Link href={"/shop/" + companyLocation + "/" + companyName}>
+                      Go to site
+                    </Link>
+                  </div>
+                  <div className="bounceButton">Request access</div>
+                </div>
+              </>
+            )}
             <Row justify="center" className="mb2 mt2">
               Web Address:
               <span className="ml1 bold bounceBlue underline">
-                cityofbounce.com/
-                {companyLocation.replace(/, | /g, "_")}/
-                {companyName.replace(/, | /g, "_")}/shop
+                cityofbounce.com/shop/
+                {companyLocation.replace(/, | /g, "_").toLowerCase()}/
+                {companyName.replace(/, | /g, "_").toLowerCase()}
               </span>
             </Row>
             <Form
@@ -137,6 +178,7 @@ export default function RegisterCompany() {
               <Form.Item
                 label="Company location"
                 name="location"
+                hasFeedback
                 rules={[
                   { required: true, message: "Please enter your location" },
                 ]}
@@ -157,6 +199,7 @@ export default function RegisterCompany() {
               <Form.Item
                 label="Company name"
                 name="name"
+                hasFeedback
                 rules={[
                   { required: true, message: "Please enter your company name" },
                 ]}
@@ -170,16 +213,22 @@ export default function RegisterCompany() {
               </Form.Item>
 
               <Form.Item wrapperCol={{ offset: 6, span: 16 }}>
-                <div className="bounceButton" htmlType="submit">
-                  Submit
-                </div>
+                {loading ? (
+                  <div className="cancelButton">
+                    <LoadingOutlined className="mr1" /> Saving
+                  </div>
+                ) : (
+                  <button className="bounceButton" htmltype="submit">
+                    Submit
+                  </button>
+                )}
               </Form.Item>
             </Form>
           </div>
         )}
         {step === 1 && (
           <div>
-            <Row onClick={handleBack} className="mb2 mt2 row">
+            <Row onClick={handleBack} className="mb2 mt2 row pointer">
               <LeftOutlined />
               Back
             </Row>
