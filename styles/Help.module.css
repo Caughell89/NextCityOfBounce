@@ -34,10 +34,6 @@
   padding-bottom: 14px;
   padding-left: 24px;
   padding-right: 24px;
-  transition-duration: 0.2s, 0.1s, 0.1s, 0.1s;
-  transition-timing-function: ease, ease, ease, ease;
-  transition-delay: initial, initial, initial, initial;
-  transition: box-shadow, -ms-transform, transform, transform;
   border-top-width: initial;
   border-right-width: initial;
   border-bottom-width: initial;
@@ -70,4 +66,14 @@
   background-color: initial;
   color: rgb(255, 255, 255);
   white-space: nowrap;
+  transition: all 0.4s ease;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1), 0 2px 7px 0 rgba(0, 0, 0, 0.2);
+  opacity: 1;
+}
+.helpButton:hover {
+  opacity: 0.8;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+}
+.helpButton:active {
+  opacity: 1;
 }

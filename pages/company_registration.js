@@ -63,26 +63,39 @@ export default function RegisterCompany() {
     console.log(formData);
     setLoading(true);
     setRegistrationError(false);
-    const { data, error } = await supabase.from("companies").insert({
-      name: formData.name,
-      location: formData.location,
-      url:
-        "cityofbounce.com/shop/" +
-        formData.location.replace(/, | /g, "_").toLowerCase() +
-        "/" +
-        formData.name.replace(/, | /g, "_").toLowerCase(),
-    });
-    console.log(data);
+    const { data: company_data, error: company_error } = await supabase
+      .from("companies")
+      .insert({
+        name: formData.name,
+        location: formData.location,
+        url:
+          "cityofbounce.com/shop/" +
+          formData.location.replace(/, | /g, "_").toLowerCase() +
+          "/" +
+          formData.name.replace(/, | /g, "_").toLowerCase(),
+      });
+    const company_id = company_data[0].id;
 
-    setStep(1);
-
-    if (error) {
-      console.log(error);
+    if (company_error) {
+      console.log(company_error);
 
       console.log("name already taken ");
       setRegistrationError(true);
       setCompanyLocation(formData.location.replace(/, | /g, "_").toLowerCase());
       setCompanyName(formData.name.replace(/, | /g, "_").toLowerCase());
+    } else {
+      const { data: user_data, error: user_error } = await supabase
+        .from("users")
+        .update({ hasCompany: true })
+        .match({ id: user.id });
+      console.log(user_data);
+      console.log(user_error);
+      const { data: employee_data, error: employee_error } = await supabase
+        .from("employees")
+        .insert([{ user_id: user.id, company_id: company_id, role_id: 0 }]);
+      console.log(employee_data);
+      console.log(employee_error);
+      setStep(1);
     }
     setLoading(false);
   };

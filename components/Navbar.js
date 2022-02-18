@@ -121,7 +121,7 @@ const Navbar = (...pageProps) => {
       {userLoaded && (
         <Menu.Item key="company" icon={<DesktopOutlined />}>
           {userDetails.data.hasCompany ? (
-            <Link href="/company_manager">Manage Company</Link>
+            <Link href="/c/company_manager">Manage Company</Link>
           ) : (
             <Link href="/company_registration">Register Company</Link>
           )}
@@ -210,20 +210,26 @@ const Navbar = (...pageProps) => {
           )}
           <div className={styles.navLinks}>
             {userLoaded && (
-              <Link href="/company_registration">
-                <motion.a
-                  initial={{ borderBottom: "2px solid rgb(255, 255, 255)" }}
-                  whileTap={{ scale: 0.9 }}
-                  whileHover={{
-                    scale: 1.1,
-                    color: "rgb(28, 172, 200)",
-                    borderBottom: "2px solid rgb(28, 172, 200)",
-                  }}
-                  className={styles.navItem}
-                >
-                  <span className={styles.navItemText}>Register Company</span>
-                </motion.a>
-              </Link>
+              <>
+                {userDetails.data.hasCompany === false && (
+                  <Link href="/company_registration">
+                    <motion.a
+                      initial={{ borderBottom: "2px solid rgb(255, 255, 255)" }}
+                      whileTap={{ scale: 0.9 }}
+                      whileHover={{
+                        scale: 1.1,
+                        color: "rgb(28, 172, 200)",
+                        borderBottom: "2px solid rgb(28, 172, 200)",
+                      }}
+                      className={styles.navItem}
+                    >
+                      <span className={styles.navItemText}>
+                        Register Company
+                      </span>
+                    </motion.a>
+                  </Link>
+                )}
+              </>
             )}
             {!userLoaded && (
               <motion.div
@@ -434,7 +440,7 @@ const Navbar = (...pageProps) => {
                 </Link>
                 <div className="mb1 pointer">
                   {userDetails.data.hasCompany ? (
-                    <Link href="/cart">
+                    <Link href="/c/company_manager">
                       <a onClick={() => setSideMenu(false)}>
                         <DesktopOutlined className="mr1" />
                         Manage Company
