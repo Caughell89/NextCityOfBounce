@@ -9,6 +9,10 @@ body {
   font-size: 62.5% !important;
 }
 
+h2 {
+  margin: 0;
+}
+
 div,
 ::placeholder {
   font-size: 1.6rem;
