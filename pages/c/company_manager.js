@@ -3,10 +3,17 @@ import { useRef, useState, useEffect } from "react";
 import { useUser } from "../../utils/useUser";
 import { supabase } from "../../utils/supabaseClient";
 import moment from "moment";
+import { Menu } from "antd";
+import {
+  CalendarOutlined,
+  HistoryOutlined,
+  TeamOutlined,
+} from "@ant-design/icons";
 
 export default function CompanyManager() {
   const { userLoaded, userDetails } = useUser();
   const [company, setCompany] = useState({});
+  const [current, setCurrent] = useState("upcoming");
 
   const getCompany = async () => {
     if (userLoaded) {
@@ -32,7 +39,9 @@ export default function CompanyManager() {
   useEffect(() => {
     getCompany();
   }, []);
-
+  const handleClick = (e) => {
+    setCurrent(e.key);
+  };
   return (
     <div>
       <Head>
@@ -48,7 +57,7 @@ export default function CompanyManager() {
       </Head>
 
       <div className="content">
-        <h1>Manage your company</h1>
+        <h2>Manage your company</h2>
         {company === null ? (
           <div>Loading</div>
         ) : (
@@ -58,6 +67,42 @@ export default function CompanyManager() {
               Shop Opened {moment(company.created_at).format("LL")}
             </div>
             <div>{company.location}</div>
+            <Menu
+              onClick={handleClick}
+              selectedKeys={[current]}
+              mode="horizontal"
+              className="mb2"
+            >
+              <Menu.Item key="upcoming" icon={<CalendarOutlined />}>
+                Upcoming Orders
+              </Menu.Item>
+              <Menu.Item key="past" icon={<HistoryOutlined />}>
+                Previous Orders
+              </Menu.Item>
+              <Menu.Item key="areas" icon={<HistoryOutlined />}>
+                Areas
+              </Menu.Item>
+              <Menu.Item key="employees" icon={<TeamOutlined />}>
+                Employees
+              </Menu.Item>
+              <Menu.Item key="products" icon={<HistoryOutlined />}>
+                Products
+              </Menu.Item>
+            </Menu>
+            <>
+              {current === "upcoming" && (
+                <div>Show upcoming orders and the ablity to search</div>
+              )}
+              {current === "past" && (
+                <div>Show past orders and the ablity to search</div>
+              )}
+              {current === "areas" && (
+                <div>Show service areas ability to edit and add</div>
+              )}
+              {current === "employees" && (
+                <div>Show employees show ablity to edit and add</div>
+              )}
+            </>
           </>
         )}
       </div>
