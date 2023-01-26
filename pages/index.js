@@ -155,7 +155,7 @@ export default function Home() {
               <Link href="party_ideas/Unique-Night-Events">
                 <div className={styles.articleHolder}>
                   <img
-                    src="https://archzine.com/wp-content/uploads/2019/06/outdoor-movie-night-teen-birthday-party-ideas-throw-pillows-fairy-lights.jpg"
+                    src="https://media.istockphoto.com/id/487371742/photo/pool-movie-night-party.jpg?s=612x612&w=0&k=20&c=Vi7WqCNtqGaof-AxnDqPR_CGPYx7EROR6msGYAj69Ow="
                     alt="Article pic"
                   />
                   <div className={styles.articlePreviewText}>
