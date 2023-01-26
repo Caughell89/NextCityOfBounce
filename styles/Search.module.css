@@ -29,7 +29,7 @@
     border-bottom: solid 1px lightgray;
   }
   .flexScroll {
-    margin: 0.4rem 0;
+    padding: 0.4rem 0;
     display: flex;
     flex-flow: row nowrap;
     overflow: scroll;

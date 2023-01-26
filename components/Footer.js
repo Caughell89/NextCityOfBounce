@@ -1,12 +1,12 @@
 import React from "react";
+import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faFacebookF,
   faTwitter,
-  faInstagram
+  faInstagram,
 } from "@fortawesome/free-brands-svg-icons";
-import styles from '../styles/Footer.module.css'
-
+import styles from "../styles/Footer.module.css";
 
 class Footer extends React.Component {
   render() {
@@ -47,7 +47,8 @@ class Footer extends React.Component {
             </div>
           </div>
           <div className={styles.copyRight}>
-            © {year.getFullYear()} City of Bounce, Inc. All rights reserved
+            <Link href="admin">Admin</Link> © {year.getFullYear()} City of
+            Bounce, Inc. All rights reserved
           </div>
         </div>
       </div>
