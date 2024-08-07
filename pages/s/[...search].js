@@ -98,6 +98,7 @@ export default function Search() {
 
   const savePrices = () => {
     console.log("saving prices");
+    setVisible(false);
   };
 
   const loadProducts = () => {

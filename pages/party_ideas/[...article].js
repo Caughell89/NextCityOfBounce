@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Article from "../../components/Article";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { productSearch, productSearchFiltered } from "../../utils/API";
 import { Menu, Dropdown, Slider, InputNumber, Checkbox } from "antd";
 import moment from "moment";
 
