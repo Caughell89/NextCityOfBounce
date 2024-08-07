@@ -99,6 +99,7 @@ export default function Search() {
   const savePrices = () => {
     console.log("saving prices");
     setVisible(false);
+    alert("closing fliter box");
   };
 
   const loadProducts = () => {
