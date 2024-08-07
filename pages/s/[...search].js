@@ -98,7 +98,7 @@ export default function Search() {
 
   const savePrices = () => {
     console.log("saving prices");
-    setVisible(false);
+    closeFilter();
     alert("closing fliter box");
   };
 
